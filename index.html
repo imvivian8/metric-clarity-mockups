@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Metric Clarity Mockups · Mailchimp</title>
+<style>
+@font-face { font-family: 'Graphik Mailchimp'; src: url('fonts/GraphikMailchimp-Regular-Web.woff2') format('woff2'); font-weight: 400; }
+@font-face { font-family: 'Graphik Mailchimp'; src: url('fonts/GraphikMailchimp-Medium-Web.woff2') format('woff2'); font-weight: 500; }
+@font-face { font-family: 'Graphik Mailchimp'; src: url('fonts/GraphikMailchimp-Semibold-Web.woff2') format('woff2'); font-weight: 600; }
+@font-face { font-family: 'Graphik Mailchimp'; src: url('fonts/GraphikMailchimp-Bold-Web.woff2') format('woff2'); font-weight: 700; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Graphik Mailchimp', Helvetica, Arial, sans-serif; background: #f8f8f8; color: #171b1f; padding: 48px 64px; line-height: 1.5; }
+.hero { max-width: 980px; margin-bottom: 32px; }
+.hero-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #007c89; margin-bottom: 12px; }
+.hero h1 { font-size: 40px; font-weight: 700; letter-spacing: -.02em; margin-bottom: 16px; }
+.hero p { font-size: 16px; color: #6e7173; max-width: 760px; }
+.legend { background: white; border: 1px solid #ececec; border-radius: 8px; padding: 18px 22px; margin-top: 28px; max-width: 980px; }
+.legend-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #6e7173; margin-bottom: 12px; }
+.legend-row { display: flex; gap: 16px; flex-wrap: wrap; }
+.legend-item { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; }
+.confusion-pill { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 100px; letter-spacing: .02em; white-space: nowrap; }
+.cp-def { background: #e0edff; color: #205ea3; }
+.cp-date { background: #f0e8ff; color: #6f4cd6; }
+.cp-bench { background: #ffe6d4; color: #c9540d; }
+.cp-vs { background: #ffe7e7; color: #b61a37; }
+.cp-prec { background: #fff8d0; color: #a07d00; }
+.cp-attr { background: #d2f8d9; color: #00892e; }
+.tier-band { margin: 48px 0 16px; padding: 0 0 8px; border-bottom: 2px solid #ececec; }
+.tier-band h2 { font-size: 22px; font-weight: 700; letter-spacing: -.01em; }
+.tier-band p { font-size: 13px; color: #6e7173; margin-top: 4px; }
+.tier-tag { display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: 3px 10px; border-radius: 4px; margin-bottom: 4px; }
+.tier-static { background: #e5f2f3; color: #007c89; }
+.tier-ai { background: #f0e8ff; color: #6f4cd6; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+.card { display: block; text-decoration: none; color: inherit; background: #fff; border: 1px solid #ececec; border-radius: 8px; padding: 22px; transition: all .15s; position: relative; }
+.card:hover { border-color: #007c89; box-shadow: 0 4px 16px rgba(0,0,0,.06); transform: translateY(-1px); }
+.card.ai { background: linear-gradient(135deg, #faf6ff 0%, #f0e8ff 30%, #ffffff 70%); border-color: #d8c5ff; }
+.card.ai:hover { border-color: #6f4cd6; }
+.card-id { font-size: 11px; font-weight: 700; color: #007c89; letter-spacing: .04em; margin-bottom: 6px; }
+.card.ai .card-id { color: #6f4cd6; }
+.card-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; letter-spacing: -.005em; padding-right: 24px; }
+.card-desc { font-size: 13px; color: #6e7173; line-height: 1.5; margin-bottom: 14px; }
+.card-tactic { font-size: 11px; font-weight: 600; color: #00892e; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 12px; }
+.card.ai .card-tactic { color: #6f4cd6; }
+.card-modes-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #9ea0a2; margin-bottom: 6px; }
+.card-modes { display: flex; flex-wrap: wrap; gap: 4px; padding-top: 10px; border-top: 1px solid #f3f3f3; }
+.card-arrow { position: absolute; top: 22px; right: 22px; font-size: 18px; color: #b2b3b4; }
+.card:hover .card-arrow { color: #007c89; }
+.card.ai:hover .card-arrow { color: #6f4cd6; }
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-eyebrow">R&amp;A · Q4 FY26 · Metric Clarity Initiative</div>
+  <h1>Explain My Metrics</h1>
+  <p>A meaningful share of Mailchimp's "data inaccuracy" VOC isn't bad data — it's metric-clarity confusion. These 8 mockups span the spectrum from cheap static UX to AI-driven contextual explanations, each tagged with the confusion mode(s) it solves.</p>
+
+  <div class="legend">
+    <div class="legend-title">The 6 confusion modes we're solving</div>
+    <div class="legend-row">
+      <span class="legend-item"><span class="confusion-pill cp-def">📖 Definition</span><span style="color:#6e7173;font-size:12px">"What is this metric?"</span></span>
+      <span class="legend-item"><span class="confusion-pill cp-date">📅 Date range</span><span style="color:#6e7173;font-size:12px">"What window is this calculating on?"</span></span>
+      <span class="legend-item"><span class="confusion-pill cp-bench">🎯 Benchmark / health</span><span style="color:#6e7173;font-size:12px">"Should I act or celebrate?"</span></span>
+      <span class="legend-item"><span class="confusion-pill cp-vs">⚖️ vs other metric</span><span style="color:#6e7173;font-size:12px">"Click vs unique click?"</span></span>
+      <span class="legend-item"><span class="confusion-pill cp-prec">🔍 Precision / rounding</span><span style="color:#6e7173;font-size:12px">"Why does this look wrong?"</span></span>
+      <span class="legend-item"><span class="confusion-pill cp-attr">🌐 Attribution scope</span><span style="color:#6e7173;font-size:12px">"Why doesn't this match GA?"</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- TIER 1 -->
+<div class="tier-band">
+  <span class="tier-tag tier-static">Tier 1 · Static</span>
+  <h2>Cheap wins — no AI required</h2>
+  <p>Captures ~60% of VOC gains for ~10% of the build cost. Should ship first.</p>
+</div>
+<div class="grid">
+
+  <a class="card" href="mockup.html?id=1">
+    <div class="card-id">01</div>
+    <div class="card-title">Inline tooltip with un-rounded value</div>
+    <div class="card-desc">Every metric label gets a <code>ⓘ</code> icon. Hover or click → small popover with one-sentence definition, the actual unrounded value, what's included/excluded, and a KB link. Pure static UX, deployable in days.</div>
+    <div class="card-tactic">Tactic: Just-in-time disclosure</div>
+    <div class="card-modes-label">Solves</div>
+    <div class="card-modes">
+      <span class="confusion-pill cp-def">📖 Definition</span>
+      <span class="confusion-pill cp-prec">🔍 Precision</span>
+      <span class="confusion-pill cp-vs">⚖️ vs other metric</span>
+    </div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <a class="card" href="mockup.html?id=2">
+    <div class="card-id">02</div>
+    <div class="card-title">Smart precision footnote</div>
+    <div class="card-desc">Auto-detect when display rounding hides nuance ("100% delivery rate" when it's actually 99.74%, "0% open rate" when it's 0.04%). Show a subtle <code>*</code> footnote that reveals the real value. Catches the exact 3/27 VOC example automatically — no user action required.</div>
+    <div class="card-tactic">Tactic: Proactive transparency</div>
+    <div class="card-modes-label">Solves</div>
+    <div class="card-modes">
+      <span class="confusion-pill cp-prec">🔍 Precision</span>
+    </div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <a class="card" href="mockup.html?id=3">
+    <div class="card-id">03</div>
+    <div class="card-title">Calculation breakdown drawer</div>
+    <div class="card-desc">Click any KPI tile → slide-out drawer shows the math with the user's <em>actual</em> numbers: "Click rate = unique clicks ÷ delivered. For your last campaign: 187 ÷ 2,840 = 6.58%." Includes date range used, what's excluded, and a "verify against export" button.</div>
+    <div class="card-tactic">Tactic: Calculation transparency</div>
+    <div class="card-modes-label">Solves</div>
+    <div class="card-modes">
+      <span class="confusion-pill cp-def">📖 Definition</span>
+      <span class="confusion-pill cp-date">📅 Date range</span>
+      <span class="confusion-pill cp-attr">🌐 Attribution</span>
+    </div>
+    <span class="card-arrow">→</span>
+  </a>
+</div>
+
+<!-- TIER 2 -->
+<div class="tier-band">
+  <span class="tier-tag tier-ai">Tier 2 · AI · Contextual</span>
+  <h2>AI explanations — pulled into the chart, on demand</h2>
+  <p>The user's screenshot direction. AI agent embedded in the dashboard, with KB citations.</p>
+</div>
+<div class="grid">
+
+  <a class="card ai" href="mockup.html?id=4">
+    <div class="card-id">04</div>
+    <div class="card-title">"Looks wrong?" AI entry point</div>
+    <div class="card-desc">Meet users in their <em>actual</em> mental state ("this is broken!"), not their cleaned-up question. Hover any metric → small button: "Looks wrong?" Click → AI explains the top 3 reasons that metric typically confuses users (precision, attribution, channel scope), tailored to <strong>their current values</strong>. Lower expectation than a generic "Explain" — easier for the AI to feel useful.</div>
+    <div class="card-tactic">Tactic: Empathetic framing + perspective-taking</div>
+    <div class="card-modes-label">Solves</div>
+    <div class="card-modes">
+      <span class="confusion-pill cp-def">📖 Definition</span>
+      <span class="confusion-pill cp-prec">🔍 Precision</span>
+      <span class="confusion-pill cp-attr">🌐 Attribution</span>
+      <span class="confusion-pill cp-bench">🎯 Benchmark</span>
+    </div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <a class="card ai" href="mockup.html?id=5">
+    <div class="card-id">05</div>
+    <div class="card-title">"Explain this chart" pill + right rail</div>
+    <div class="card-desc">The user's original sketch, refined. Pill on every chart and KPI tile. Click → right rail opens with AI explanation of <em>that specific component</em>, citing 1–3 KB articles inline as hyperlinks. Pre-baked follow-up chips ("Why doesn't this match GA?", "How is attribution calculated?"). Conversation persists as you click between charts.</div>
+    <div class="card-tactic">Tactic: Conversational disclosure + KB grounding</div>
+    <div class="card-modes-label">Solves</div>
+    <div class="card-modes">
+      <span class="confusion-pill cp-def">📖 Definition</span>
+      <span class="confusion-pill cp-date">📅 Date range</span>
+      <span class="confusion-pill cp-bench">🎯 Benchmark</span>
+      <span class="confusion-pill cp-vs">⚖️ vs other metric</span>
+      <span class="confusion-pill cp-prec">🔍 Precision</span>
+      <span class="confusion-pill cp-attr">🌐 Attribution</span>
+    </div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <a class="card ai" href="mockup.html?id=6">
+    <div class="card-id">06</div>
+    <div class="card-title">Persistent Learn rail / agent mode</div>
+    <div class="card-desc">A pinnable right-rail KB browser + conversational agent that lives alongside the dashboard (not behind a pill). Auto-surfaces articles relevant to the current page. Searchable across the full KB. Hyperlinks let users dig in without leaving. Aligned with the VOC quote: "Learn tab side-by-side with editing."</div>
+    <div class="card-tactic">Tactic: Persistent knowledge access + window-in-window</div>
+    <div class="card-modes-label">Solves</div>
+    <div class="card-modes">
+      <span class="confusion-pill cp-def">📖 Definition</span>
+      <span class="confusion-pill cp-date">📅 Date range</span>
+      <span class="confusion-pill cp-bench">🎯 Benchmark</span>
+      <span class="confusion-pill cp-vs">⚖️ vs other metric</span>
+      <span class="confusion-pill cp-prec">🔍 Precision</span>
+      <span class="confusion-pill cp-attr">🌐 Attribution</span>
+    </div>
+    <span class="card-arrow">→</span>
+  </a>
+</div>
+
+<!-- TIER 3 -->
+<div class="tier-band">
+  <span class="tier-tag tier-ai">Tier 3 · AI · Proactive &amp; comparative</span>
+  <h2>AI catches confusion before it becomes a VOC ticket</h2>
+  <p>Most ambitious — the AI explains things the user hasn't asked about yet.</p>
+</div>
+<div class="grid">
+
+  <a class="card ai" href="mockup.html?id=7">
+    <div class="card-id">07</div>
+    <div class="card-title">Anomaly auto-explain</div>
+    <div class="card-desc">When a metric spikes, drops, or hits a value users typically misread (delivery rate at 99.7% rounded to 100%, attribution share doubling), an inline note appears <em>under the number</em>: "<em>This is higher than usual because…</em>" with AI-generated context citing the cause and KB. Catches confusion <strong>before</strong> it becomes a ticket.</div>
+    <div class="card-tactic">Tactic: Proactive disclosure + anomaly detection</div>
+    <div class="card-modes-label">Solves</div>
+    <div class="card-modes">
+      <span class="confusion-pill cp-prec">🔍 Precision</span>
+      <span class="confusion-pill cp-bench">🎯 Benchmark</span>
+      <span class="confusion-pill cp-attr">🌐 Attribution</span>
+    </div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <a class="card ai" href="mockup.html?id=8">
+    <div class="card-id">08</div>
+    <div class="card-title">"Compare to" overlay — solve the GA mismatch</div>
+    <div class="card-desc">"Why doesn't this match Google Analytics?" is the #1 attribution VOC. This mockup tackles it head-on: connect GA (or paste a GA number), AI shows a side-by-side breakdown of what's included/excluded in each, explains the scope difference, and reconciles to a "this is why" number. Works for any cross-tool comparison.</div>
+    <div class="card-tactic">Tactic: Reconciliation + scope visualization</div>
+    <div class="card-modes-label">Solves</div>
+    <div class="card-modes">
+      <span class="confusion-pill cp-attr">🌐 Attribution</span>
+      <span class="confusion-pill cp-date">📅 Date range</span>
+    </div>
+    <span class="card-arrow">→</span>
+  </a>
+</div>
+
+</body>
+</html>

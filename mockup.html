@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Metric Clarity Mockup · Mailchimp</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+@font-face { font-family: 'Graphik Mailchimp'; src: url('fonts/GraphikMailchimp-Regular-Web.woff2') format('woff2'); font-weight: 400; }
+@font-face { font-family: 'Graphik Mailchimp'; src: url('fonts/GraphikMailchimp-Medium-Web.woff2') format('woff2'); font-weight: 500; }
+@font-face { font-family: 'Graphik Mailchimp'; src: url('fonts/GraphikMailchimp-Semibold-Web.woff2') format('woff2'); font-weight: 600; }
+@font-face { font-family: 'Graphik Mailchimp'; src: url('fonts/GraphikMailchimp-Bold-Web.woff2') format('woff2'); font-weight: 700; }
+:root {
+  --elderberry-130:#171b1f; --elderberry-100:#6e7173; --elderberry-90:#8b8d8f; --elderberry-80:#9ea0a2; --elderberry-70:#b2b3b4; --elderberry-50:#d8d9da; --elderberry-40:#ececec; --elderberry-30:#f3f3f3; --elderberry-20:#f8f8f8;
+  --kale-100:#045c67; --kale-90:#007c89; --kale-30:#c2e0e3; --kale-10:#e5f2f3; --kale-0:#f5fafa;
+  --blueberry-70:#2b77cc; --blueberry-10:#e0edff;
+  --kiwi-80:#00892e; --kiwi-40:#a8edba; --kiwi-10:#d2f8d9;
+  --watermelon-80:#b61a37; --watermelon-10:#ffe7e7;
+  --persimmon-60:#e56c1d; --persimmon-10:#ffe6d4;
+  --eggplant-70:#a275ff; --eggplant-50:#c2a3ff; --eggplant-10:#f0e8ff;
+  --cavendish:#ffe01b; --coconut:#ffffff;
+  --font:'Graphik Mailchimp',Helvetica,Arial,sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); font-size: 14px; color: var(--elderberry-130); background: var(--elderberry-20); min-height: 100vh; }
+
+/* App header */
+.app-header { height: 52px; background: var(--elderberry-130); display: flex; align-items: center; padding: 0 16px; position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
+.back-link { display: inline-flex; align-items: center; gap: 6px; color: rgba(255,255,255,.85); text-decoration: none; font-size: 12px; font-weight: 600; padding: 6px 10px; border-radius: 4px; background: rgba(255,255,255,.08); margin-right: 12px; }
+.back-link:hover { background: rgba(255,255,255,.15); }
+.logo-mark { width: 28px; height: 28px; }
+.app-search { flex: 1; max-width: 480px; margin: 0 24px; height: 32px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.15); border-radius: 4px; display: flex; align-items: center; padding: 0 10px; color: rgba(255,255,255,.45); font-size: 12px; }
+.app-right { margin-left: auto; display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,.75); font-size: 12px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; background: var(--watermelon-80); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 11px; }
+
+.layout { display: flex; padding-top: 52px; min-height: calc(100vh - 52px); }
+.sidebar { width: 216px; background: var(--elderberry-130); position: fixed; top: 52px; bottom: 0; overflow-y: auto; padding: 12px 0; }
+.btn-create { margin: 0 12px 8px; height: 36px; background: var(--cavendish); color: var(--elderberry-130); border: none; border-radius: 4px; font-weight: 700; font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; width: calc(100% - 24px); font-family: var(--font); }
+.nav-group { padding: 4px 0; }
+.nav-group + .nav-group { border-top: 1px solid rgba(255,255,255,.08); }
+.nav-section-label { padding: 12px 16px 4px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.5); }
+.nav-item { display: flex; align-items: center; gap: 10px; padding: 7px 16px; font-size: 13px; color: var(--elderberry-70); text-decoration: none; cursor: pointer; position: relative; }
+.nav-item:hover { background: rgba(255,255,255,.08); color: white; }
+.nav-item.active { background: rgba(255,255,255,.12); color: var(--cavendish); font-weight: 600; }
+.nav-item.active::before { content: ''; position: absolute; left: 0; top: 4px; bottom: 4px; width: 3px; background: var(--cavendish); }
+.nav-item svg { width: 16px; height: 16px; flex-shrink: 0; }
+.nav-sub-item { padding-left: 42px; font-size: 12px; }
+
+.main { flex: 1; margin-left: 216px; min-width: 0; transition: margin-right .2s; }
+.main.with-rail { margin-right: 380px; }
+
+.page-header { background: white; border-bottom: 1px solid var(--elderberry-40); padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 52px; z-index: 50; min-height: 60px; }
+.page-title { font-size: 24px; font-weight: 700; letter-spacing: -.01em; }
+.page-title-row { display: flex; align-items: center; gap: 12px; }
+.audience-pill { display: inline-flex; align-items: center; gap: 4px; height: 28px; padding: 0 8px 0 12px; background: var(--elderberry-30); border: 1px solid var(--elderberry-50); border-radius: 4px; font-size: 12px; font-weight: 500; cursor: pointer; }
+.btn-ghost { display: inline-flex; align-items: center; gap: 4px; height: 32px; padding: 0 12px; background: transparent; border: 1px solid var(--elderberry-50); border-radius: 4px; font-size: 12px; color: var(--elderberry-100); cursor: pointer; font-family: var(--font); }
+.btn-ghost:hover { background: var(--elderberry-30); }
+.btn-primary { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 14px; background: var(--kale-90); color: white; border: none; border-radius: 4px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: var(--font); }
+.btn-primary:hover { background: var(--kale-100); }
+.btn-secondary { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 14px; background: white; color: var(--kale-90); border: 1px solid var(--kale-90); border-radius: 4px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: var(--font); }
+
+.page-content { padding: 24px 32px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-bottom: 16px; }
+.kpi-tile { background: white; border: 1px solid var(--elderberry-40); border-radius: 8px; padding: 14px; position: relative; }
+.kpi-label { font-size: 11px; font-weight: 600; color: var(--elderberry-90); display: flex; align-items: center; gap: 4px; }
+.kpi-value { font-size: 22px; font-weight: 700; margin-top: 6px; letter-spacing: -.02em; }
+.kpi-delta { font-size: 11px; font-weight: 600; margin-top: 4px; }
+.kpi-delta.up { color: var(--kiwi-80); }
+.kpi-delta.down { color: var(--watermelon-80); }
+
+.widget { background: white; border: 1px solid var(--elderberry-40); border-radius: 8px; padding: 24px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+.widget-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.widget-title { font-size: 18px; font-weight: 700; letter-spacing: -.01em; display: flex; align-items: center; gap: 10px; }
+.widget-sub { font-size: 12px; color: var(--elderberry-100); margin-top: 2px; }
+
+.filters-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+.filter-pill { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; background: white; border: 1px solid var(--elderberry-50); border-radius: 4px; font-size: 12px; font-family: var(--font); cursor: pointer; }
+.filter-pill strong { font-weight: 600; }
+
+/* Info icon */
+.info-i { width: 14px; height: 14px; border-radius: 50%; background: var(--elderberry-50); color: white; display: inline-flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; font-style: italic; cursor: pointer; flex-shrink: 0; transition: background .15s; vertical-align: middle; }
+.info-i:hover { background: var(--kale-90); }
+.info-i.lit { background: var(--kale-90); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(0,124,137,.4);} 50% { box-shadow: 0 0 0 6px rgba(0,124,137,0);} }
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  background: white;
+  border: 1px solid var(--elderberry-40);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 12px 28px rgba(0,0,0,.12), 0 4px 12px rgba(0,0,0,.06);
+  width: 320px;
+  z-index: 30;
+  font-size: 12px;
+}
+.tooltip::before { content: ''; position: absolute; top: -7px; left: 24px; width: 12px; height: 12px; background: white; border-left: 1px solid var(--elderberry-40); border-top: 1px solid var(--elderberry-40); transform: rotate(45deg); }
+.tooltip-eyebrow { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--kale-90); margin-bottom: 4px; }
+.tooltip-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+.tooltip-def { font-size: 12px; color: var(--elderberry-100); line-height: 1.5; margin-bottom: 12px; }
+.tooltip-row { display: flex; justify-content: space-between; padding: 6px 0; border-top: 1px solid var(--elderberry-30); font-size: 11px; }
+.tooltip-row .l { color: var(--elderberry-100); }
+.tooltip-row .v { font-weight: 700; }
+.tooltip-link { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; color: var(--kale-90); margin-top: 12px; text-decoration: none; }
+.tooltip-link:hover { text-decoration: underline; }
+
+/* Precision asterisk */
+.prec-asterisk { color: var(--persimmon-60); font-weight: 700; cursor: pointer; margin-left: 2px; }
+.prec-note { font-size: 11px; color: var(--persimmon-60); font-weight: 500; margin-top: 2px; display: flex; align-items: center; gap: 4px; }
+
+/* AI elements */
+.ai-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  height: 26px; padding: 0 10px;
+  background: linear-gradient(135deg, var(--kale-90), #006470);
+  color: white;
+  border: none;
+  border-radius: 100px;
+  font-size: 11px; font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font);
+  box-shadow: 0 2px 6px rgba(0,124,137,.3);
+}
+.ai-pill:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,124,137,.4); }
+.ai-pill.eggplant { background: linear-gradient(135deg, var(--eggplant-70), #6f4cd6); box-shadow: 0 2px 6px rgba(162,117,255,.3); }
+
+.ai-pill-tile {
+  position: absolute; top: 8px; right: 8px;
+  display: inline-flex; align-items: center; gap: 4px;
+  height: 22px; padding: 0 8px;
+  background: white;
+  border: 1px solid var(--kale-30);
+  color: var(--kale-100);
+  border-radius: 100px;
+  font-size: 10px; font-weight: 600;
+  cursor: pointer;
+  opacity: 0; transition: opacity .15s;
+}
+.kpi-tile:hover .ai-pill-tile { opacity: 1; }
+
+.looks-wrong-btn {
+  position: absolute; top: 6px; right: 6px;
+  height: 22px; padding: 0 8px;
+  background: var(--watermelon-10);
+  border: 1px solid #ffaaba;
+  color: var(--watermelon-80);
+  border-radius: 100px;
+  font-size: 10px; font-weight: 700;
+  cursor: pointer;
+  opacity: 0; transition: opacity .15s;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.kpi-tile:hover .looks-wrong-btn { opacity: 1; }
+
+/* Right rail */
+.ai-rail {
+  position: fixed; top: 52px; right: 0; bottom: 0;
+  width: 380px;
+  background: white;
+  border-left: 1px solid var(--elderberry-40);
+  display: flex; flex-direction: column;
+  z-index: 90;
+  box-shadow: -4px 0 16px rgba(0,0,0,.04);
+}
+.ai-rail-header {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--elderberry-40);
+  display: flex; align-items: center; gap: 10px;
+}
+.ai-rail-icon {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--eggplant-70), var(--blueberry-70));
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 700;
+  flex-shrink: 0;
+}
+.ai-rail-title { font-size: 14px; font-weight: 700; }
+.ai-rail-sub { font-size: 11px; color: var(--elderberry-100); margin-top: 1px; }
+.ai-rail-close { margin-left: auto; width: 28px; height: 28px; border-radius: 50%; border: none; background: transparent; cursor: pointer; color: var(--elderberry-100); font-size: 16px; }
+.ai-rail-close:hover { background: var(--elderberry-30); }
+.ai-rail-body { flex: 1; overflow-y: auto; padding: 18px; }
+.ai-msg-context {
+  background: var(--elderberry-20);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 14px;
+  font-size: 11px;
+  border: 1px solid var(--elderberry-40);
+}
+.ai-msg-context-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--elderberry-90); margin-bottom: 4px; }
+.ai-msg {
+  background: linear-gradient(135deg, #fafaff 0%, #f0e8ff 100%);
+  border: 1px solid var(--eggplant-10);
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+.ai-msg p { margin-bottom: 10px; }
+.ai-msg p:last-child { margin-bottom: 0; }
+.ai-msg ul { padding-left: 18px; margin-bottom: 10px; }
+.ai-msg ul li { margin-bottom: 4px; }
+.ai-msg strong { font-weight: 700; }
+.ai-msg .kb-link { color: var(--kale-90); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 2px; cursor: pointer; }
+.ai-msg .kb-link:hover { color: var(--kale-100); text-decoration-style: solid; }
+.ai-citation {
+  margin-top: 10px;
+  padding: 8px 10px;
+  background: white;
+  border: 1px solid var(--elderberry-40);
+  border-radius: 6px;
+  display: flex; gap: 8px; align-items: center;
+  font-size: 11px;
+  cursor: pointer;
+  text-decoration: none; color: inherit;
+}
+.ai-citation:hover { border-color: var(--kale-90); background: var(--kale-0); }
+.ai-cite-icon { width: 24px; height: 24px; border-radius: 4px; background: var(--kale-10); color: var(--kale-90); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+.ai-cite-body { flex: 1; min-width: 0; }
+.ai-cite-title { font-weight: 600; font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ai-cite-meta { color: var(--elderberry-90); font-size: 10px; }
+
+.followup-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 0 0; }
+.chip { display: inline-flex; align-items: center; height: 28px; padding: 0 12px; background: white; border: 1px solid var(--elderberry-50); border-radius: 100px; font-size: 12px; font-family: var(--font); cursor: pointer; color: var(--elderberry-100); }
+.chip:hover { background: var(--kale-0); border-color: var(--kale-90); color: var(--kale-100); }
+
+.ai-input-wrap { padding: 12px 18px; border-top: 1px solid var(--elderberry-40); display: flex; gap: 8px; background: var(--elderberry-20); }
+.ai-input { flex: 1; height: 36px; border: 1px solid var(--elderberry-50); border-radius: 100px; padding: 0 14px; font-size: 13px; font-family: var(--font); background: white; }
+.ai-send { width: 36px; height: 36px; border-radius: 50%; border: none; background: var(--kale-90); color: white; cursor: pointer; flex-shrink: 0; }
+
+/* Mockup meta bar */
+.mockup-meta-bar { background: var(--elderberry-130); color: white; padding: 12px 32px; position: sticky; top: 52px; z-index: 60; display: flex; align-items: center; gap: 16px; font-size: 12px; border-bottom: 1px solid #2a2e32; }
+.mockup-meta-id { background: var(--cavendish); color: var(--elderberry-130); font-weight: 700; padding: 3px 8px; border-radius: 4px; font-size: 11px; letter-spacing: .04em; }
+.mockup-meta-id.ai { background: var(--eggplant-70); color: white; }
+.mockup-meta-title { font-weight: 600; }
+.mockup-meta-tactic { color: rgba(255,255,255,.6); }
+.mockup-meta-nav { margin-left: auto; display: flex; gap: 6px; }
+.mockup-meta-nav a { background: rgba(255,255,255,.1); color: white; padding: 4px 10px; border-radius: 4px; text-decoration: none; font-size: 11px; font-weight: 600; }
+.mockup-meta-nav a:hover { background: rgba(255,255,255,.2); }
+
+/* Drawer */
+.drawer-overlay { position: fixed; top: 52px; left: 216px; right: 0; bottom: 0; background: rgba(0,0,0,.3); z-index: 100; display: none; }
+.drawer-overlay.open { display: block; }
+.drawer { position: fixed; top: 52px; right: 0; bottom: 0; width: 480px; background: white; box-shadow: -8px 0 24px rgba(0,0,0,.12); z-index: 101; padding: 24px; overflow-y: auto; transform: translateX(100%); transition: transform .25s; }
+.drawer.open { transform: translateX(0); }
+.drawer-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--elderberry-40); }
+.drawer-eyebrow { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--kale-90); margin-bottom: 4px; }
+.drawer-title { font-size: 22px; font-weight: 700; letter-spacing: -.01em; }
+.drawer-value { font-size: 32px; font-weight: 700; color: var(--kale-100); margin-top: 6px; letter-spacing: -.02em; }
+.drawer-close { width: 28px; height: 28px; border-radius: 50%; border: none; background: var(--elderberry-30); cursor: pointer; color: var(--elderberry-100); font-size: 16px; }
+
+.calc-row { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 8px; align-items: center; padding: 16px; background: var(--elderberry-20); border-radius: 8px; margin-bottom: 16px; font-size: 13px; }
+.calc-cell { text-align: center; }
+.calc-cell .l { font-size: 10px; font-weight: 600; color: var(--elderberry-90); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
+.calc-cell .v { font-size: 22px; font-weight: 700; }
+.calc-op { font-size: 24px; color: var(--elderberry-80); font-weight: 300; }
+
+/* Anomaly */
+.anomaly-note {
+  display: inline-flex; align-items: flex-start; gap: 6px;
+  margin-top: 6px;
+  padding: 6px 10px;
+  background: linear-gradient(135deg, #faf6ff, #f0e8ff);
+  border: 1px solid var(--eggplant-50);
+  border-radius: 6px;
+  font-size: 11px;
+  color: var(--elderberry-130);
+  line-height: 1.4;
+  max-width: 100%;
+}
+.anomaly-note .ico { color: var(--eggplant-70); flex-shrink: 0; font-size: 12px; line-height: 1.2; }
+.anomaly-note .kb-link { color: var(--eggplant-70); font-weight: 600; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; }
+
+/* Compare */
+.compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.compare-col { padding: 16px; border-radius: 8px; border: 1px solid var(--elderberry-40); background: white; }
+.compare-col h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+.compare-col .num { font-size: 28px; font-weight: 700; letter-spacing: -.02em; margin: 6px 0; }
+.compare-col.mc { background: linear-gradient(135deg, #fffceb, #fff8d0); border-color: #f0d800; }
+.compare-col.ga { background: linear-gradient(135deg, #f4f9ff, #e0edff); border-color: #b8d4f7; }
+.scope-list { list-style: none; margin-top: 10px; }
+.scope-list li { padding: 6px 0; font-size: 12px; border-top: 1px solid rgba(0,0,0,.06); display: flex; align-items: center; gap: 8px; }
+.scope-list li.included::before { content: '✓'; color: var(--kiwi-80); font-weight: 700; }
+.scope-list li.excluded::before { content: '✕'; color: var(--watermelon-80); font-weight: 700; }
+
+.reconcile-card { background: linear-gradient(135deg, #faf6ff, #f0e8ff); border: 1px solid var(--eggplant-70); border-radius: 8px; padding: 16px; margin-top: 16px; }
+.reconcile-eyebrow { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--eggplant-70); margin-bottom: 6px; }
+.reconcile-math { font-size: 13px; line-height: 1.7; font-family: 'SF Mono', Menlo, monospace; background: white; padding: 12px; border-radius: 6px; margin-top: 8px; border: 1px solid #ddd0ff; }
+
+/* Learn rail (mockup 6) */
+.learn-rail { position: fixed; top: 52px; right: 0; bottom: 0; width: 380px; background: white; border-left: 1px solid var(--elderberry-40); display: flex; flex-direction: column; z-index: 90; }
+.learn-tabs { display: flex; border-bottom: 1px solid var(--elderberry-40); padding: 0 14px; }
+.learn-tab { padding: 12px 14px; font-size: 12px; font-weight: 600; cursor: pointer; color: var(--elderberry-100); border: none; background: none; border-bottom: 2px solid transparent; margin-bottom: -1px; font-family: var(--font); }
+.learn-tab.active { color: var(--kale-100); border-bottom-color: var(--kale-100); }
+.learn-search { padding: 12px 14px; border-bottom: 1px solid var(--elderberry-40); }
+.learn-search input { width: 100%; height: 32px; border: 1px solid var(--elderberry-50); border-radius: 4px; padding: 0 10px 0 30px; font-size: 12px; font-family: var(--font); background: var(--elderberry-20) url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 16 16'%3E%3Ccircle cx='6.5' cy='6.5' r='5.5' stroke='%236e7173' stroke-width='1.5' fill='none'/%3E%3Cline x1='10' y1='10' x2='14' y2='14' stroke='%236e7173' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat 10px center; }
+.learn-section { padding: 14px; border-bottom: 1px solid var(--elderberry-40); }
+.learn-section-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--elderberry-90); margin-bottom: 8px; }
+.kb-card { padding: 10px; border-radius: 6px; cursor: pointer; display: flex; gap: 10px; }
+.kb-card:hover { background: var(--kale-0); }
+.kb-card .ico { width: 24px; height: 24px; border-radius: 4px; background: var(--kale-10); color: var(--kale-90); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+.kb-card .body { flex: 1; min-width: 0; }
+.kb-card .title { font-size: 12px; font-weight: 600; }
+.kb-card .meta { font-size: 10px; color: var(--elderberry-90); margin-top: 2px; }
+
+/* Cap charts */
+canvas[id^="chart-"] { max-height: 220px !important; height: 220px !important; }
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <a class="back-link" href="index.html">← Gallery</a>
+  <svg class="logo-mark" viewBox="0 0 40 40">
+    <ellipse cx="20" cy="22" rx="12" ry="13" fill="#FFE01B"/>
+    <ellipse cx="20" cy="18" rx="10" ry="10" fill="#FFE01B"/>
+    <ellipse cx="20" cy="15" rx="9" ry="8" fill="#FFE01B"/>
+    <ellipse cx="9" cy="19" rx="3" ry="4" fill="#FFE01B"/>
+    <ellipse cx="31" cy="19" rx="3" ry="4" fill="#FFE01B"/>
+    <circle cx="16.5" cy="15" r="2" fill="#1a1a1a"/>
+    <circle cx="23.5" cy="15" r="2" fill="#1a1a1a"/>
+    <ellipse cx="20" cy="18.5" rx="2.5" ry="1.5" fill="#c8a800"/>
+    <path d="M17 21 Q20 23.5 23 21" stroke="#1a1a1a" stroke-width="1.2" fill="none"/>
+  </svg>
+  <div class="app-search">Search Mailchimp</div>
+  <div class="app-right"><span>Help</span><div class="avatar">VW</div></div>
+</header>
+
+<div class="mockup-meta-bar">
+  <span class="mockup-meta-id" id="meta-id">—</span>
+  <span class="mockup-meta-title" id="meta-title">Mockup</span>
+  <span class="mockup-meta-tactic" id="meta-tactic"></span>
+  <div class="mockup-meta-nav">
+    <a href="#" id="prev-mockup">← Prev</a>
+    <a href="#" id="next-mockup">Next →</a>
+  </div>
+</div>
+
+<div class="layout">
+  <nav class="sidebar">
+    <button class="btn-create">+ Create</button>
+    <div class="nav-group">
+      <a class="nav-item" href="#"><svg viewBox="0 0 16 16"><path fill="currentColor" d="M2 8 L8 2 L14 8 L14 14 L10 14 L10 10 L6 10 L6 14 L2 14 Z"/></svg>Home</a>
+      <a class="nav-item" href="#"><svg viewBox="0 0 16 16"><rect fill="currentColor" x="2" y="3" width="12" height="10" rx="1"/></svg>Campaigns</a>
+      <a class="nav-item" href="#"><svg viewBox="0 0 16 16"><path fill="currentColor" d="M3 8 L8 3 L13 8 L8 13 Z"/></svg>Automations</a>
+      <a class="nav-item" href="#"><svg viewBox="0 0 16 16"><path fill="currentColor" d="M3 3 L13 3 L13 11 L9 11 L8 13 L7 11 L3 11 Z"/></svg>SMS</a>
+      <a class="nav-item" href="#"><svg viewBox="0 0 16 16"><circle fill="currentColor" cx="8" cy="6" r="3"/><path fill="currentColor" d="M3 14 Q3 9 8 9 Q13 9 13 14 Z"/></svg>Audience</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-section-label">Analytics</div>
+      <a class="nav-item active" href="#"><svg viewBox="0 0 16 16"><path fill="currentColor" d="M2 14 L2 2 L4 2 L4 14 Z M6 14 L6 6 L8 6 L8 14 Z M10 14 L10 9 L12 9 L12 14 Z"/></svg>Analytics</a>
+      <a class="nav-item nav-sub-item active" href="#">Marketing dashboard</a>
+      <a class="nav-item nav-sub-item" href="#">Conversion Insights</a>
+      <a class="nav-item nav-sub-item" href="#">Custom reports</a>
+    </div>
+  </nav>
+
+  <main class="main" id="main-area">
+    <div class="page-header">
+      <div class="page-title-row">
+        <h1 class="page-title">Marketing dashboard</h1>
+        <div style="font-size:13px;color:var(--elderberry-100);margin-left:8px">How your email and SMS marketing is performing</div>
+      </div>
+      <div class="page-header-actions"><button class="btn-ghost">⚙ Analytics settings</button></div>
+    </div>
+    <div id="content-root"></div>
+  </main>
+</div>
+
+<script>
+// ========================= SHARED PIECES =========================
+const filtersBar = `
+  <div class="filters-bar">
+    <button class="filter-pill">📅 <strong>Date</strong> Last 90 days ▾</button>
+    <button class="filter-pill">📡 <strong>Channel</strong> All ▾</button>
+    <button class="filter-pill">👥 <strong>Audience</strong> All contacts ▾</button>
+  </div>
+`;
+
+const standardKpis = `
+  <div class="kpi-grid">
+    <div class="kpi-tile"><div class="kpi-label">$ Attributed revenue</div><div class="kpi-value">$184,320</div><div class="kpi-delta up">▲ 12%</div></div>
+    <div class="kpi-tile"><div class="kpi-label"># Attributed orders</div><div class="kpi-value">1,427</div><div class="kpi-delta up">▲ 8%</div></div>
+    <div class="kpi-tile"><div class="kpi-label">% Order rate</div><div class="kpi-value">3.2%</div><div class="kpi-delta down">▼ 2%</div></div>
+    <div class="kpi-tile"><div class="kpi-label">⌀ Avg order value</div><div class="kpi-value">$129</div><div class="kpi-delta up">▲ 4%</div></div>
+    <div class="kpi-tile"><div class="kpi-label">↻ Repeat rate</div><div class="kpi-value">28%</div><div class="kpi-delta up">▲ 3%</div></div>
+    <div class="kpi-tile"><div class="kpi-label">$ Rev / recipient</div><div class="kpi-value">$2.84</div><div class="kpi-delta up">▲ 6%</div></div>
+  </div>
+`;
+
+const stackedChartWidget = (title, pillHtml='') => `
+  <div class="widget">
+    <div class="widget-header">
+      <div>
+        <div class="widget-title">${title} ${pillHtml}</div>
+        <div class="widget-sub">Last 90 days · Compared to previous 90 days</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div style="display:flex;background:var(--elderberry-30);border-radius:4px;padding:2px;font-size:11px;font-weight:600">
+          <span style="padding:4px 10px;color:var(--elderberry-100)">Day</span>
+          <span style="padding:4px 10px;background:white;border-radius:3px">Week</span>
+          <span style="padding:4px 10px;color:var(--elderberry-100)">Month</span>
+        </div>
+      </div>
+    </div>
+    <canvas id="chart-share"></canvas>
+    <div style="display:flex;gap:18px;justify-content:center;margin-top:14px;font-size:11px;color:var(--elderberry-100)">
+      <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:#2b77cc;border-radius:2px"></span>Email</span>
+      <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:#d72792;border-radius:2px"></span>SMS</span>
+      <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:#a275ff;border-radius:2px"></span>Automation</span>
+      <span style="display:flex;align-items:center;gap:6px"><span style="width:14px;height:0;border-top:2px dashed #171b1f"></span>Total attributed</span>
+    </div>
+  </div>
+`;
+
+function drawShareChart() {
+  const el = document.getElementById('chart-share');
+  if (!el) return;
+  const labels = ['W1','W2','W3','W4','W5','W6','W7','W8','W9','W10','W11','W12','W13'];
+  new Chart(el.getContext('2d'), {
+    type: 'line',
+    data: { labels, datasets: [
+      { label:'Email', data:[14,18,15,17,21,21,23,23,24,23,25,27,28], backgroundColor:'rgba(43,119,204,.85)', borderColor:'#2b77cc', borderWidth:0, fill:'origin', tension:.35, pointRadius:0, stack:'a' },
+      { label:'SMS', data:[6,5,5,7,8,7,8,9,9,10,10,11,12], backgroundColor:'rgba(215,39,146,.85)', borderColor:'#d72792', borderWidth:0, fill:'-1', tension:.35, pointRadius:0, stack:'a' },
+      { label:'Automation', data:[3,3,4,5,6,7,7,8,9,9,10,11,11], backgroundColor:'rgba(162,117,255,.85)', borderColor:'#a275ff', borderWidth:0, fill:'-1', tension:.35, pointRadius:0, stack:'a' },
+      { label:'Total attributed', data:[23,26,24,29,35,35,38,40,42,42,45,49,51], borderColor:'#171b1f', borderWidth:2, borderDash:[5,4], fill:false, tension:.35, pointRadius:3, pointBackgroundColor:'#171b1f', pointBorderColor:'#fff', pointBorderWidth:2 }
+    ]},
+    options: { responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{grid:{display:false}},y:{grid:{color:'#ececec'},ticks:{callback:v=>v+'%'}}} }
+  });
+}
+
+// ========================= MOCKUP DEFINITIONS =========================
+const MOCKUPS = {
+
+  // ============= 01 · INLINE TOOLTIP =============
+  '1': {
+    title: 'Inline tooltip with un-rounded value',
+    tactic: 'Just-in-time disclosure',
+    isAi: false,
+    render: () => `
+      <div class="page-content">
+        ${filtersBar}
+        <div class="kpi-grid">
+          <div class="kpi-tile"><div class="kpi-label">$ Attributed revenue <span class="info-i" data-tip="rev">i</span></div><div class="kpi-value">$184,320</div><div class="kpi-delta up">▲ 12%</div></div>
+          <div class="kpi-tile"><div class="kpi-label"># Attributed orders <span class="info-i" data-tip="orders">i</span></div><div class="kpi-value">1,427</div><div class="kpi-delta up">▲ 8%</div></div>
+          <div class="kpi-tile"><div class="kpi-label">% Order rate <span class="info-i lit" data-tip="orderrate">i</span></div><div class="kpi-value">3.2%</div><div class="kpi-delta down">▼ 2%</div></div>
+          <div class="kpi-tile"><div class="kpi-label">⌀ Avg order value <span class="info-i" data-tip="aov">i</span></div><div class="kpi-value">$129</div><div class="kpi-delta up">▲ 4%</div></div>
+          <div class="kpi-tile"><div class="kpi-label">↻ Repeat rate <span class="info-i" data-tip="repeat">i</span></div><div class="kpi-value">28%</div><div class="kpi-delta up">▲ 3%</div></div>
+          <div class="kpi-tile"><div class="kpi-label">$ Rev / recipient <span class="info-i" data-tip="revper">i</span></div><div class="kpi-value">$2.84</div><div class="kpi-delta up">▲ 6%</div></div>
+        </div>
+
+        <!-- The tooltip itself, shown for "Order rate" -->
+        <div class="tooltip" style="position:fixed;top:200px;left:434px;">
+          <div class="tooltip-eyebrow">📖 Definition</div>
+          <div class="tooltip-title">Order rate</div>
+          <div class="tooltip-def">The percentage of recipients who placed an order within your <strong>attribution window</strong> after receiving an email, SMS, or automation.</div>
+          <div class="tooltip-row"><span class="l">Formula</span><span class="v">orders ÷ recipients</span></div>
+          <div class="tooltip-row"><span class="l">Your value (precise)</span><span class="v">3.184%</span></div>
+          <div class="tooltip-row"><span class="l">Displayed</span><span class="v">3.2%</span></div>
+          <div class="tooltip-row"><span class="l">Date range</span><span class="v">Last 90 days</span></div>
+          <div class="tooltip-row"><span class="l">Includes</span><span class="v">Email · SMS · Automation</span></div>
+          <div class="tooltip-row"><span class="l">Excludes</span><span class="v">Direct, paid, organic</span></div>
+          <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--elderberry-30);font-size:11px;color:var(--elderberry-100)">
+            <strong style="color:var(--elderberry-130)">Often confused with:</strong> Click-to-purchase rate (clicks → orders, not recipients → orders).
+          </div>
+          <a class="tooltip-link" href="#">📚 Learn more in our KB →</a>
+        </div>
+
+        ${stackedChartWidget('Share of attributed revenue over time')}
+
+        <div class="widget">
+          <div class="widget-header">
+            <div>
+              <div class="widget-title">Marketing engagement</div>
+              <div class="widget-sub">Last 90 days · Hover any metric label for definition</div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+            <div><div style="font-size:11px;color:var(--elderberry-90);font-weight:600">Sends <span class="info-i" data-tip="sends">i</span></div><div style="font-size:22px;font-weight:700;margin-top:6px">42,180</div></div>
+            <div><div style="font-size:11px;color:var(--elderberry-90);font-weight:600">Open rate <span class="info-i" data-tip="open">i</span></div><div style="font-size:22px;font-weight:700;margin-top:6px">38.2%</div></div>
+            <div><div style="font-size:11px;color:var(--elderberry-90);font-weight:600">Click rate <span class="info-i" data-tip="click">i</span></div><div style="font-size:22px;font-weight:700;margin-top:6px">4.7%</div></div>
+            <div><div style="font-size:11px;color:var(--elderberry-90);font-weight:600">Unique click rate <span class="info-i" data-tip="uniclick">i</span></div><div style="font-size:22px;font-weight:700;margin-top:6px">3.4%</div></div>
+          </div>
+        </div>
+      </div>
+    `,
+    afterRender: () => drawShareChart()
+  },
+
+  // ============= 02 · PRECISION FOOTNOTE =============
+  '2': {
+    title: 'Smart precision footnote',
+    tactic: 'Proactive transparency',
+    isAi: false,
+    render: () => `
+      <div class="page-content">
+        ${filtersBar}
+        <div style="background:linear-gradient(135deg,#fffceb,#fff8d0);border:1px solid #f0d800;border-radius:8px;padding:14px 18px;margin-bottom:16px;display:flex;gap:10px;align-items:center">
+          <span style="font-size:20px">🔍</span>
+          <div style="flex:1;font-size:13px"><strong>Smart precision detection is on.</strong> When a metric rounds in a way that hides nuance, we'll flag it with an asterisk — hover to see the actual value.</div>
+        </div>
+
+        <div class="widget">
+          <div class="widget-header"><div><div class="widget-title">Latest campaign · "Spring drop · Aurora pendant"</div><div class="widget-sub">Sent Apr 28 to 2,840 contacts</div></div></div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px">
+            <div>
+              <div style="font-size:11px;font-weight:600;color:var(--elderberry-90)">Delivery rate</div>
+              <div style="font-size:32px;font-weight:700;letter-spacing:-.02em;margin-top:6px;display:flex;align-items:baseline">
+                100%<span class="prec-asterisk" title="Rounded — actual value is 99.74%">*</span>
+              </div>
+              <div class="prec-note">⚠ Rounded · actual 99.74%</div>
+            </div>
+            <div>
+              <div style="font-size:11px;font-weight:600;color:var(--elderberry-90)">Open rate</div>
+              <div style="font-size:32px;font-weight:700;letter-spacing:-.02em;margin-top:6px">38.2%</div>
+              <div style="font-size:11px;color:var(--kiwi-80);font-weight:600;margin-top:2px">▲ 2.1pts</div>
+            </div>
+            <div>
+              <div style="font-size:11px;font-weight:600;color:var(--elderberry-90)">Click rate</div>
+              <div style="font-size:32px;font-weight:700;letter-spacing:-.02em;margin-top:6px;display:flex;align-items:baseline">
+                0%<span class="prec-asterisk" title="Rounded — actual value is 0.04%">*</span>
+              </div>
+              <div class="prec-note">⚠ Rounded down · actual 0.04% (1 click)</div>
+            </div>
+            <div>
+              <div style="font-size:11px;font-weight:600;color:var(--elderberry-90)">Unsubscribes</div>
+              <div style="font-size:32px;font-weight:700;letter-spacing:-.02em;margin-top:6px">0.3%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="widget">
+          <div class="widget-header"><div><div class="widget-title">Anatomy of a precision flag</div><div class="widget-sub">Three places where rounding hides important nuance</div></div></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+            <div style="padding:14px;background:var(--persimmon-10);border:1px solid #ffc296;border-radius:8px">
+              <div style="font-size:11px;font-weight:700;color:var(--persimmon-60);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">⚠ Pattern 1 · Ceiling rounding</div>
+              <div style="font-size:13px;line-height:1.5"><strong>99.5–99.99% rounds to 100%.</strong> Looks "perfect" but hides bounces. We show <code>*</code> footnote with actual value.</div>
+              <div style="margin-top:8px;font-size:11px;color:var(--elderberry-100)">VOC source: 3/27 report — "Delivery Rate showing 100% when it isn't"</div>
+            </div>
+            <div style="padding:14px;background:var(--persimmon-10);border:1px solid #ffc296;border-radius:8px">
+              <div style="font-size:11px;font-weight:700;color:var(--persimmon-60);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">⚠ Pattern 2 · Floor rounding</div>
+              <div style="font-size:13px;line-height:1.5"><strong>0.01–0.49% rounds to 0%.</strong> Looks like nothing happened. We show actual value + raw count.</div>
+              <div style="margin-top:8px;font-size:11px;color:var(--elderberry-100)">"Did anyone click? It says 0%."</div>
+            </div>
+            <div style="padding:14px;background:var(--persimmon-10);border:1px solid #ffc296;border-radius:8px">
+              <div style="font-size:11px;font-weight:700;color:var(--persimmon-60);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">⚠ Pattern 3 · Trailing decimals dropped</div>
+              <div style="font-size:13px;line-height:1.5"><strong>3.184% displays as 3.2%.</strong> Difference rarely matters — but when comparing two metrics, we surface the precise value on hover.</div>
+              <div style="margin-top:8px;font-size:11px;color:var(--elderberry-100)">Reduces "but the math doesn't add up" tickets</div>
+            </div>
+          </div>
+        </div>
+
+        ${stackedChartWidget('Share of attributed revenue over time')}
+      </div>
+    `,
+    afterRender: () => drawShareChart()
+  },
+
+  // ============= 03 · CALCULATION DRAWER =============
+  '3': {
+    title: 'Calculation breakdown drawer',
+    tactic: 'Calculation transparency',
+    isAi: false,
+    render: () => `
+      <div class="page-content">
+        ${filtersBar}
+        <div style="background:var(--blueberry-10);border:1px solid #b8d4f7;border-radius:8px;padding:14px 18px;margin-bottom:16px;display:flex;gap:10px;align-items:center">
+          <span style="font-size:20px">🧮</span>
+          <div style="flex:1;font-size:13px"><strong>Click any KPI tile</strong> to see exactly how it was calculated, with your real numbers and date range. Below: drawer for "Order rate."</div>
+        </div>
+        ${standardKpis}
+        ${stackedChartWidget('Share of attributed revenue over time')}
+      </div>
+
+      <div class="drawer-overlay open"></div>
+      <div class="drawer open">
+        <div class="drawer-header">
+          <div>
+            <div class="drawer-eyebrow">📖 How this is calculated</div>
+            <div class="drawer-title">Order rate</div>
+            <div class="drawer-value">3.2%</div>
+          </div>
+          <button class="drawer-close">✕</button>
+        </div>
+
+        <div style="font-size:13px;color:var(--elderberry-100);line-height:1.5;margin-bottom:14px">The percentage of recipients who placed an order within your <strong>attribution window</strong> after receiving an email, SMS, or automation.</div>
+
+        <div class="calc-row">
+          <div class="calc-cell"><div class="l">Attributed orders</div><div class="v">1,427</div></div>
+          <div class="calc-op">÷</div>
+          <div class="calc-cell"><div class="l">Recipients</div><div class="v">44,720</div></div>
+          <div class="calc-op">=</div>
+          <div class="calc-cell"><div class="l">Order rate</div><div class="v" style="color:var(--kale-100)">3.184%*</div></div>
+        </div>
+        <div style="font-size:11px;color:var(--persimmon-60);margin-bottom:18px">* Displayed as <strong>3.2%</strong> due to single-decimal rounding</div>
+
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--elderberry-90);margin-bottom:8px">Date range</div>
+        <div style="padding:10px 12px;background:var(--elderberry-20);border-radius:6px;font-size:13px;margin-bottom:18px">📅 <strong>Last 90 days</strong> · Feb 4 – May 5, 2026 · Compared to previous 90 days</div>
+
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--elderberry-90);margin-bottom:8px">What's included</div>
+        <ul class="scope-list" style="margin-bottom:18px">
+          <li class="included">Orders attributed to email opens within 5 days</li>
+          <li class="included">Orders attributed to SMS clicks within 1 day</li>
+          <li class="included">Orders attributed to automation flows within 5 days</li>
+          <li class="excluded">Orders from direct traffic (no marketing touch)</li>
+          <li class="excluded">Orders from paid ads, organic search, social</li>
+          <li class="excluded">Refunded or cancelled orders</li>
+        </ul>
+
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--elderberry-90);margin-bottom:8px">Often confused with</div>
+        <div style="background:white;border:1px solid var(--elderberry-40);border-radius:6px;padding:12px;margin-bottom:18px">
+          <div style="font-size:13px;font-weight:600;margin-bottom:4px">Click-to-purchase rate (3.4%)</div>
+          <div style="font-size:12px;color:var(--elderberry-100);line-height:1.5">That measures <strong>orders ÷ clicks</strong>. Order rate measures <strong>orders ÷ recipients</strong> — a much larger denominator. Different question, different answer.</div>
+        </div>
+
+        <div style="display:flex;gap:8px">
+          <button class="btn-primary">📥 Download CSV (verify)</button>
+          <button class="btn-secondary">📚 KB article</button>
+        </div>
+      </div>
+    `
+  },
+
+  // ============= 04 · LOOKS WRONG AI =============
+  '4': {
+    title: '"Looks wrong?" AI entry point',
+    tactic: 'Empathetic framing + perspective-taking',
+    isAi: true,
+    withRail: true,
+    render: () => `
+      <div class="page-content">
+        ${filtersBar}
+        <div style="background:linear-gradient(135deg,#fef0f3,#ffe7e7);border:1px solid #ffaaba;border-radius:8px;padding:14px 18px;margin-bottom:16px;display:flex;gap:10px;align-items:center">
+          <span style="font-size:20px">🤔</span>
+          <div style="flex:1;font-size:13px"><strong>Hover over any metric to surface a "Looks wrong?" button.</strong> This meets users in their actual mental state — not "explain this," but "why does this seem off?"</div>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi-tile" style="border-color:#ffaaba"><button class="looks-wrong-btn">⚠ Looks wrong?</button><div class="kpi-label">$ Attributed revenue</div><div class="kpi-value">$184,320</div><div class="kpi-delta up">▲ 12%</div></div>
+          <div class="kpi-tile"><button class="looks-wrong-btn">⚠ Looks wrong?</button><div class="kpi-label"># Attributed orders</div><div class="kpi-value">1,427</div><div class="kpi-delta up">▲ 8%</div></div>
+          <div class="kpi-tile"><button class="looks-wrong-btn">⚠ Looks wrong?</button><div class="kpi-label">% Order rate</div><div class="kpi-value">3.2%</div><div class="kpi-delta down">▼ 2%</div></div>
+          <div class="kpi-tile"><button class="looks-wrong-btn">⚠ Looks wrong?</button><div class="kpi-label">⌀ Avg order value</div><div class="kpi-value">$129</div><div class="kpi-delta up">▲ 4%</div></div>
+          <div class="kpi-tile"><button class="looks-wrong-btn">⚠ Looks wrong?</button><div class="kpi-label">↻ Repeat rate</div><div class="kpi-value">28%</div><div class="kpi-delta up">▲ 3%</div></div>
+          <div class="kpi-tile"><button class="looks-wrong-btn">⚠ Looks wrong?</button><div class="kpi-label">$ Rev / recipient</div><div class="kpi-value">$2.84</div><div class="kpi-delta up">▲ 6%</div></div>
+        </div>
+        ${stackedChartWidget('Share of attributed revenue over time')}
+      </div>
+
+      <aside class="ai-rail">
+        <div class="ai-rail-header">
+          <div class="ai-rail-icon">AI</div>
+          <div>
+            <div class="ai-rail-title">Analytics agent</div>
+            <div class="ai-rail-sub">Pedalfish Cycles · Investigating "Attributed revenue"</div>
+          </div>
+          <button class="ai-rail-close">✕</button>
+        </div>
+        <div class="ai-rail-body">
+          <div class="ai-msg-context">
+            <div class="ai-msg-context-label">You said</div>
+            <div>⚠ <strong>Attributed revenue: $184,320</strong> · Looks wrong</div>
+          </div>
+          <div class="ai-msg">
+            <p>Got it — let me explain the <strong>3 reasons this number commonly looks "off"</strong> to people in your situation:</p>
+            <p><strong>1. It's lower than your store dashboard.</strong> Mailchimp only counts orders within an <span class="kb-link">attribution window</span> after a marketing touch (5d for email, 1d for SMS). Direct traffic, paid ads, and organic searches are excluded. <em>Your store likely shows ~$2.4M total revenue this period — so seeing $184k attributed is actually healthy: it's 7.6% direct attribution, near the median for DTC stores.</em></p>
+            <p><strong>2. The 12% increase looks deceptive.</strong> Compared to the previous 90 days. We exclude refunds — so if you had a refund spike last period, the lift will look bigger than reality. <span class="kb-link">How we handle refunds →</span></p>
+            <p><strong>3. It doesn't match Google Analytics.</strong> GA uses last-touch attribution (any source), Mailchimp uses last-marketing-touch within window. <span class="kb-link">See full reconciliation →</span></p>
+            <p>Want me to dig into any of these?</p>
+
+            <a class="ai-citation">
+              <div class="ai-cite-icon">📄</div>
+              <div class="ai-cite-body">
+                <div class="ai-cite-title">How attributed revenue is calculated</div>
+                <div class="ai-cite-meta">KB · Updated 14 days ago</div>
+              </div>
+            </a>
+            <a class="ai-citation">
+              <div class="ai-cite-icon">📄</div>
+              <div class="ai-cite-body">
+                <div class="ai-cite-title">Attribution windows: email, SMS, automation</div>
+                <div class="ai-cite-meta">KB · Updated 28 days ago</div>
+              </div>
+            </a>
+          </div>
+
+          <div class="followup-chips">
+            <button class="chip">Why doesn't this match Google Analytics?</button>
+            <button class="chip">Show me the orders included</button>
+            <button class="chip">Change my attribution window</button>
+          </div>
+        </div>
+        <div class="ai-input-wrap">
+          <input class="ai-input" placeholder="Ask a follow-up...">
+          <button class="ai-send">→</button>
+        </div>
+      </aside>
+    `,
+    afterRender: () => { document.getElementById('main-area').classList.add('with-rail'); drawShareChart(); }
+  },
+
+  // ============= 05 · EXPLAIN THIS CHART PILL =============
+  '5': {
+    title: '"Explain this chart" pill + right rail',
+    tactic: 'Conversational disclosure + KB grounding',
+    isAi: true,
+    withRail: true,
+    render: () => `
+      <div class="page-content">
+        ${filtersBar}
+        <div class="kpi-grid">
+          <div class="kpi-tile"><button class="ai-pill-tile">✨ Explain</button><div class="kpi-label">$ Attributed revenue</div><div class="kpi-value">$184,320</div><div class="kpi-delta up">▲ 12%</div></div>
+          <div class="kpi-tile"><button class="ai-pill-tile">✨ Explain</button><div class="kpi-label"># Attributed orders</div><div class="kpi-value">1,427</div><div class="kpi-delta up">▲ 8%</div></div>
+          <div class="kpi-tile"><button class="ai-pill-tile">✨ Explain</button><div class="kpi-label">% Order rate</div><div class="kpi-value">3.2%</div><div class="kpi-delta down">▼ 2%</div></div>
+          <div class="kpi-tile"><button class="ai-pill-tile">✨ Explain</button><div class="kpi-label">⌀ Avg order value</div><div class="kpi-value">$129</div><div class="kpi-delta up">▲ 4%</div></div>
+          <div class="kpi-tile"><button class="ai-pill-tile">✨ Explain</button><div class="kpi-label">↻ Repeat rate</div><div class="kpi-value">28%</div><div class="kpi-delta up">▲ 3%</div></div>
+          <div class="kpi-tile"><button class="ai-pill-tile">✨ Explain</button><div class="kpi-label">$ Rev / recipient</div><div class="kpi-value">$2.84</div><div class="kpi-delta up">▲ 6%</div></div>
+        </div>
+        ${stackedChartWidget('Share of attributed revenue over time', '<button class="ai-pill">+ Explain this chart</button>')}
+      </div>
+
+      <aside class="ai-rail">
+        <div class="ai-rail-header">
+          <div class="ai-rail-icon">✨</div>
+          <div>
+            <div class="ai-rail-title">Analytics agent</div>
+            <div class="ai-rail-sub">Pedalfish Cycles · Last 90 days</div>
+          </div>
+          <button class="ai-rail-close">✕</button>
+        </div>
+        <div class="ai-rail-body">
+          <div class="ai-msg">
+            <p><strong>Share of attributed revenue</strong> shows the percent of your total online store revenue that Mailchimp can attribute to email, SMS, or automation activity within your attribution window. The remaining share comes from sources Mailchimp doesn't have visibility into — direct traffic, paid ads, organic search, etc.</p>
+            <p>Here's what's happening over the last 90 days:</p>
+            <ul>
+              <li><strong>Total Mailchimp-attributed share is climbing</strong> — from 23% in Week 1 to 51% in Week 13.</li>
+              <li><strong>Email is your biggest contributor</strong> (~28% in the most recent week), followed by SMS (~12%) and automation flows (~11%).</li>
+              <li>The upward trend is largely driven by your email channel and the abandoned cart flow you launched in Week 4.</li>
+            </ul>
+            <p>Anything you'd like to dig into?</p>
+
+            <a class="ai-citation">
+              <div class="ai-cite-icon">📄</div>
+              <div class="ai-cite-body">
+                <div class="ai-cite-title">Understanding share of attributed revenue</div>
+                <div class="ai-cite-meta">KB · Updated 7 days ago</div>
+              </div>
+            </a>
+            <a class="ai-citation">
+              <div class="ai-cite-icon">📄</div>
+              <div class="ai-cite-body">
+                <div class="ai-cite-title">Attribution model: how Mailchimp attributes revenue</div>
+                <div class="ai-cite-meta">KB · Updated 21 days ago</div>
+              </div>
+            </a>
+          </div>
+
+          <div class="followup-chips">
+            <button class="chip">Why doesn't this match Google Analytics?</button>
+            <button class="chip">Split orders by opens vs clicks</button>
+            <button class="chip">Is 51% good for my industry?</button>
+          </div>
+        </div>
+        <div class="ai-input-wrap">
+          <input class="ai-input" placeholder="Ask a follow-up...">
+          <button class="ai-send">→</button>
+        </div>
+      </aside>
+    `,
+    afterRender: () => { document.getElementById('main-area').classList.add('with-rail'); drawShareChart(); }
+  },
+
+  // ============= 06 · LEARN RAIL =============
+  '6': {
+    title: 'Persistent Learn rail / agent mode',
+    tactic: 'Persistent knowledge access',
+    isAi: true,
+    withRail: true,
+    render: () => `
+      <div class="page-content">
+        ${filtersBar}
+        <div style="background:linear-gradient(135deg,#faf6ff,#f0e8ff);border:1px solid var(--eggplant-50);border-radius:8px;padding:14px 18px;margin-bottom:16px;display:flex;gap:10px;align-items:center">
+          <span style="font-size:20px">📚</span>
+          <div style="flex:1;font-size:13px"><strong>Learn rail is pinned open.</strong> Auto-surfaces articles relevant to this page. Switch to "Ask" tab for conversational mode. Aligned with VOC: "Learn tab side-by-side with editing."</div>
+          <button class="btn-ghost">📌 Unpin</button>
+        </div>
+        ${standardKpis}
+        ${stackedChartWidget('Share of attributed revenue over time')}
+      </div>
+
+      <aside class="learn-rail">
+        <div class="ai-rail-header">
+          <div class="ai-rail-icon" style="background:linear-gradient(135deg,var(--blueberry-70),var(--kale-90))">📚</div>
+          <div>
+            <div class="ai-rail-title">Learn</div>
+            <div class="ai-rail-sub">Marketing dashboard · Pinned</div>
+          </div>
+          <button class="ai-rail-close">📌</button>
+        </div>
+        <div class="learn-tabs">
+          <button class="learn-tab active">Browse</button>
+          <button class="learn-tab">Ask</button>
+          <button class="learn-tab">Recent</button>
+        </div>
+        <div class="learn-search">
+          <input placeholder="Search the knowledge base...">
+        </div>
+        <div style="flex:1;overflow-y:auto">
+          <div class="learn-section">
+            <div class="learn-section-label">📍 Relevant to this page</div>
+            <a class="kb-card"><div class="ico">📊</div><div class="body"><div class="title">Reading the Marketing Dashboard</div><div class="meta">5 min read · Updated 7 days ago</div></div></a>
+            <a class="kb-card"><div class="ico">🎯</div><div class="body"><div class="title">Attribution windows explained</div><div class="meta">3 min read · Most-viewed</div></div></a>
+            <a class="kb-card"><div class="ico">⚖️</div><div class="body"><div class="title">Click rate vs unique click rate</div><div class="meta">2 min read</div></div></a>
+            <a class="kb-card"><div class="ico">🔍</div><div class="body"><div class="title">Why your numbers don't match Google Analytics</div><div class="meta">8 min read · ⭐ Top FAQ</div></div></a>
+          </div>
+          <div class="learn-section">
+            <div class="learn-section-label">🗂 Categories</div>
+            <a class="kb-card"><div class="ico">📈</div><div class="body"><div class="title">Reporting &amp; analytics</div><div class="meta">42 articles</div></div></a>
+            <a class="kb-card"><div class="ico">💰</div><div class="body"><div class="title">Revenue attribution</div><div class="meta">18 articles</div></div></a>
+            <a class="kb-card"><div class="ico">📤</div><div class="body"><div class="title">Sending &amp; deliverability</div><div class="meta">31 articles</div></div></a>
+            <a class="kb-card"><div class="ico">🤖</div><div class="body"><div class="title">Automations</div><div class="meta">24 articles</div></div></a>
+          </div>
+          <div class="learn-section">
+            <div class="learn-section-label">⭐ Most-viewed this week</div>
+            <a class="kb-card"><div class="ico">🆚</div><div class="body"><div class="title">Open rate, click rate, and beyond</div><div class="meta">2,841 views</div></div></a>
+            <a class="kb-card"><div class="ico">📅</div><div class="body"><div class="title">Date ranges and comparison periods</div><div class="meta">1,927 views</div></div></a>
+          </div>
+        </div>
+      </aside>
+    `,
+    afterRender: () => { document.getElementById('main-area').classList.add('with-rail'); drawShareChart(); }
+  },
+
+  // ============= 07 · ANOMALY AUTO-EXPLAIN =============
+  '7': {
+    title: 'Anomaly auto-explain',
+    tactic: 'Proactive disclosure + anomaly detection',
+    isAi: true,
+    render: () => `
+      <div class="page-content">
+        ${filtersBar}
+        <div style="background:linear-gradient(135deg,#faf6ff,#f0e8ff);border:1px solid var(--eggplant-50);border-radius:8px;padding:14px 18px;margin-bottom:16px;display:flex;gap:10px;align-items:center">
+          <span style="font-size:20px">✨</span>
+          <div style="flex:1;font-size:13px"><strong>Auto-explain is on.</strong> When a metric spikes, drops, or hits a value that's typically misread, we'll add a contextual note <em>under</em> the number — before you have to ask.</div>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi-tile">
+            <div class="kpi-label">$ Attributed revenue</div>
+            <div class="kpi-value">$184,320</div>
+            <div class="kpi-delta up">▲ 12%</div>
+            <div class="anomaly-note"><span class="ico">✨</span><span><strong>Higher than usual.</strong> Driven by your abandoned-cart flow launched W4. <span class="kb-link">View flow →</span></span></div>
+          </div>
+          <div class="kpi-tile"><div class="kpi-label"># Attributed orders</div><div class="kpi-value">1,427</div><div class="kpi-delta up">▲ 8%</div></div>
+          <div class="kpi-tile">
+            <div class="kpi-label">% Order rate</div>
+            <div class="kpi-value">3.2%</div>
+            <div class="kpi-delta down">▼ 2%</div>
+            <div class="anomaly-note" style="background:linear-gradient(135deg,#fef0f3,#ffe7e7);border-color:#ffaaba"><span class="ico" style="color:var(--watermelon-80)">⚠</span><span><strong>Lower than your 90-day avg (3.7%).</strong> Likely because list grew 18% — denominator effect, not a real drop. <span class="kb-link">Why this happens →</span></span></div>
+          </div>
+          <div class="kpi-tile"><div class="kpi-label">⌀ Avg order value</div><div class="kpi-value">$129</div><div class="kpi-delta up">▲ 4%</div></div>
+          <div class="kpi-tile"><div class="kpi-label">↻ Repeat rate</div><div class="kpi-value">28%</div><div class="kpi-delta up">▲ 3%</div></div>
+          <div class="kpi-tile"><div class="kpi-label">$ Rev / recipient</div><div class="kpi-value">$2.84</div><div class="kpi-delta up">▲ 6%</div></div>
+        </div>
+
+        <div class="widget">
+          <div class="widget-header"><div><div class="widget-title">Latest campaign · "Spring drop"</div><div class="widget-sub">Sent Apr 28 to 2,840 contacts</div></div></div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px">
+            <div>
+              <div style="font-size:11px;font-weight:600;color:var(--elderberry-90)">Delivery rate</div>
+              <div style="font-size:32px;font-weight:700;letter-spacing:-.02em;margin-top:6px">100%</div>
+              <div class="anomaly-note"><span class="ico">✨</span><span><strong>Actually 99.74%.</strong> Rounded up for display. 7 hard bounces logged. <span class="kb-link">Clean list →</span></span></div>
+            </div>
+            <div>
+              <div style="font-size:11px;font-weight:600;color:var(--elderberry-90)">Open rate</div>
+              <div style="font-size:32px;font-weight:700;letter-spacing:-.02em;margin-top:6px">52.3%</div>
+              <div class="anomaly-note" style="background:linear-gradient(135deg,#effff0,var(--kiwi-10));border-color:var(--kiwi-40)"><span class="ico" style="color:var(--kiwi-80)">🎉</span><span><strong>Top 8% for DTC home goods.</strong> Industry median is 38%. <span class="kb-link">See benchmarks →</span></span></div>
+            </div>
+            <div>
+              <div style="font-size:11px;font-weight:600;color:var(--elderberry-90)">Click rate</div>
+              <div style="font-size:32px;font-weight:700;letter-spacing:-.02em;margin-top:6px">8.1%</div>
+            </div>
+            <div>
+              <div style="font-size:11px;font-weight:600;color:var(--elderberry-90)">Unsubscribes</div>
+              <div style="font-size:32px;font-weight:700;letter-spacing:-.02em;margin-top:6px">0.8%</div>
+              <div class="anomaly-note" style="background:linear-gradient(135deg,#fef0f3,#ffe7e7);border-color:#ffaaba"><span class="ico" style="color:var(--watermelon-80)">⚠</span><span><strong>2.7× your usual.</strong> Spike correlates with re-engagement send. Often expected behavior. <span class="kb-link">Read more →</span></span></div>
+            </div>
+          </div>
+        </div>
+
+        ${stackedChartWidget('Share of attributed revenue over time')}
+      </div>
+    `,
+    afterRender: () => drawShareChart()
+  },
+
+  // ============= 08 · COMPARE TO GA =============
+  '8': {
+    title: '"Compare to" overlay — solve the GA mismatch',
+    tactic: 'Reconciliation + scope visualization',
+    isAi: true,
+    render: () => `
+      <div class="page-content">
+        ${filtersBar}
+        <div style="background:linear-gradient(135deg,#f4f9ff,#e0edff);border:1px solid #b8d4f7;border-radius:8px;padding:14px 18px;margin-bottom:16px;display:flex;gap:10px;align-items:center">
+          <span style="font-size:20px">⚖️</span>
+          <div style="flex:1;font-size:13px"><strong>"Why doesn't this match Google Analytics?"</strong> is the #1 attribution VOC. This view tackles it head-on — connect GA (or paste a number) and AI explains the scope difference.</div>
+          <button class="btn-primary">+ Connect GA</button>
+        </div>
+
+        <div class="widget">
+          <div class="widget-header"><div><div class="widget-title">Reconciliation: Mailchimp vs Google Analytics</div><div class="widget-sub">Last 90 days · Connected to GA4 property G-XXXXX-X</div></div><button class="ai-pill eggplant">✨ AI explanation</button></div>
+          <div class="compare-grid">
+            <div class="compare-col mc">
+              <h4>🐵 Mailchimp · Attributed revenue</h4>
+              <div class="num">$184,320</div>
+              <div style="font-size:11px;color:var(--elderberry-100)">Last-marketing-touch within window</div>
+              <ul class="scope-list">
+                <li class="included">Email opens within 5 days</li>
+                <li class="included">SMS clicks within 1 day</li>
+                <li class="included">Automation flows within 5 days</li>
+                <li class="excluded">Direct traffic</li>
+                <li class="excluded">Paid ads, social, organic</li>
+                <li class="excluded">Refunded orders</li>
+              </ul>
+            </div>
+            <div class="compare-col ga">
+              <h4>📊 Google Analytics · Email/SMS revenue</h4>
+              <div class="num">$247,890</div>
+              <div style="font-size:11px;color:var(--elderberry-100)">Last-touch attribution, any source</div>
+              <ul class="scope-list">
+                <li class="included">All UTM-tagged email + SMS clicks</li>
+                <li class="included">Any session within 30 days</li>
+                <li class="included">Includes refunded orders (revenue gross)</li>
+                <li class="excluded">Conversions without UTM tags</li>
+                <li class="excluded">Cross-device journeys</li>
+                <li class="included">Includes paid retargeting</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="reconcile-card">
+            <div class="reconcile-eyebrow">✨ AI reconciliation</div>
+            <div style="font-size:14px;line-height:1.6">
+              The <strong>$63,570 gap</strong> between Mailchimp ($184,320) and GA ($247,890) is fully explained by 4 differences in scope. <strong>Both numbers are correct</strong> — they're answering different questions.
+            </div>
+            <div class="reconcile-math">
+GA total                          $247,890<br>
+− Refunded orders GA includes      −$8,420<br>
+− 30-day window vs MC's 5-day     −$24,180<br>
+− Paid retargeting in GA only     −$19,050<br>
+− Untagged direct visits in GA    −$11,820<br>
+─────────────────────────<br>
+<strong>= Mailchimp attributed             $184,420</strong> (vs $184,320 actual)<br>
+<span style="color:var(--elderberry-100)">Reconciled within $100 (rounding).</span>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:12px">
+              <button class="btn-primary">📥 Download reconciliation</button>
+              <button class="btn-secondary">📚 Read full attribution guide</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="widget">
+          <div class="widget-header"><div><div class="widget-title">Common reconciliations we can solve</div></div></div>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px">
+            <div style="padding:14px;background:var(--blueberry-10);border:1px solid #b8d4f7;border-radius:8px;cursor:pointer">
+              <div style="font-weight:700;font-size:13px;margin-bottom:4px">📊 Google Analytics</div>
+              <div style="font-size:12px;color:var(--elderberry-100)">Connected · Auto-reconciles weekly</div>
+            </div>
+            <div style="padding:14px;background:white;border:1px solid var(--elderberry-50);border-radius:8px;cursor:pointer">
+              <div style="font-weight:700;font-size:13px;margin-bottom:4px">🛍 Shopify orders dashboard</div>
+              <div style="font-size:12px;color:var(--elderberry-100)">Connect to reconcile against gross order data</div>
+            </div>
+            <div style="padding:14px;background:white;border:1px solid var(--elderberry-50);border-radius:8px;cursor:pointer">
+              <div style="font-weight:700;font-size:13px;margin-bottom:4px">📥 Paste a number</div>
+              <div style="font-size:12px;color:var(--elderberry-100)">From any tool — AI will explain the gap</div>
+            </div>
+            <div style="padding:14px;background:white;border:1px solid var(--elderberry-50);border-radius:8px;cursor:pointer">
+              <div style="font-weight:700;font-size:13px;margin-bottom:4px">📈 Klaviyo / Bloomreach / etc</div>
+              <div style="font-size:12px;color:var(--elderberry-100)">Compare attribution between ESPs</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  }
+
+};
+
+// ========================= ROUTING =========================
+const params = new URLSearchParams(location.search);
+const id = params.get('id') || '1';
+const order = ['1','2','3','4','5','6','7','8'];
+const idx = order.indexOf(id);
+const m = MOCKUPS[id];
+
+if (!m) {
+  document.getElementById('content-root').innerHTML = '<div class="page-content"><div class="widget"><div class="widget-title">Mockup not found.</div><a href="index.html" class="btn-primary" style="margin-top:12px;display:inline-block">← Back to gallery</a></div></div>';
+} else {
+  const metaId = document.getElementById('meta-id');
+  metaId.textContent = id.padStart(2,'0');
+  if (m.isAi) metaId.classList.add('ai');
+  document.getElementById('meta-title').textContent = m.title;
+  document.getElementById('meta-tactic').textContent = '· ' + m.tactic;
+  document.title = `${id.padStart(2,'0')} · ${m.title}`;
+  document.getElementById('content-root').innerHTML = m.render();
+  if (m.afterRender) setTimeout(m.afterRender, 50);
+}
+
+const prevLink = document.getElementById('prev-mockup');
+const nextLink = document.getElementById('next-mockup');
+prevLink.href = idx > 0 ? `mockup.html?id=${order[idx-1]}` : 'index.html';
+nextLink.href = idx < order.length-1 ? `mockup.html?id=${order[idx+1]}` : 'index.html';
+if (idx === 0) prevLink.style.opacity = .4;
+if (idx === order.length-1) nextLink.textContent = 'Done →';
+</script>
+
+</body>
+</html>
