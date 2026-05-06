@@ -309,6 +309,32 @@ body { font-family: var(--font); font-size: 14px; color: var(--elderberry-130); 
 
 /* Cap charts */
 canvas[id^="chart-"] { max-height: 220px !important; height: 220px !important; }
+
+/* Freshness + source strip (used across mockups) */
+.data-strip {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 10px 14px;
+  background: white;
+  border: 1px solid var(--elderberry-40);
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-size: 11px;
+  color: var(--elderberry-100);
+  flex-wrap: wrap;
+}
+.data-strip .item { display: inline-flex; align-items: center; gap: 6px; }
+.data-strip .item strong { color: var(--elderberry-130); font-weight: 600; }
+.data-strip .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--kiwi-80); display: inline-block; }
+.data-strip .dot.warm { background: var(--persimmon-60); }
+.data-strip .platform-chips { display: inline-flex; gap: 4px; margin-left: 4px; }
+.platform-chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; background: var(--elderberry-20); border: 1px solid var(--elderberry-40); border-radius: 100px; font-size: 10px; font-weight: 600; color: var(--elderberry-100); cursor: pointer; }
+.platform-chip:hover { border-color: var(--kale-90); color: var(--kale-100); }
+.platform-chip .logo { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.platform-chip .logo.shopify { background: #96bf48; }
+.platform-chip .logo.ga { background: #f9ab00; }
+.platform-chip .logo.stripe { background: #635bff; }
 </style>
 </head>
 <body>
@@ -381,6 +407,20 @@ const filtersBar = `
   </div>
 `;
 
+const dataStrip = `
+  <div class="data-strip">
+    <span class="item"><span class="dot"></span><strong>Updated 4 min ago</strong> · auto-refreshes every 15 min</span>
+    <span style="color:var(--elderberry-50)">·</span>
+    <span class="item">📍 <strong>Source:</strong> Mailchimp + connected platforms</span>
+    <span class="data-strip platform-chips" style="margin-left:auto;border:none;padding:0;background:transparent">
+      <span class="platform-chip"><span class="logo shopify"></span>Shopify · synced 2m</span>
+      <span class="platform-chip"><span class="logo ga"></span>GA4 · synced 18m</span>
+      <span class="platform-chip"><span class="logo stripe"></span>Stripe · synced 1m</span>
+      <button class="platform-chip" style="cursor:pointer;font-weight:700">⚖️ Compare</button>
+    </span>
+  </div>
+`;
+
 const standardKpis = `
   <div class="kpi-grid">
     <div class="kpi-tile"><div class="kpi-label">$ Attributed revenue</div><div class="kpi-value">$184,320</div><div class="kpi-delta up">▲ 12%</div></div>
@@ -444,6 +484,7 @@ const MOCKUPS = {
     render: () => `
       <div class="page-content">
         ${filtersBar}
+        ${dataStrip}
         <div class="kpi-grid">
           <div class="kpi-tile"><div class="kpi-label">$ Attributed revenue <span class="info-i" data-tip="rev">i</span></div><div class="kpi-value">$184,320</div><div class="kpi-delta up">▲ 12%</div></div>
           <div class="kpi-tile"><div class="kpi-label"># Attributed orders <span class="info-i" data-tip="orders">i</span></div><div class="kpi-value">1,427</div><div class="kpi-delta up">▲ 8%</div></div>
@@ -473,10 +514,28 @@ const MOCKUPS = {
             <strong style="color:var(--kale-100)">🌐 What's included:</strong> Email · SMS · Automation orders within window. <strong>Excludes:</strong> direct, paid, organic.
           </div>
 
+          <div style="margin-top:8px;padding:8px 10px;background:#ffe6f4;border-radius:4px;font-size:11px;line-height:1.5">
+            <strong style="color:#b8127a">📍 Where this came from:</strong> Mailchimp campaign data joined with Shopify order data via your connected store. <a href="#" style="color:#b8127a;font-weight:600">View lineage →</a>
+          </div>
+
+          <div style="margin-top:8px;padding:8px 10px;background:#d6f0f3;border-radius:4px;font-size:11px;line-height:1.5">
+            <strong style="color:var(--kale-100)">⏱ Freshness:</strong> Mailchimp data <strong>4 min ago</strong>, Shopify orders <strong>2 min ago</strong>. Auto-refreshes every 15 min.
+          </div>
+
+          <div style="margin-top:8px;padding:8px 10px;background:var(--elderberry-20);border-radius:4px;font-size:11px;line-height:1.5">
+            <strong style="color:var(--elderberry-130)">⚖️ How other tools count this:</strong>
+            <div style="margin-top:4px;display:flex;flex-direction:column;gap:2px">
+              <div>🛍️ <strong>Shopify:</strong> 4.1% (counts repeat sessions)</div>
+              <div>📊 <strong>GA4:</strong> 3.8% (last-touch any source)</div>
+              <div>🐵 <strong>Mailchimp:</strong> 3.2% (last marketing touch)</div>
+            </div>
+          </div>
+
           <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--elderberry-30);font-size:11px;color:var(--elderberry-100)">
             <strong style="color:var(--elderberry-130)">⚖️ Often confused with:</strong> Click-to-purchase rate (clicks → orders, not recipients → orders).
           </div>
           <a class="tooltip-link" href="#">📚 Learn more in our KB →</a>
+          <button class="btn-primary" style="width:100%;margin-top:10px;height:32px">✨ Ask the Analytics Agent a follow-up</button>
         </div>
 
         ${stackedChartWidget('Share of attributed revenue over time')}
@@ -508,6 +567,7 @@ const MOCKUPS = {
     render: () => `
       <div class="page-content">
         ${filtersBar}
+        ${dataStrip}
         <div style="background:linear-gradient(135deg,#fffceb,#fff8d0);border:1px solid #f0d800;border-radius:8px;padding:14px 18px;margin-bottom:16px;display:flex;gap:10px;align-items:center">
           <span style="font-size:20px">🔍</span>
           <div style="flex:1;font-size:13px"><strong>Smart precision detection is on.</strong> When a metric rounds in a way that hides nuance, we'll flag it with an asterisk — hover to see the actual value.</div>
@@ -562,10 +622,19 @@ const MOCKUPS = {
               <strong style="color:var(--kale-100)">🌐 What's included:</strong> Hard + soft bounces count as undelivered. Spam-flagged messages count as delivered.
             </div>
 
+            <div style="margin-top:8px;padding:8px 10px;background:#ffe6f4;border-radius:4px;font-size:11px;line-height:1.5">
+              <strong style="color:#b8127a">📍 Source:</strong> SendGrid event log (our delivery provider) → joined to your campaign in Mailchimp.
+            </div>
+
+            <div style="margin-top:8px;padding:8px 10px;background:#d6f0f3;border-radius:4px;font-size:11px;line-height:1.5">
+              <strong style="color:var(--kale-100)">⏱ Freshness:</strong> Bounce events stream in for up to 72h after send. This number stabilizes ~3 days post-send. <strong>Last bounce: 18h ago.</strong>
+            </div>
+
             <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--elderberry-30);font-size:11px;color:var(--elderberry-100)">
-              <strong style="color:var(--elderberry-130)">⚖️ Not the same as:</strong> Inbox placement (whether messages reach the primary tab vs spam).
+              <strong style="color:var(--elderberry-130)">⚖️ Not the same as:</strong> Inbox placement (whether messages reach the primary tab vs spam) — we don't measure that.
             </div>
             <a class="tooltip-link" href="#">📚 KB · How delivery rate works →</a>
+            <button class="btn-primary" style="width:100%;margin-top:10px;height:32px">✨ Ask the Analytics Agent</button>
           </div>
         </div>
 
@@ -604,6 +673,7 @@ const MOCKUPS = {
     render: () => `
       <div class="page-content">
         ${filtersBar}
+        ${dataStrip}
         <div style="background:var(--blueberry-10);border:1px solid #b8d4f7;border-radius:8px;padding:14px 18px;margin-bottom:16px;display:flex;gap:10px;align-items:center">
           <span style="font-size:20px">🧮</span>
           <div style="flex:1;font-size:13px"><strong>Click any KPI tile</strong> to see exactly how it was calculated, with your real numbers and date range. Below: drawer for "Order rate."</div>
@@ -659,8 +729,33 @@ const MOCKUPS = {
           <div style="font-size:12px;color:var(--elderberry-100);line-height:1.5">That measures <strong>orders ÷ clicks</strong>. Order rate measures <strong>orders ÷ recipients</strong> — a much larger denominator. Different question, different answer.</div>
         </div>
 
-        <div style="display:flex;gap:8px">
-          <button class="btn-primary">📥 Download CSV (verify)</button>
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--elderberry-90);margin-bottom:8px">📍 Source &amp; lineage</div>
+        <div style="padding:12px;background:#ffe6f4;border:1px solid #f7c7e0;border-radius:6px;margin-bottom:14px;font-size:12px;line-height:1.5">
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div>📨 <strong>Recipients (44,720):</strong> Mailchimp send log</div>
+            <div>🛍️ <strong>Orders (1,427):</strong> Shopify orders matched to campaign clicks via shopper email or pixel</div>
+            <div>🔗 <strong>Joined on:</strong> shopper email + Mailchimp click event ID</div>
+          </div>
+          <a href="#" style="color:#b8127a;font-weight:600;font-size:11px;display:inline-block;margin-top:6px">View full lineage diagram →</a>
+        </div>
+
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--elderberry-90);margin-bottom:8px">⏱ Freshness</div>
+        <div style="padding:12px;background:#d6f0f3;border:1px solid #b8dde2;border-radius:6px;margin-bottom:14px;font-size:12px;line-height:1.5">
+          <div style="display:flex;justify-content:space-between"><span>Mailchimp recipient counts</span><strong>4 min ago</strong></div>
+          <div style="display:flex;justify-content:space-between"><span>Shopify order data</span><strong>2 min ago</strong></div>
+          <div style="display:flex;justify-content:space-between;color:var(--elderberry-100)"><span>Auto-refresh</span><span>Every 15 min</span></div>
+        </div>
+
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--elderberry-90);margin-bottom:8px">⚖️ How other tools count this</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:18px">
+          <div style="padding:10px;background:white;border:1px solid var(--elderberry-40);border-radius:6px"><div style="font-size:10px;color:var(--elderberry-90);font-weight:600">🛍️ Shopify</div><div style="font-size:18px;font-weight:700">4.1%</div><div style="font-size:10px;color:var(--elderberry-100)">repeat sessions</div></div>
+          <div style="padding:10px;background:white;border:1px solid var(--elderberry-40);border-radius:6px"><div style="font-size:10px;color:var(--elderberry-90);font-weight:600">📊 GA4</div><div style="font-size:18px;font-weight:700">3.8%</div><div style="font-size:10px;color:var(--elderberry-100)">last-touch any source</div></div>
+          <div style="padding:10px;background:linear-gradient(135deg,#fffceb,#fff8d0);border:1px solid #f0d800;border-radius:6px"><div style="font-size:10px;color:var(--elderberry-90);font-weight:600">🐵 Mailchimp</div><div style="font-size:18px;font-weight:700">3.2%</div><div style="font-size:10px;color:var(--elderberry-100)">last marketing touch</div></div>
+        </div>
+
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn-primary">✨ Ask follow-up to Analytics Agent</button>
+          <button class="btn-secondary">📥 Download CSV</button>
           <button class="btn-secondary">📚 KB article</button>
         </div>
       </div>
@@ -676,6 +771,7 @@ const MOCKUPS = {
     render: () => `
       <div class="page-content">
         ${filtersBar}
+        ${dataStrip}
         <div style="background:linear-gradient(135deg,#faf6ff,#f0e8ff);border:1px solid var(--eggplant-50);border-radius:8px;padding:14px 18px;margin-bottom:16px;display:flex;gap:10px;align-items:center">
           <span style="font-size:20px">✨</span>
           <div style="flex:1;font-size:13px"><strong>Hover over any metric to surface an "Explain this metric" button.</strong> One-click access to a tailored AI explanation — definition, calculation, what's included, and the most common reasons this metric trips people up.</div>
@@ -713,7 +809,11 @@ const MOCKUPS = {
             <p><strong>1. 🌐 It's lower than your store dashboard.</strong> Mailchimp only counts orders within an <span class="kb-link">attribution window</span> after a marketing touch (5d for email, 1d for SMS). Direct traffic, paid ads, and organic searches are excluded. <em>Your store likely shows ~$2.4M total revenue this period — so $184k attributed is healthy: 7.6% direct attribution, near the median for DTC stores.</em></p>
             <p><strong>2. 🎯 Is $184k good?</strong> Yes — for a list your size in DTC home goods, the median is $142k/90d. You're in the <strong>top 35%</strong>. No action needed; consider increasing send cadence to push into top 25%.</p>
             <p><strong>3. ⚖️ Don't confuse it with "total store revenue."</strong> Attributed revenue ≠ total revenue. It also differs from <strong>"sent revenue"</strong> (revenue per send) and <strong>"recipient revenue"</strong> (revenue per unique person reached). <span class="kb-link">See all 4 revenue metrics →</span></p>
-            <p><strong>4. 🌐 It doesn't match Google Analytics.</strong> GA uses last-touch attribution (any source), Mailchimp uses last-marketing-touch within window. <span class="kb-link">See full reconciliation →</span></p>
+            <p><strong>4. 🌐 It doesn't match Google Analytics or Shopify.</strong> GA uses last-touch attribution (any source) and reports <strong>$247,890</strong>. Shopify reports <strong>$268k</strong> in total online revenue. Mailchimp uses last-marketing-touch within window — that's why your $184k is lower. <span class="kb-link">See full reconciliation →</span></p>
+
+            <p style="background:#ffe6f4;padding:10px;border-radius:6px;border:1px solid #f7c7e0;margin-top:12px"><strong style="color:#b8127a">📍 Source:</strong> $184,320 = Mailchimp campaign click events joined to Shopify orders on shopper email. Pulled from Mailchimp's reporting warehouse + your Shopify integration.</p>
+            <p style="background:#d6f0f3;padding:10px;border-radius:6px;border:1px solid #b8dde2;margin-top:8px"><strong style="color:var(--kale-100)">⏱ Last updated:</strong> 4 minutes ago. Shopify orders sync every 2 min, Mailchimp click events stream in real-time. Numbers can shift slightly for ~24h post-purchase as refunds settle.</p>
+
             <p>Want me to dig into any of these?</p>
 
             <a class="ai-citation">
@@ -733,7 +833,10 @@ const MOCKUPS = {
           </div>
 
           <div class="followup-chips">
-            <button class="chip">Why doesn't this match Google Analytics?</button>
+            <button class="chip">Why doesn't this match Shopify?</button>
+            <button class="chip">Why is this different from GA4?</button>
+            <button class="chip">When was this last updated?</button>
+            <button class="chip">Where did this number come from?</button>
             <button class="chip">Show me the orders included</button>
             <button class="chip">Change my attribution window</button>
           </div>
@@ -756,6 +859,7 @@ const MOCKUPS = {
     render: () => `
       <div class="page-content">
         ${filtersBar}
+        ${dataStrip}
         <div class="kpi-grid">
           <div class="kpi-tile"><button class="ai-pill-tile">✨ Explain</button><div class="kpi-label">$ Attributed revenue</div><div class="kpi-value">$184,320</div><div class="kpi-delta up">▲ 12%</div></div>
           <div class="kpi-tile"><button class="ai-pill-tile">✨ Explain</button><div class="kpi-label"># Attributed orders</div><div class="kpi-value">1,427</div><div class="kpi-delta up">▲ 8%</div></div>
@@ -785,7 +889,19 @@ const MOCKUPS = {
               <li><strong>Email is your biggest contributor</strong> (~28% in the most recent week), followed by SMS (~12%) and automation flows (~11%).</li>
               <li>The upward trend is largely driven by your email channel and the abandoned cart flow you launched in Week 4.</li>
             </ul>
-            <p>Anything you'd like to dig into?</p>
+
+            <p style="background:#ffe6f4;padding:10px;border-radius:6px;border:1px solid #f7c7e0"><strong style="color:#b8127a">📍 Where this data comes from:</strong> Mailchimp campaign + automation events joined to your <strong>Shopify</strong> store revenue. The "total store revenue" denominator comes directly from Shopify's GraphQL API.</p>
+
+            <p style="background:#d6f0f3;padding:10px;border-radius:6px;border:1px solid #b8dde2;margin-top:8px"><strong style="color:var(--kale-100)">⏱ Last updated:</strong> Mailchimp side <strong>4 min ago</strong>; Shopify side <strong>2 min ago</strong>. The chart auto-refreshes every 15 min — you don't need to reload.</p>
+
+            <p style="background:var(--elderberry-20);padding:10px;border-radius:6px;border:1px solid var(--elderberry-40);margin-top:8px"><strong>⚖️ Compared to other platforms for the same period:</strong></p>
+            <ul style="margin-top:0">
+              <li>🐵 <strong>Mailchimp:</strong> 51% attributed share (this view)</li>
+              <li>📊 <strong>GA4:</strong> 38% (because it credits paid + organic separately)</li>
+              <li>🛍️ <strong>Shopify "Marketing" report:</strong> 47% (counts UTM-tagged sessions only)</li>
+            </ul>
+
+            <p>Anything you'd like to dig into? You can keep asking — I have the full chart context.</p>
 
             <a class="ai-citation">
               <div class="ai-cite-icon">📄</div>
@@ -804,9 +920,12 @@ const MOCKUPS = {
           </div>
 
           <div class="followup-chips">
+            <button class="chip">Why doesn't this match Shopify?</button>
             <button class="chip">Why doesn't this match Google Analytics?</button>
+            <button class="chip">When was this last updated?</button>
             <button class="chip">Split orders by opens vs clicks</button>
             <button class="chip">Is 51% good for my industry?</button>
+            <button class="chip">Show the data lineage</button>
           </div>
         </div>
         <div class="ai-input-wrap">
@@ -827,6 +946,7 @@ const MOCKUPS = {
     render: () => `
       <div class="page-content">
         ${filtersBar}
+        ${dataStrip}
         <div style="background:linear-gradient(135deg,#faf6ff,#f0e8ff);border:1px solid var(--eggplant-50);border-radius:8px;padding:14px 18px;margin-bottom:16px;display:flex;gap:10px;align-items:center">
           <span style="font-size:20px">📚</span>
           <div style="flex:1;font-size:13px"><strong>Learn rail is pinned open.</strong> Auto-surfaces articles relevant to this page. Switch to "Ask" tab for conversational mode. Aligned with VOC: "Learn tab side-by-side with editing."</div>
@@ -869,10 +989,36 @@ const MOCKUPS = {
             <a class="kb-card"><div class="ico">🤖</div><div class="body"><div class="title">Automations</div><div class="meta">24 articles</div></div></a>
           </div>
           <div class="learn-section">
+            <div class="learn-section-label">📍 Where your data comes from</div>
+            <a class="kb-card"><div class="ico" style="background:#ffe6f4;color:#b8127a">🛍️</div><div class="body"><div class="title">Shopify integration · Connected</div><div class="meta">Synced 2 min ago · Orders, customers, products</div></div></a>
+            <a class="kb-card"><div class="ico" style="background:#ffe6f4;color:#b8127a">📊</div><div class="body"><div class="title">GA4 integration · Connected</div><div class="meta">Synced 18 min ago · Sessions, conversions</div></div></a>
+            <a class="kb-card"><div class="ico" style="background:#ffe6f4;color:#b8127a">📨</div><div class="body"><div class="title">Mailchimp event stream</div><div class="meta">Real-time · Sends, opens, clicks, automations</div></div></a>
+            <a class="kb-card"><div class="ico" style="background:#ffe6f4;color:#b8127a">🗺️</div><div class="body"><div class="title">View full data lineage</div><div class="meta">See how each metric is assembled</div></div></a>
+          </div>
+          <div class="learn-section">
+            <div class="learn-section-label">⏱ Freshness across this dashboard</div>
+            <div style="padding:10px;font-size:11px;line-height:1.7;color:var(--elderberry-100)">
+              <div style="display:flex;justify-content:space-between"><span>Mailchimp data</span><strong>4 min ago</strong></div>
+              <div style="display:flex;justify-content:space-between"><span>Shopify orders</span><strong>2 min ago</strong></div>
+              <div style="display:flex;justify-content:space-between"><span>GA4 sessions</span><strong>18 min ago</strong></div>
+              <div style="display:flex;justify-content:space-between;color:var(--elderberry-90);margin-top:4px"><span>Auto-refresh</span><span>15 min</span></div>
+            </div>
+          </div>
+          <div class="learn-section">
+            <div class="learn-section-label">⚖️ Compare to other platforms</div>
+            <a class="kb-card"><div class="ico">🛍️</div><div class="body"><div class="title">Mailchimp vs Shopify reports</div><div class="meta">Why your numbers differ</div></div></a>
+            <a class="kb-card"><div class="ico">📊</div><div class="body"><div class="title">Mailchimp vs Google Analytics</div><div class="meta">⭐ Top FAQ</div></div></a>
+            <a class="kb-card"><div class="ico">📈</div><div class="body"><div class="title">Mailchimp vs Klaviyo / Bloomreach</div><div class="meta">For ESP migrations</div></div></a>
+          </div>
+          <div class="learn-section">
             <div class="learn-section-label">⭐ Most-viewed this week</div>
             <a class="kb-card"><div class="ico">🆚</div><div class="body"><div class="title">Open rate, click rate, and beyond</div><div class="meta">2,841 views</div></div></a>
             <a class="kb-card"><div class="ico">📅</div><div class="body"><div class="title">Date ranges and comparison periods</div><div class="meta">1,927 views</div></div></a>
           </div>
+        </div>
+        <div class="ai-input-wrap" style="border-top:1px solid var(--elderberry-40)">
+          <input class="ai-input" placeholder="Ask the agent anything about this dashboard...">
+          <button class="ai-send">→</button>
         </div>
       </aside>
     `,
@@ -887,6 +1033,7 @@ const MOCKUPS = {
     render: () => `
       <div class="page-content">
         ${filtersBar}
+        ${dataStrip}
         <div style="background:linear-gradient(135deg,#faf6ff,#f0e8ff);border:1px solid var(--eggplant-50);border-radius:8px;padding:14px 18px;margin-bottom:16px;display:flex;gap:10px;align-items:center">
           <span style="font-size:20px">✨</span>
           <div style="flex:1;font-size:13px"><strong>Auto-explain is on.</strong> When a metric spikes, drops, or hits a value that's typically misread, we'll add a contextual note <em>under</em> the number — before you have to ask.</div>
@@ -897,7 +1044,10 @@ const MOCKUPS = {
             <div class="kpi-label">$ Attributed revenue</div>
             <div class="kpi-value">$184,320</div>
             <div class="kpi-delta up">▲ 12% · Feb 4 – May 5</div>
-            <div class="anomaly-note"><span class="ico">✨</span><span><strong>Higher than usual.</strong> Driven by your abandoned-cart flow launched W4. <span class="kb-link">What's "attributed" →</span> · <span class="kb-link">View flow →</span></span></div>
+            <div class="anomaly-note"><span class="ico">✨</span><span><strong>Higher than usual.</strong> Driven by your abandoned-cart flow launched W4. <span class="kb-link">What's "attributed" →</span></span></div>
+            <div class="anomaly-note" style="background:#ffe6f4;border-color:#f7c7e0;margin-top:4px"><span class="ico" style="color:#b8127a">📍</span><span><strong>Source:</strong> Mailchimp clicks ⨯ Shopify orders. <span class="kb-link" style="color:#b8127a">View lineage →</span></span></div>
+            <div class="anomaly-note" style="background:#d6f0f3;border-color:#b8dde2;margin-top:4px"><span class="ico" style="color:var(--kale-100)">⏱</span><span><strong>4 min ago.</strong> Refunds settle ~24h post-purchase, so this can shift slightly.</span></div>
+            <div class="anomaly-note" style="background:var(--elderberry-20);border-color:var(--elderberry-40);margin-top:4px"><span class="ico" style="color:var(--elderberry-100)">⚖️</span><span><strong>Shopify reports $268k total revenue</strong> for the same period — the gap is non-marketing channels (direct, paid). <span class="kb-link">Reconcile →</span></span></div>
           </div>
           <div class="kpi-tile"><div class="kpi-label"># Attributed orders</div><div class="kpi-value">1,427</div><div class="kpi-delta up">▲ 8%</div></div>
           <div class="kpi-tile">
@@ -950,6 +1100,7 @@ const MOCKUPS = {
     render: () => `
       <div class="page-content">
         ${filtersBar}
+        ${dataStrip}
         <div style="background:linear-gradient(135deg,#f4f9ff,#e0edff);border:1px solid #b8d4f7;border-radius:8px;padding:14px 18px;margin-bottom:16px;display:flex;gap:10px;align-items:center">
           <span style="font-size:20px">⚖️</span>
           <div style="flex:1;font-size:13px"><strong>"Why doesn't this match Google Analytics?"</strong> is the #1 attribution VOC. This view tackles it head-on — connect GA (or paste a number) and AI explains the scope difference.</div>
@@ -1024,24 +1175,56 @@ GA total                          $247,890<br>
         </div>
 
         <div class="widget">
-          <div class="widget-header"><div><div class="widget-title">Common reconciliations we can solve</div></div></div>
-          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px">
-            <div style="padding:14px;background:var(--blueberry-10);border:1px solid #b8d4f7;border-radius:8px;cursor:pointer">
-              <div style="font-weight:700;font-size:13px;margin-bottom:4px">📊 Google Analytics</div>
-              <div style="font-size:12px;color:var(--elderberry-100)">Connected · Auto-reconciles weekly</div>
+          <div class="widget-header"><div><div class="widget-title">Compare across all your platforms</div><div class="widget-sub">Same period (Feb 4 – May 5) — every platform measures revenue slightly differently</div></div></div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px">
+            <div style="padding:14px;background:linear-gradient(135deg,#fffceb,#fff8d0);border:1px solid #f0d800;border-radius:8px"><div style="font-size:10px;color:var(--elderberry-90);font-weight:700">🐵 MAILCHIMP</div><div style="font-size:20px;font-weight:700;margin:4px 0">$184,320</div><div style="font-size:11px;color:var(--elderberry-100)">last marketing touch · 5d window</div></div>
+            <div style="padding:14px;background:#f4f9ff;border:1px solid #b8d4f7;border-radius:8px"><div style="font-size:10px;color:var(--elderberry-90);font-weight:700">📊 GA4</div><div style="font-size:20px;font-weight:700;margin:4px 0">$247,890</div><div style="font-size:11px;color:var(--elderberry-100)">last touch · 30d window</div></div>
+            <div style="padding:14px;background:#f0f9eb;border:1px solid #b9e09a;border-radius:8px"><div style="font-size:10px;color:var(--elderberry-90);font-weight:700">🛍️ SHOPIFY</div><div style="font-size:20px;font-weight:700;margin:4px 0">$268,140</div><div style="font-size:11px;color:var(--elderberry-100)">total online orders</div></div>
+            <div style="padding:14px;background:#f0eeff;border:1px solid #c5bbff;border-radius:8px"><div style="font-size:10px;color:var(--elderberry-90);font-weight:700">💳 STRIPE</div><div style="font-size:20px;font-weight:700;margin:4px 0">$272,460</div><div style="font-size:11px;color:var(--elderberry-100)">gross charges (incl. non-store)</div></div>
+          </div>
+          <div style="padding:10px 14px;background:var(--elderberry-20);border:1px solid var(--elderberry-40);border-radius:6px;font-size:12px;color:var(--elderberry-100);line-height:1.5">
+            <strong>None of these numbers are wrong.</strong> Each tool measures a different question. Click any tile above to see what's included/excluded vs Mailchimp.
+          </div>
+        </div>
+
+        <div class="widget">
+          <div class="widget-header"><div><div class="widget-title">📍 Source &amp; ⏱ Freshness</div><div class="widget-sub">Where every number on this page came from, and when it was last updated</div></div></div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;gap:12px;padding:10px 14px;background:var(--elderberry-20);border:1px solid var(--elderberry-40);border-radius:6px;align-items:center">
+              <div style="width:10px;height:10px;background:#96bf48;border-radius:2px"></div>
+              <div style="flex:1"><strong>Shopify</strong> · GraphQL Order API · 47,200 orders this period</div>
+              <div style="font-size:11px;color:var(--kiwi-80);font-weight:600">⏱ 2 min ago</div>
             </div>
-            <div style="padding:14px;background:white;border:1px solid var(--elderberry-50);border-radius:8px;cursor:pointer">
-              <div style="font-weight:700;font-size:13px;margin-bottom:4px">🛍 Shopify orders dashboard</div>
-              <div style="font-size:12px;color:var(--elderberry-100)">Connect to reconcile against gross order data</div>
+            <div style="display:flex;gap:12px;padding:10px 14px;background:var(--elderberry-20);border:1px solid var(--elderberry-40);border-radius:6px;align-items:center">
+              <div style="width:10px;height:10px;background:#f9ab00;border-radius:2px"></div>
+              <div style="flex:1"><strong>GA4</strong> · Property G-XXXXX-X · Measurement Protocol API</div>
+              <div style="font-size:11px;color:var(--persimmon-60);font-weight:600">⏱ 18 min ago</div>
             </div>
-            <div style="padding:14px;background:white;border:1px solid var(--elderberry-50);border-radius:8px;cursor:pointer">
-              <div style="font-weight:700;font-size:13px;margin-bottom:4px">📥 Paste a number</div>
-              <div style="font-size:12px;color:var(--elderberry-100)">From any tool — AI will explain the gap</div>
+            <div style="display:flex;gap:12px;padding:10px 14px;background:var(--elderberry-20);border:1px solid var(--elderberry-40);border-radius:6px;align-items:center">
+              <div style="width:10px;height:10px;background:#635bff;border-radius:2px"></div>
+              <div style="flex:1"><strong>Stripe</strong> · Charges API · live event stream</div>
+              <div style="font-size:11px;color:var(--kiwi-80);font-weight:600">⏱ 1 min ago</div>
             </div>
-            <div style="padding:14px;background:white;border:1px solid var(--elderberry-50);border-radius:8px;cursor:pointer">
-              <div style="font-weight:700;font-size:13px;margin-bottom:4px">📈 Klaviyo / Bloomreach / etc</div>
-              <div style="font-size:12px;color:var(--elderberry-100)">Compare attribution between ESPs</div>
+            <div style="display:flex;gap:12px;padding:10px 14px;background:var(--elderberry-20);border:1px solid var(--elderberry-40);border-radius:6px;align-items:center">
+              <div style="width:10px;height:10px;background:var(--cavendish);border-radius:2px"></div>
+              <div style="flex:1"><strong>Mailchimp</strong> · Campaign + automation event log · joined to all three above</div>
+              <div style="font-size:11px;color:var(--kiwi-80);font-weight:600">⏱ 4 min ago</div>
             </div>
+          </div>
+        </div>
+
+        <div class="widget">
+          <div class="widget-header"><div><div class="widget-title">✨ Ask follow-ups about the reconciliation</div></div></div>
+          <div class="followup-chips" style="padding:0">
+            <button class="chip">Why is Stripe higher than Shopify?</button>
+            <button class="chip">Show me the orders only Mailchimp counts</button>
+            <button class="chip">Switch to a 30-day attribution window</button>
+            <button class="chip">Why doesn't this match my BI tool?</button>
+            <button class="chip">When does this data settle / stop changing?</button>
+          </div>
+          <div class="ai-input-wrap" style="margin-top:12px;border:1px solid var(--elderberry-40);border-radius:8px;background:white">
+            <input class="ai-input" placeholder="Ask the Analytics Agent...">
+            <button class="ai-send">→</button>
           </div>
         </div>
       </div>
