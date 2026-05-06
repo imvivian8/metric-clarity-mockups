@@ -143,11 +143,11 @@ body { font-family: var(--font); font-size: 14px; color: var(--elderberry-130); 
 .looks-wrong-btn {
   position: absolute; top: 6px; right: 6px;
   height: 22px; padding: 0 8px;
-  background: var(--watermelon-10);
-  border: 1px solid #ffaaba;
-  color: var(--watermelon-80);
+  background: white;
+  border: 1px solid var(--kale-30);
+  color: var(--kale-100);
   border-radius: 100px;
-  font-size: 10px; font-weight: 700;
+  font-size: 10px; font-weight: 600;
   cursor: pointer;
   opacity: 0; transition: opacity .15s;
   display: inline-flex; align-items: center; gap: 4px;
@@ -627,25 +627,25 @@ const MOCKUPS = {
 
   // ============= 04 · LOOKS WRONG AI =============
   '4': {
-    title: '"Looks wrong?" AI entry point',
-    tactic: 'Empathetic framing + perspective-taking',
+    title: '"Explain this metric" AI entry point',
+    tactic: 'Per-metric contextual explanation',
     isAi: true,
     withRail: true,
     render: () => `
       <div class="page-content">
         ${filtersBar}
-        <div style="background:linear-gradient(135deg,#fef0f3,#ffe7e7);border:1px solid #ffaaba;border-radius:8px;padding:14px 18px;margin-bottom:16px;display:flex;gap:10px;align-items:center">
-          <span style="font-size:20px">🤔</span>
-          <div style="flex:1;font-size:13px"><strong>Hover over any metric to surface a "Looks wrong?" button.</strong> This meets users in their actual mental state — not "explain this," but "why does this seem off?"</div>
+        <div style="background:linear-gradient(135deg,#faf6ff,#f0e8ff);border:1px solid var(--eggplant-50);border-radius:8px;padding:14px 18px;margin-bottom:16px;display:flex;gap:10px;align-items:center">
+          <span style="font-size:20px">✨</span>
+          <div style="flex:1;font-size:13px"><strong>Hover over any metric to surface an "Explain this metric" button.</strong> One-click access to a tailored AI explanation — definition, calculation, what's included, and the most common reasons this metric trips people up.</div>
         </div>
 
         <div class="kpi-grid">
-          <div class="kpi-tile" style="border-color:#ffaaba"><button class="looks-wrong-btn">⚠ Looks wrong?</button><div class="kpi-label">$ Attributed revenue</div><div class="kpi-value">$184,320</div><div class="kpi-delta up">▲ 12%</div></div>
-          <div class="kpi-tile"><button class="looks-wrong-btn">⚠ Looks wrong?</button><div class="kpi-label"># Attributed orders</div><div class="kpi-value">1,427</div><div class="kpi-delta up">▲ 8%</div></div>
-          <div class="kpi-tile"><button class="looks-wrong-btn">⚠ Looks wrong?</button><div class="kpi-label">% Order rate</div><div class="kpi-value">3.2%</div><div class="kpi-delta down">▼ 2%</div></div>
-          <div class="kpi-tile"><button class="looks-wrong-btn">⚠ Looks wrong?</button><div class="kpi-label">⌀ Avg order value</div><div class="kpi-value">$129</div><div class="kpi-delta up">▲ 4%</div></div>
-          <div class="kpi-tile"><button class="looks-wrong-btn">⚠ Looks wrong?</button><div class="kpi-label">↻ Repeat rate</div><div class="kpi-value">28%</div><div class="kpi-delta up">▲ 3%</div></div>
-          <div class="kpi-tile"><button class="looks-wrong-btn">⚠ Looks wrong?</button><div class="kpi-label">$ Rev / recipient</div><div class="kpi-value">$2.84</div><div class="kpi-delta up">▲ 6%</div></div>
+          <div class="kpi-tile" style="border-color:var(--kale-30)"><button class="looks-wrong-btn">✨ Explain this metric</button><div class="kpi-label">$ Attributed revenue</div><div class="kpi-value">$184,320</div><div class="kpi-delta up">▲ 12%</div></div>
+          <div class="kpi-tile"><button class="looks-wrong-btn">✨ Explain this metric</button><div class="kpi-label"># Attributed orders</div><div class="kpi-value">1,427</div><div class="kpi-delta up">▲ 8%</div></div>
+          <div class="kpi-tile"><button class="looks-wrong-btn">✨ Explain this metric</button><div class="kpi-label">% Order rate</div><div class="kpi-value">3.2%</div><div class="kpi-delta down">▼ 2%</div></div>
+          <div class="kpi-tile"><button class="looks-wrong-btn">✨ Explain this metric</button><div class="kpi-label">⌀ Avg order value</div><div class="kpi-value">$129</div><div class="kpi-delta up">▲ 4%</div></div>
+          <div class="kpi-tile"><button class="looks-wrong-btn">✨ Explain this metric</button><div class="kpi-label">↻ Repeat rate</div><div class="kpi-value">28%</div><div class="kpi-delta up">▲ 3%</div></div>
+          <div class="kpi-tile"><button class="looks-wrong-btn">✨ Explain this metric</button><div class="kpi-label">$ Rev / recipient</div><div class="kpi-value">$2.84</div><div class="kpi-delta up">▲ 6%</div></div>
         </div>
         ${stackedChartWidget('Share of attributed revenue over time')}
       </div>
@@ -655,17 +655,17 @@ const MOCKUPS = {
           <div class="ai-rail-icon">AI</div>
           <div>
             <div class="ai-rail-title">Analytics agent</div>
-            <div class="ai-rail-sub">Pedalfish Cycles · Investigating "Attributed revenue"</div>
+            <div class="ai-rail-sub">Pedalfish Cycles · Explaining "Attributed revenue"</div>
           </div>
           <button class="ai-rail-close">✕</button>
         </div>
         <div class="ai-rail-body">
           <div class="ai-msg-context">
-            <div class="ai-msg-context-label">You said</div>
-            <div>⚠ <strong>Attributed revenue: $184,320</strong> · Looks wrong</div>
+            <div class="ai-msg-context-label">Explaining</div>
+            <div>✨ <strong>Attributed revenue: $184,320</strong> · Last 90 days</div>
           </div>
           <div class="ai-msg">
-            <p>Got it — let me explain the <strong>3 reasons this number commonly looks "off"</strong> to people in your situation:</p>
+            <p><strong>Attributed revenue</strong> is the total order revenue Mailchimp can credit to your email, SMS, or automation activity within your attribution window. Here are the <strong>3 things that most often trip people up</strong> on this metric:</p>
             <p><strong>1. It's lower than your store dashboard.</strong> Mailchimp only counts orders within an <span class="kb-link">attribution window</span> after a marketing touch (5d for email, 1d for SMS). Direct traffic, paid ads, and organic searches are excluded. <em>Your store likely shows ~$2.4M total revenue this period — so seeing $184k attributed is actually healthy: it's 7.6% direct attribution, near the median for DTC stores.</em></p>
             <p><strong>2. The 12% increase looks deceptive.</strong> Compared to the previous 90 days. We exclude refunds — so if you had a refund spike last period, the lift will look bigger than reality. <span class="kb-link">How we handle refunds →</span></p>
             <p><strong>3. It doesn't match Google Analytics.</strong> GA uses last-touch attribution (any source), Mailchimp uses last-marketing-touch within window. <span class="kb-link">See full reconciliation →</span></p>
