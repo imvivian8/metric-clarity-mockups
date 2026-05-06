@@ -453,19 +453,28 @@ const MOCKUPS = {
           <div class="kpi-tile"><div class="kpi-label">$ Rev / recipient <span class="info-i" data-tip="revper">i</span></div><div class="kpi-value">$2.84</div><div class="kpi-delta up">▲ 6%</div></div>
         </div>
 
-        <!-- The tooltip itself, shown for "Order rate" -->
-        <div class="tooltip" style="position:fixed;top:200px;left:434px;">
+        <!-- The tooltip itself, shown for "Order rate" — covers all 6 confusion modes -->
+        <div class="tooltip" style="position:fixed;top:200px;left:434px;width:340px">
           <div class="tooltip-eyebrow">📖 Definition</div>
           <div class="tooltip-title">Order rate</div>
           <div class="tooltip-def">The percentage of recipients who placed an order within your <strong>attribution window</strong> after receiving an email, SMS, or automation.</div>
+
           <div class="tooltip-row"><span class="l">Formula</span><span class="v">orders ÷ recipients</span></div>
-          <div class="tooltip-row"><span class="l">Your value (precise)</span><span class="v">3.184%</span></div>
-          <div class="tooltip-row"><span class="l">Displayed</span><span class="v">3.2%</span></div>
-          <div class="tooltip-row"><span class="l">Date range</span><span class="v">Last 90 days</span></div>
-          <div class="tooltip-row"><span class="l">Includes</span><span class="v">Email · SMS · Automation</span></div>
-          <div class="tooltip-row"><span class="l">Excludes</span><span class="v">Direct, paid, organic</span></div>
-          <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--elderberry-30);font-size:11px;color:var(--elderberry-100)">
-            <strong style="color:var(--elderberry-130)">Often confused with:</strong> Click-to-purchase rate (clicks → orders, not recipients → orders).
+          <div class="tooltip-row" style="background:var(--persimmon-10)"><span class="l">🔍 Your value (precise)</span><span class="v">3.184%</span></div>
+          <div class="tooltip-row" style="background:var(--persimmon-10)"><span class="l">Displayed (rounded)</span><span class="v">3.2%</span></div>
+          <div class="tooltip-row"><span class="l">📅 Date range</span><span class="v">Feb 4 – May 5 · 90d</span></div>
+          <div class="tooltip-row"><span class="l">vs previous period</span><span class="v" style="color:var(--watermelon-80)">▼ 2% (was 3.265%)</span></div>
+
+          <div style="margin-top:10px;padding:8px 10px;background:var(--kiwi-10);border-radius:4px;font-size:11px">
+            <strong style="color:var(--kiwi-80)">🎯 Health check:</strong> 3.2% is <strong>top 25%</strong> for DTC home goods (median 2.1%). No action needed — celebrate.
+          </div>
+
+          <div style="margin-top:8px;padding:8px 10px;background:var(--kale-0);border-radius:4px;font-size:11px">
+            <strong style="color:var(--kale-100)">🌐 What's included:</strong> Email · SMS · Automation orders within window. <strong>Excludes:</strong> direct, paid, organic.
+          </div>
+
+          <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--elderberry-30);font-size:11px;color:var(--elderberry-100)">
+            <strong style="color:var(--elderberry-130)">⚖️ Often confused with:</strong> Click-to-purchase rate (clicks → orders, not recipients → orders).
           </div>
           <a class="tooltip-link" href="#">📚 Learn more in our KB →</a>
         </div>
@@ -504,8 +513,8 @@ const MOCKUPS = {
           <div style="flex:1;font-size:13px"><strong>Smart precision detection is on.</strong> When a metric rounds in a way that hides nuance, we'll flag it with an asterisk — hover to see the actual value.</div>
         </div>
 
-        <div class="widget">
-          <div class="widget-header"><div><div class="widget-title">Latest campaign · "Spring drop · Aurora pendant"</div><div class="widget-sub">Sent Apr 28 to 2,840 contacts</div></div></div>
+        <div class="widget" style="position:relative">
+          <div class="widget-header"><div><div class="widget-title">Latest campaign · "Spring drop · Aurora pendant"</div><div class="widget-sub">Sent Apr 28 to 2,840 contacts · Compared to your last campaign</div></div></div>
           <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px">
             <div>
               <div style="font-size:11px;font-weight:600;color:var(--elderberry-90)">Delivery rate</div>
@@ -517,7 +526,7 @@ const MOCKUPS = {
             <div>
               <div style="font-size:11px;font-weight:600;color:var(--elderberry-90)">Open rate</div>
               <div style="font-size:32px;font-weight:700;letter-spacing:-.02em;margin-top:6px">38.2%</div>
-              <div style="font-size:11px;color:var(--kiwi-80);font-weight:600;margin-top:2px">▲ 2.1pts</div>
+              <div style="font-size:11px;color:var(--kiwi-80);font-weight:600;margin-top:2px">▲ 2.1pts vs last</div>
             </div>
             <div>
               <div style="font-size:11px;font-weight:600;color:var(--elderberry-90)">Click rate</div>
@@ -530,6 +539,33 @@ const MOCKUPS = {
               <div style="font-size:11px;font-weight:600;color:var(--elderberry-90)">Unsubscribes</div>
               <div style="font-size:32px;font-weight:700;letter-spacing:-.02em;margin-top:6px">0.3%</div>
             </div>
+          </div>
+
+          <!-- Expanded popover anchored to the Delivery Rate asterisk — surfaces all 6 modes -->
+          <div class="tooltip" style="position:absolute;top:130px;left:24px;width:340px">
+            <div class="tooltip-eyebrow">🔍 Precision flag · Delivery rate</div>
+            <div class="tooltip-title">Why this shows 100%</div>
+            <div class="tooltip-def">Your <strong>actual delivery rate is 99.74%</strong> (2,833 of 2,840 sent). The dashboard rounds rates above 99.5% up to 100% to keep tiles compact.</div>
+
+            <div class="tooltip-row" style="background:var(--persimmon-10)"><span class="l">🔍 Actual value</span><span class="v">99.74%</span></div>
+            <div class="tooltip-row" style="background:var(--persimmon-10)"><span class="l">Displayed</span><span class="v">100%</span></div>
+            <div class="tooltip-row"><span class="l">📖 Formula</span><span class="v">delivered ÷ sent</span></div>
+            <div class="tooltip-row"><span class="l">Delivered</span><span class="v">2,833</span></div>
+            <div class="tooltip-row"><span class="l">Hard bounces</span><span class="v">7</span></div>
+            <div class="tooltip-row"><span class="l">📅 For this campaign</span><span class="v">Apr 28 send</span></div>
+
+            <div style="margin-top:10px;padding:8px 10px;background:var(--kiwi-10);border-radius:4px;font-size:11px">
+              <strong style="color:var(--kiwi-80)">🎯 Health check:</strong> 99.74% is healthy. Industry expects 98%+. <strong>No action needed.</strong>
+            </div>
+
+            <div style="margin-top:8px;padding:8px 10px;background:var(--kale-0);border-radius:4px;font-size:11px">
+              <strong style="color:var(--kale-100)">🌐 What's included:</strong> Hard + soft bounces count as undelivered. Spam-flagged messages count as delivered.
+            </div>
+
+            <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--elderberry-30);font-size:11px;color:var(--elderberry-100)">
+              <strong style="color:var(--elderberry-130)">⚖️ Not the same as:</strong> Inbox placement (whether messages reach the primary tab vs spam).
+            </div>
+            <a class="tooltip-link" href="#">📚 KB · How delivery rate works →</a>
           </div>
         </div>
 
@@ -596,7 +632,13 @@ const MOCKUPS = {
           <div class="calc-op">=</div>
           <div class="calc-cell"><div class="l">Order rate</div><div class="v" style="color:var(--kale-100)">3.184%*</div></div>
         </div>
-        <div style="font-size:11px;color:var(--persimmon-60);margin-bottom:18px">* Displayed as <strong>3.2%</strong> due to single-decimal rounding</div>
+        <div style="font-size:11px;color:var(--persimmon-60);margin-bottom:18px;padding:8px 10px;background:var(--persimmon-10);border-radius:4px">🔍 <strong>Precision:</strong> Displayed as <strong>3.2%</strong> due to single-decimal rounding. Underlying value is 3.184%.</div>
+
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--elderberry-90);margin-bottom:8px">🎯 Health check</div>
+        <div style="padding:12px;background:var(--kiwi-10);border:1px solid var(--kiwi-40);border-radius:6px;margin-bottom:18px">
+          <div style="font-size:13px;font-weight:600;color:var(--kiwi-80);margin-bottom:4px">Top 25% for DTC home goods 🎉</div>
+          <div style="font-size:12px;color:var(--elderberry-100);line-height:1.5">Your 3.2% beats the industry median of <strong>2.1%</strong> and the top-quartile threshold of <strong>3.0%</strong>. <strong>No action needed</strong> — celebrate this.</div>
+        </div>
 
         <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--elderberry-90);margin-bottom:8px">Date range</div>
         <div style="padding:10px 12px;background:var(--elderberry-20);border-radius:6px;font-size:13px;margin-bottom:18px">📅 <strong>Last 90 days</strong> · Feb 4 – May 5, 2026 · Compared to previous 90 days</div>
@@ -665,10 +707,13 @@ const MOCKUPS = {
             <div>✨ <strong>Attributed revenue: $184,320</strong> · Last 90 days</div>
           </div>
           <div class="ai-msg">
-            <p><strong>Attributed revenue</strong> is the total order revenue Mailchimp can credit to your email, SMS, or automation activity within your attribution window. Here are the <strong>3 things that most often trip people up</strong> on this metric:</p>
-            <p><strong>1. It's lower than your store dashboard.</strong> Mailchimp only counts orders within an <span class="kb-link">attribution window</span> after a marketing touch (5d for email, 1d for SMS). Direct traffic, paid ads, and organic searches are excluded. <em>Your store likely shows ~$2.4M total revenue this period — so seeing $184k attributed is actually healthy: it's 7.6% direct attribution, near the median for DTC stores.</em></p>
-            <p><strong>2. The 12% increase looks deceptive.</strong> Compared to the previous 90 days. We exclude refunds — so if you had a refund spike last period, the lift will look bigger than reality. <span class="kb-link">How we handle refunds →</span></p>
-            <p><strong>3. It doesn't match Google Analytics.</strong> GA uses last-touch attribution (any source), Mailchimp uses last-marketing-touch within window. <span class="kb-link">See full reconciliation →</span></p>
+            <p><strong>📖 Attributed revenue</strong> is the total order revenue Mailchimp can credit to your email, SMS, or automation activity within your attribution window.</p>
+            <p><strong>📅 What this $184,320 covers:</strong> orders placed <strong>Feb 4 – May 5, 2026</strong> (last 90 days) where the customer had a marketing touch within the attribution window before purchase. The ▲ 12% compares against Nov 6 – Feb 3.</p>
+            <p>Here are the <strong>4 things that most often trip people up</strong> on this metric:</p>
+            <p><strong>1. 🌐 It's lower than your store dashboard.</strong> Mailchimp only counts orders within an <span class="kb-link">attribution window</span> after a marketing touch (5d for email, 1d for SMS). Direct traffic, paid ads, and organic searches are excluded. <em>Your store likely shows ~$2.4M total revenue this period — so $184k attributed is healthy: 7.6% direct attribution, near the median for DTC stores.</em></p>
+            <p><strong>2. 🎯 Is $184k good?</strong> Yes — for a list your size in DTC home goods, the median is $142k/90d. You're in the <strong>top 35%</strong>. No action needed; consider increasing send cadence to push into top 25%.</p>
+            <p><strong>3. ⚖️ Don't confuse it with "total store revenue."</strong> Attributed revenue ≠ total revenue. It also differs from <strong>"sent revenue"</strong> (revenue per send) and <strong>"recipient revenue"</strong> (revenue per unique person reached). <span class="kb-link">See all 4 revenue metrics →</span></p>
+            <p><strong>4. 🌐 It doesn't match Google Analytics.</strong> GA uses last-touch attribution (any source), Mailchimp uses last-marketing-touch within window. <span class="kb-link">See full reconciliation →</span></p>
             <p>Want me to dig into any of these?</p>
 
             <a class="ai-citation">
@@ -851,15 +896,15 @@ const MOCKUPS = {
           <div class="kpi-tile">
             <div class="kpi-label">$ Attributed revenue</div>
             <div class="kpi-value">$184,320</div>
-            <div class="kpi-delta up">▲ 12%</div>
-            <div class="anomaly-note"><span class="ico">✨</span><span><strong>Higher than usual.</strong> Driven by your abandoned-cart flow launched W4. <span class="kb-link">View flow →</span></span></div>
+            <div class="kpi-delta up">▲ 12% · Feb 4 – May 5</div>
+            <div class="anomaly-note"><span class="ico">✨</span><span><strong>Higher than usual.</strong> Driven by your abandoned-cart flow launched W4. <span class="kb-link">What's "attributed" →</span> · <span class="kb-link">View flow →</span></span></div>
           </div>
           <div class="kpi-tile"><div class="kpi-label"># Attributed orders</div><div class="kpi-value">1,427</div><div class="kpi-delta up">▲ 8%</div></div>
           <div class="kpi-tile">
             <div class="kpi-label">% Order rate</div>
             <div class="kpi-value">3.2%</div>
-            <div class="kpi-delta down">▼ 2%</div>
-            <div class="anomaly-note" style="background:linear-gradient(135deg,#fef0f3,#ffe7e7);border-color:#ffaaba"><span class="ico" style="color:var(--watermelon-80)">⚠</span><span><strong>Lower than your 90-day avg (3.7%).</strong> Likely because list grew 18% — denominator effect, not a real drop. <span class="kb-link">Why this happens →</span></span></div>
+            <div class="kpi-delta down">▼ 2% · vs Nov 6 – Feb 3</div>
+            <div class="anomaly-note" style="background:linear-gradient(135deg,#fef0f3,#ffe7e7);border-color:#ffaaba"><span class="ico" style="color:var(--watermelon-80)">⚠</span><span><strong>Lower than your 90-day avg (3.7%).</strong> Likely because list grew 18% — denominator effect, not a real drop. Don't confuse with <span class="kb-link">click-to-purchase rate</span> (a different denominator). <span class="kb-link">Why this happens →</span></span></div>
           </div>
           <div class="kpi-tile"><div class="kpi-label">⌀ Avg order value</div><div class="kpi-value">$129</div><div class="kpi-delta up">▲ 4%</div></div>
           <div class="kpi-tile"><div class="kpi-label">↻ Repeat rate</div><div class="kpi-value">28%</div><div class="kpi-delta up">▲ 3%</div></div>
@@ -912,7 +957,12 @@ const MOCKUPS = {
         </div>
 
         <div class="widget">
-          <div class="widget-header"><div><div class="widget-title">Reconciliation: Mailchimp vs Google Analytics</div><div class="widget-sub">Last 90 days · Connected to GA4 property G-XXXXX-X</div></div><button class="ai-pill eggplant">✨ AI explanation</button></div>
+          <div class="widget-header"><div><div class="widget-title">Reconciliation: Mailchimp vs Google Analytics</div><div class="widget-sub">📅 Both: Feb 4 – May 5, 2026 (90 days) · Connected to GA4 property G-XXXXX-X</div></div><button class="ai-pill eggplant">✨ AI explanation</button></div>
+
+          <div style="padding:12px 14px;background:var(--kale-0);border:1px solid var(--kale-30);border-radius:6px;margin-bottom:14px;font-size:13px;line-height:1.5">
+            <strong>📖 Both numbers measure "revenue attributed to email/SMS marketing"</strong> — but they answer slightly different questions because of scope, attribution model, and date math. Below: side-by-side breakdown, then AI reconciliation.
+          </div>
+
           <div class="compare-grid">
             <div class="compare-col mc">
               <h4>🐵 Mailchimp · Attributed revenue</h4>
@@ -946,6 +996,15 @@ const MOCKUPS = {
             <div class="reconcile-eyebrow">✨ AI reconciliation</div>
             <div style="font-size:14px;line-height:1.6">
               The <strong>$63,570 gap</strong> between Mailchimp ($184,320) and GA ($247,890) is fully explained by 4 differences in scope. <strong>Both numbers are correct</strong> — they're answering different questions.
+            </div>
+            <div style="margin-top:10px;padding:10px 12px;background:var(--kiwi-10);border:1px solid var(--kiwi-40);border-radius:6px;font-size:12px;line-height:1.5">
+              <strong style="color:var(--kiwi-80)">🎯 Health check:</strong> A 25–35% gap between Mailchimp and GA is normal and expected for DTC home goods. Yours is <strong>26%</strong> — well within the healthy range. <strong>No action needed.</strong>
+            </div>
+            <div style="margin-top:8px;padding:10px 12px;background:var(--persimmon-10);border:1px solid #ffc296;border-radius:6px;font-size:12px;line-height:1.5">
+              <strong style="color:var(--persimmon-60);">🔍 Precision note:</strong> The reconciliation lands within <strong>$100</strong> due to rounding in both tools. Underlying values reconcile exactly when you download both as CSV.
+            </div>
+            <div style="margin-top:8px;padding:10px 12px;background:white;border:1px solid var(--elderberry-40);border-radius:6px;font-size:12px;line-height:1.5">
+              <strong style="color:var(--elderberry-130)">⚖️ Don't confuse with:</strong> GA's "Sessions from email" (traffic, not revenue) or Mailchimp's "Email revenue" (revenue per email send, not per recipient).
             </div>
             <div class="reconcile-math">
 GA total                          $247,890<br>

@@ -84,8 +84,11 @@ body { font-family: 'Graphik Mailchimp', Helvetica, Arial, sans-serif; backgroun
     <div class="card-modes-label">Solves</div>
     <div class="card-modes">
       <span class="confusion-pill cp-def">📖 Definition</span>
-      <span class="confusion-pill cp-prec">🔍 Precision</span>
+      <span class="confusion-pill cp-date">📅 Date range</span>
+      <span class="confusion-pill cp-bench">🎯 Benchmark</span>
       <span class="confusion-pill cp-vs">⚖️ vs other metric</span>
+      <span class="confusion-pill cp-prec">🔍 Precision</span>
+      <span class="confusion-pill cp-attr">🌐 Attribution</span>
     </div>
     <span class="card-arrow">→</span>
   </a>
@@ -93,11 +96,16 @@ body { font-family: 'Graphik Mailchimp', Helvetica, Arial, sans-serif; backgroun
   <a class="card" href="mockup.html?id=2">
     <div class="card-id">02</div>
     <div class="card-title">Smart precision footnote</div>
-    <div class="card-desc">Auto-detect when display rounding hides nuance ("100% delivery rate" when it's actually 99.74%, "0% open rate" when it's 0.04%). Show a subtle <code>*</code> footnote that reveals the real value. Catches the exact 3/27 VOC example automatically — no user action required.</div>
+    <div class="card-desc">Auto-detect when display rounding hides nuance ("100% delivery rate" when it's actually 99.74%, "0% open rate" when it's 0.04%). Subtle <code>*</code> reveals the real value, and the popover surfaces the full definition, date range, benchmark, scope, and similar metrics. Catches the exact 3/27 VOC example automatically.</div>
     <div class="card-tactic">Tactic: Proactive transparency</div>
     <div class="card-modes-label">Solves</div>
     <div class="card-modes">
+      <span class="confusion-pill cp-def">📖 Definition</span>
+      <span class="confusion-pill cp-date">📅 Date range</span>
+      <span class="confusion-pill cp-bench">🎯 Benchmark</span>
+      <span class="confusion-pill cp-vs">⚖️ vs other metric</span>
       <span class="confusion-pill cp-prec">🔍 Precision</span>
+      <span class="confusion-pill cp-attr">🌐 Attribution</span>
     </div>
     <span class="card-arrow">→</span>
   </a>
@@ -105,12 +113,15 @@ body { font-family: 'Graphik Mailchimp', Helvetica, Arial, sans-serif; backgroun
   <a class="card" href="mockup.html?id=3">
     <div class="card-id">03</div>
     <div class="card-title">Calculation breakdown drawer</div>
-    <div class="card-desc">Click any KPI tile → slide-out drawer shows the math with the user's <em>actual</em> numbers: "Click rate = unique clicks ÷ delivered. For your last campaign: 187 ÷ 2,840 = 6.58%." Includes date range used, what's excluded, and a "verify against export" button.</div>
+    <div class="card-desc">Click any KPI tile → slide-out drawer shows the math with the user's <em>actual</em> numbers: definition, formula with their values, precision footnote, date range, benchmark callout, what's included/excluded, and an "often confused with" section. Verify-with-CSV button at the bottom.</div>
     <div class="card-tactic">Tactic: Calculation transparency</div>
     <div class="card-modes-label">Solves</div>
     <div class="card-modes">
       <span class="confusion-pill cp-def">📖 Definition</span>
       <span class="confusion-pill cp-date">📅 Date range</span>
+      <span class="confusion-pill cp-bench">🎯 Benchmark</span>
+      <span class="confusion-pill cp-vs">⚖️ vs other metric</span>
+      <span class="confusion-pill cp-prec">🔍 Precision</span>
       <span class="confusion-pill cp-attr">🌐 Attribution</span>
     </div>
     <span class="card-arrow">→</span>
@@ -128,14 +139,16 @@ body { font-family: 'Graphik Mailchimp', Helvetica, Arial, sans-serif; backgroun
   <a class="card ai" href="mockup.html?id=4">
     <div class="card-id">04</div>
     <div class="card-title">"Explain this metric" AI entry point</div>
-    <div class="card-desc">A per-tile AI explanation pattern. Hover any metric → small button: "Explain this metric." Click → AI opens a right rail with the definition, calculation, and the 3 things that most commonly trip users up on that specific metric — tailored to <strong>their current values</strong>. Pattern lives directly on the metric, not on the chart.</div>
+    <div class="card-desc">A per-tile AI explanation pattern. Hover any metric → small button: "Explain this metric." Click → AI opens a right rail with definition, the date range and what it covers, benchmark health check, similar-but-different metrics, precision notes, and attribution scope — all tailored to <strong>their current values</strong>. Pattern lives directly on the metric.</div>
     <div class="card-tactic">Tactic: Per-metric contextual explanation</div>
     <div class="card-modes-label">Solves</div>
     <div class="card-modes">
       <span class="confusion-pill cp-def">📖 Definition</span>
+      <span class="confusion-pill cp-date">📅 Date range</span>
+      <span class="confusion-pill cp-bench">🎯 Benchmark</span>
+      <span class="confusion-pill cp-vs">⚖️ vs other metric</span>
       <span class="confusion-pill cp-prec">🔍 Precision</span>
       <span class="confusion-pill cp-attr">🌐 Attribution</span>
-      <span class="confusion-pill cp-bench">🎯 Benchmark</span>
     </div>
     <span class="card-arrow">→</span>
   </a>
@@ -186,12 +199,15 @@ body { font-family: 'Graphik Mailchimp', Helvetica, Arial, sans-serif; backgroun
   <a class="card ai" href="mockup.html?id=7">
     <div class="card-id">07</div>
     <div class="card-title">Anomaly auto-explain</div>
-    <div class="card-desc">When a metric spikes, drops, or hits a value users typically misread (delivery rate at 99.7% rounded to 100%, attribution share doubling), an inline note appears <em>under the number</em>: "<em>This is higher than usual because…</em>" with AI-generated context citing the cause and KB. Catches confusion <strong>before</strong> it becomes a ticket.</div>
+    <div class="card-desc">When a metric spikes, drops, or hits a value users typically misread, an inline note appears <em>under the number</em>: definition snippet, the date range it covers, why it's anomalous (benchmark + precision), what the unusual cause is (attribution/list growth/etc), and a "don't confuse with" hint. Catches confusion <strong>before</strong> it becomes a ticket.</div>
     <div class="card-tactic">Tactic: Proactive disclosure + anomaly detection</div>
     <div class="card-modes-label">Solves</div>
     <div class="card-modes">
-      <span class="confusion-pill cp-prec">🔍 Precision</span>
+      <span class="confusion-pill cp-def">📖 Definition</span>
+      <span class="confusion-pill cp-date">📅 Date range</span>
       <span class="confusion-pill cp-bench">🎯 Benchmark</span>
+      <span class="confusion-pill cp-vs">⚖️ vs other metric</span>
+      <span class="confusion-pill cp-prec">🔍 Precision</span>
       <span class="confusion-pill cp-attr">🌐 Attribution</span>
     </div>
     <span class="card-arrow">→</span>
@@ -200,12 +216,16 @@ body { font-family: 'Graphik Mailchimp', Helvetica, Arial, sans-serif; backgroun
   <a class="card ai" href="mockup.html?id=8">
     <div class="card-id">08</div>
     <div class="card-title">"Compare to" overlay — solve the GA mismatch</div>
-    <div class="card-desc">"Why doesn't this match Google Analytics?" is the #1 attribution VOC. This mockup tackles it head-on: connect GA (or paste a GA number), AI shows a side-by-side breakdown of what's included/excluded in each, explains the scope difference, and reconciles to a "this is why" number. Works for any cross-tool comparison.</div>
+    <div class="card-desc">"Why doesn't this match Google Analytics?" is the #1 attribution VOC. Tackles it head-on: side-by-side scope breakdown, AI reconciliation math that closes the gap line-by-line, definition header explaining both metrics, benchmark for whether the gap size is normal, precision note on rounding, and a "don't confuse with" warning for similar-but-different metrics. Works for any cross-tool comparison.</div>
     <div class="card-tactic">Tactic: Reconciliation + scope visualization</div>
     <div class="card-modes-label">Solves</div>
     <div class="card-modes">
-      <span class="confusion-pill cp-attr">🌐 Attribution</span>
+      <span class="confusion-pill cp-def">📖 Definition</span>
       <span class="confusion-pill cp-date">📅 Date range</span>
+      <span class="confusion-pill cp-bench">🎯 Benchmark</span>
+      <span class="confusion-pill cp-vs">⚖️ vs other metric</span>
+      <span class="confusion-pill cp-prec">🔍 Precision</span>
+      <span class="confusion-pill cp-attr">🌐 Attribution</span>
     </div>
     <span class="card-arrow">→</span>
   </a>
