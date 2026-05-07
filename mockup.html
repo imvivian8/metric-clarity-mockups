@@ -335,6 +335,8 @@ canvas[id^="chart-"] { max-height: 220px !important; height: 220px !important; }
 .platform-chip .logo.shopify { background: #96bf48; }
 .platform-chip .logo.ga { background: #f9ab00; }
 .platform-chip .logo.stripe { background: #635bff; }
+.platform-chip .logo.tw { background: #00d1c1; }
+.platform-chip .logo.klaviyo { background: #232425; }
 </style>
 </head>
 <body>
@@ -414,8 +416,9 @@ const dataStrip = `
     <span class="item">📍 <strong>Source:</strong> Mailchimp + connected platforms</span>
     <span class="data-strip platform-chips" style="margin-left:auto;border:none;padding:0;background:transparent">
       <span class="platform-chip"><span class="logo shopify"></span>Shopify · synced 2m</span>
+      <span class="platform-chip"><span class="logo tw"></span>Triple Whale · synced 6m</span>
+      <span class="platform-chip"><span class="logo klaviyo"></span>Klaviyo · synced 4m</span>
       <span class="platform-chip"><span class="logo ga"></span>GA4 · synced 18m</span>
-      <span class="platform-chip"><span class="logo stripe"></span>Stripe · synced 1m</span>
       <button class="platform-chip" style="cursor:pointer;font-weight:700">⚖️ Compare</button>
     </span>
   </div>
@@ -526,6 +529,7 @@ const MOCKUPS = {
             <strong style="color:var(--elderberry-130)">⚖️ How other tools count this:</strong>
             <div style="margin-top:4px;display:flex;flex-direction:column;gap:2px">
               <div>🛍️ <strong>Shopify:</strong> 4.1% (counts repeat sessions)</div>
+              <div>🐳 <strong>Triple Whale:</strong> 3.6% (multi-touch attribution)</div>
               <div>📊 <strong>GA4:</strong> 3.8% (last-touch any source)</div>
               <div>🐵 <strong>Mailchimp:</strong> 3.2% (last marketing touch)</div>
             </div>
@@ -747,10 +751,11 @@ const MOCKUPS = {
         </div>
 
         <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--elderberry-90);margin-bottom:8px">⚖️ How other tools count this</div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:18px">
-          <div style="padding:10px;background:white;border:1px solid var(--elderberry-40);border-radius:6px"><div style="font-size:10px;color:var(--elderberry-90);font-weight:600">🛍️ Shopify</div><div style="font-size:18px;font-weight:700">4.1%</div><div style="font-size:10px;color:var(--elderberry-100)">repeat sessions</div></div>
-          <div style="padding:10px;background:white;border:1px solid var(--elderberry-40);border-radius:6px"><div style="font-size:10px;color:var(--elderberry-90);font-weight:600">📊 GA4</div><div style="font-size:18px;font-weight:700">3.8%</div><div style="font-size:10px;color:var(--elderberry-100)">last-touch any source</div></div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:18px">
           <div style="padding:10px;background:linear-gradient(135deg,#fffceb,#fff8d0);border:1px solid #f0d800;border-radius:6px"><div style="font-size:10px;color:var(--elderberry-90);font-weight:600">🐵 Mailchimp</div><div style="font-size:18px;font-weight:700">3.2%</div><div style="font-size:10px;color:var(--elderberry-100)">last marketing touch</div></div>
+          <div style="padding:10px;background:white;border:1px solid var(--elderberry-40);border-radius:6px"><div style="font-size:10px;color:var(--elderberry-90);font-weight:600">🛍️ Shopify</div><div style="font-size:18px;font-weight:700">4.1%</div><div style="font-size:10px;color:var(--elderberry-100)">repeat sessions</div></div>
+          <div style="padding:10px;background:white;border:1px solid var(--elderberry-40);border-radius:6px"><div style="font-size:10px;color:var(--elderberry-90);font-weight:600">🐳 Triple Whale</div><div style="font-size:18px;font-weight:700">3.6%</div><div style="font-size:10px;color:var(--elderberry-100)">multi-touch · 7d</div></div>
+          <div style="padding:10px;background:white;border:1px solid var(--elderberry-40);border-radius:6px"><div style="font-size:10px;color:var(--elderberry-90);font-weight:600">📊 GA4</div><div style="font-size:18px;font-weight:700">3.8%</div><div style="font-size:10px;color:var(--elderberry-100)">last-touch any source</div></div>
         </div>
 
         <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -806,10 +811,17 @@ const MOCKUPS = {
             <p><strong>📖 Attributed revenue</strong> is the total order revenue Mailchimp can credit to your email, SMS, or automation activity within your attribution window.</p>
             <p><strong>📅 What this $184,320 covers:</strong> orders placed <strong>Feb 4 – May 5, 2026</strong> (last 90 days) where the customer had a marketing touch within the attribution window before purchase. The ▲ 12% compares against Nov 6 – Feb 3.</p>
             <p>Here are the <strong>4 things that most often trip people up</strong> on this metric:</p>
-            <p><strong>1. 🌐 It's lower than your store dashboard.</strong> Mailchimp only counts orders within an <span class="kb-link">attribution window</span> after a marketing touch (5d for email, 1d for SMS). Direct traffic, paid ads, and organic searches are excluded. <em>Your store likely shows ~$2.4M total revenue this period — so $184k attributed is healthy: 7.6% direct attribution, near the median for DTC stores.</em></p>
+            <p><strong>1. 🌐 It's lower than your Shopify dashboard.</strong> Mailchimp only counts orders within an <span class="kb-link">attribution window</span> after a marketing touch (5d for email, 1d for SMS). Direct traffic, paid ads, and organic searches are excluded. <em>Shopify shows $268k total revenue this period — so $184k attributed is healthy: 69% of orders touched a marketing channel.</em></p>
             <p><strong>2. 🎯 Is $184k good?</strong> Yes — for a list your size in DTC home goods, the median is $142k/90d. You're in the <strong>top 35%</strong>. No action needed; consider increasing send cadence to push into top 25%.</p>
             <p><strong>3. ⚖️ Don't confuse it with "total store revenue."</strong> Attributed revenue ≠ total revenue. It also differs from <strong>"sent revenue"</strong> (revenue per send) and <strong>"recipient revenue"</strong> (revenue per unique person reached). <span class="kb-link">See all 4 revenue metrics →</span></p>
-            <p><strong>4. 🌐 It doesn't match Google Analytics or Shopify.</strong> GA uses last-touch attribution (any source) and reports <strong>$247,890</strong>. Shopify reports <strong>$268k</strong> in total online revenue. Mailchimp uses last-marketing-touch within window — that's why your $184k is lower. <span class="kb-link">See full reconciliation →</span></p>
+            <p><strong>4. 🌐 It doesn't match Shopify, Triple Whale, or GA4.</strong> Each tool uses a different attribution model:</p>
+            <ul>
+              <li>🛍️ <strong>Shopify ($268k):</strong> total online orders — no marketing attribution</li>
+              <li>🐳 <strong>Triple Whale ($201k):</strong> multi-touch attribution across all paid + organic</li>
+              <li>📊 <strong>GA4 ($248k):</strong> last-touch attribution, any source, 30d window</li>
+              <li>🐵 <strong>Mailchimp ($184k):</strong> last-marketing-touch, 5d window — most conservative</li>
+            </ul>
+            <p>Mailchimp's lower number is the most conservative attribution. <span class="kb-link">See full reconciliation →</span></p>
 
             <p style="background:#ffe6f4;padding:10px;border-radius:6px;border:1px solid #f7c7e0;margin-top:12px"><strong style="color:#b8127a">📍 Source:</strong> $184,320 = Mailchimp campaign click events joined to Shopify orders on shopper email. Pulled from Mailchimp's reporting warehouse + your Shopify integration.</p>
             <p style="background:#d6f0f3;padding:10px;border-radius:6px;border:1px solid #b8dde2;margin-top:8px"><strong style="color:var(--kale-100)">⏱ Last updated:</strong> 4 minutes ago. Shopify orders sync every 2 min, Mailchimp click events stream in real-time. Numbers can shift slightly for ~24h post-purchase as refunds settle.</p>
@@ -833,12 +845,13 @@ const MOCKUPS = {
           </div>
 
           <div class="followup-chips">
-            <button class="chip">Why doesn't this match Shopify?</button>
-            <button class="chip">Why is this different from GA4?</button>
-            <button class="chip">When was this last updated?</button>
-            <button class="chip">Where did this number come from?</button>
+            <button class="chip">🛍️ Why doesn't this match Shopify?</button>
+            <button class="chip">🐳 Why is Triple Whale higher?</button>
+            <button class="chip">📊 Why is this different from GA4?</button>
+            <button class="chip">📧 Reconcile against Klaviyo</button>
+            <button class="chip">⏱ When was this last updated?</button>
+            <button class="chip">📍 Where did this number come from?</button>
             <button class="chip">Show me the orders included</button>
-            <button class="chip">Change my attribution window</button>
           </div>
         </div>
         <div class="ai-input-wrap">
@@ -897,8 +910,9 @@ const MOCKUPS = {
             <p style="background:var(--elderberry-20);padding:10px;border-radius:6px;border:1px solid var(--elderberry-40);margin-top:8px"><strong>⚖️ Compared to other platforms for the same period:</strong></p>
             <ul style="margin-top:0">
               <li>🐵 <strong>Mailchimp:</strong> 51% attributed share (this view)</li>
-              <li>📊 <strong>GA4:</strong> 38% (because it credits paid + organic separately)</li>
               <li>🛍️ <strong>Shopify "Marketing" report:</strong> 47% (counts UTM-tagged sessions only)</li>
+              <li>🐳 <strong>Triple Whale:</strong> 56% (multi-touch credits Mailchimp on assists)</li>
+              <li>📊 <strong>GA4:</strong> 38% (because it credits paid + organic separately)</li>
             </ul>
 
             <p>Anything you'd like to dig into? You can keep asking — I have the full chart context.</p>
@@ -920,12 +934,13 @@ const MOCKUPS = {
           </div>
 
           <div class="followup-chips">
-            <button class="chip">Why doesn't this match Shopify?</button>
-            <button class="chip">Why doesn't this match Google Analytics?</button>
-            <button class="chip">When was this last updated?</button>
+            <button class="chip">🛍️ Why doesn't this match Shopify?</button>
+            <button class="chip">🐳 Reconcile against Triple Whale</button>
+            <button class="chip">📊 Why doesn't this match GA4?</button>
+            <button class="chip">📧 Compare to Klaviyo</button>
+            <button class="chip">⏱ When was this last updated?</button>
             <button class="chip">Split orders by opens vs clicks</button>
             <button class="chip">Is 51% good for my industry?</button>
-            <button class="chip">Show the data lineage</button>
           </div>
         </div>
         <div class="ai-input-wrap">
@@ -990,9 +1005,11 @@ const MOCKUPS = {
           </div>
           <div class="learn-section">
             <div class="learn-section-label">📍 Where your data comes from</div>
-            <a class="kb-card"><div class="ico" style="background:#ffe6f4;color:#b8127a">🛍️</div><div class="body"><div class="title">Shopify integration · Connected</div><div class="meta">Synced 2 min ago · Orders, customers, products</div></div></a>
-            <a class="kb-card"><div class="ico" style="background:#ffe6f4;color:#b8127a">📊</div><div class="body"><div class="title">GA4 integration · Connected</div><div class="meta">Synced 18 min ago · Sessions, conversions</div></div></a>
             <a class="kb-card"><div class="ico" style="background:#ffe6f4;color:#b8127a">📨</div><div class="body"><div class="title">Mailchimp event stream</div><div class="meta">Real-time · Sends, opens, clicks, automations</div></div></a>
+            <a class="kb-card"><div class="ico" style="background:#ffe6f4;color:#b8127a">🛍️</div><div class="body"><div class="title">Shopify · Connected</div><div class="meta">Synced 2 min ago · Orders, customers, products</div></div></a>
+            <a class="kb-card"><div class="ico" style="background:#ffe6f4;color:#b8127a">🐳</div><div class="body"><div class="title">Triple Whale · Connected</div><div class="meta">Synced 6 min ago · Multi-touch attribution</div></div></a>
+            <a class="kb-card"><div class="ico" style="background:#ffe6f4;color:#b8127a">📊</div><div class="body"><div class="title">GA4 · Connected</div><div class="meta">Synced 18 min ago · Sessions, conversions</div></div></a>
+            <a class="kb-card"><div class="ico" style="background:var(--elderberry-30);color:var(--elderberry-100)">📧</div><div class="body"><div class="title">Klaviyo · Not connected</div><div class="meta">Connect for ESP migrations or comparison</div></div></a>
             <a class="kb-card"><div class="ico" style="background:#ffe6f4;color:#b8127a">🗺️</div><div class="body"><div class="title">View full data lineage</div><div class="meta">See how each metric is assembled</div></div></a>
           </div>
           <div class="learn-section">
@@ -1000,6 +1017,7 @@ const MOCKUPS = {
             <div style="padding:10px;font-size:11px;line-height:1.7;color:var(--elderberry-100)">
               <div style="display:flex;justify-content:space-between"><span>Mailchimp data</span><strong>4 min ago</strong></div>
               <div style="display:flex;justify-content:space-between"><span>Shopify orders</span><strong>2 min ago</strong></div>
+              <div style="display:flex;justify-content:space-between"><span>Triple Whale</span><strong>6 min ago</strong></div>
               <div style="display:flex;justify-content:space-between"><span>GA4 sessions</span><strong>18 min ago</strong></div>
               <div style="display:flex;justify-content:space-between;color:var(--elderberry-90);margin-top:4px"><span>Auto-refresh</span><span>15 min</span></div>
             </div>
@@ -1007,8 +1025,9 @@ const MOCKUPS = {
           <div class="learn-section">
             <div class="learn-section-label">⚖️ Compare to other platforms</div>
             <a class="kb-card"><div class="ico">🛍️</div><div class="body"><div class="title">Mailchimp vs Shopify reports</div><div class="meta">Why your numbers differ</div></div></a>
+            <a class="kb-card"><div class="ico">🐳</div><div class="body"><div class="title">Mailchimp vs Triple Whale</div><div class="meta">Multi-touch vs last-touch attribution</div></div></a>
+            <a class="kb-card"><div class="ico">📧</div><div class="body"><div class="title">Mailchimp vs Klaviyo</div><div class="meta">For ESP migrations</div></div></a>
             <a class="kb-card"><div class="ico">📊</div><div class="body"><div class="title">Mailchimp vs Google Analytics</div><div class="meta">⭐ Top FAQ</div></div></a>
-            <a class="kb-card"><div class="ico">📈</div><div class="body"><div class="title">Mailchimp vs Klaviyo / Bloomreach</div><div class="meta">For ESP migrations</div></div></a>
           </div>
           <div class="learn-section">
             <div class="learn-section-label">⭐ Most-viewed this week</div>
@@ -1047,7 +1066,7 @@ const MOCKUPS = {
             <div class="anomaly-note"><span class="ico">✨</span><span><strong>Higher than usual.</strong> Driven by your abandoned-cart flow launched W4. <span class="kb-link">What's "attributed" →</span></span></div>
             <div class="anomaly-note" style="background:#ffe6f4;border-color:#f7c7e0;margin-top:4px"><span class="ico" style="color:#b8127a">📍</span><span><strong>Source:</strong> Mailchimp clicks ⨯ Shopify orders. <span class="kb-link" style="color:#b8127a">View lineage →</span></span></div>
             <div class="anomaly-note" style="background:#d6f0f3;border-color:#b8dde2;margin-top:4px"><span class="ico" style="color:var(--kale-100)">⏱</span><span><strong>4 min ago.</strong> Refunds settle ~24h post-purchase, so this can shift slightly.</span></div>
-            <div class="anomaly-note" style="background:var(--elderberry-20);border-color:var(--elderberry-40);margin-top:4px"><span class="ico" style="color:var(--elderberry-100)">⚖️</span><span><strong>Shopify reports $268k total revenue</strong> for the same period — the gap is non-marketing channels (direct, paid). <span class="kb-link">Reconcile →</span></span></div>
+            <div class="anomaly-note" style="background:var(--elderberry-20);border-color:var(--elderberry-40);margin-top:4px"><span class="ico" style="color:var(--elderberry-100)">⚖️</span><span><strong>Other tools, same period:</strong> Shopify $268k · Triple Whale $201k · GA4 $248k. <span class="kb-link">Reconcile all →</span></span></div>
           </div>
           <div class="kpi-tile"><div class="kpi-label"># Attributed orders</div><div class="kpi-value">1,427</div><div class="kpi-delta up">▲ 8%</div></div>
           <div class="kpi-tile">
@@ -1176,11 +1195,12 @@ GA total                          $247,890<br>
 
         <div class="widget">
           <div class="widget-header"><div><div class="widget-title">Compare across all your platforms</div><div class="widget-sub">Same period (Feb 4 – May 5) — every platform measures revenue slightly differently</div></div></div>
-          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px">
+          <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px">
             <div style="padding:14px;background:linear-gradient(135deg,#fffceb,#fff8d0);border:1px solid #f0d800;border-radius:8px"><div style="font-size:10px;color:var(--elderberry-90);font-weight:700">🐵 MAILCHIMP</div><div style="font-size:20px;font-weight:700;margin:4px 0">$184,320</div><div style="font-size:11px;color:var(--elderberry-100)">last marketing touch · 5d window</div></div>
-            <div style="padding:14px;background:#f4f9ff;border:1px solid #b8d4f7;border-radius:8px"><div style="font-size:10px;color:var(--elderberry-90);font-weight:700">📊 GA4</div><div style="font-size:20px;font-weight:700;margin:4px 0">$247,890</div><div style="font-size:11px;color:var(--elderberry-100)">last touch · 30d window</div></div>
             <div style="padding:14px;background:#f0f9eb;border:1px solid #b9e09a;border-radius:8px"><div style="font-size:10px;color:var(--elderberry-90);font-weight:700">🛍️ SHOPIFY</div><div style="font-size:20px;font-weight:700;margin:4px 0">$268,140</div><div style="font-size:11px;color:var(--elderberry-100)">total online orders</div></div>
-            <div style="padding:14px;background:#f0eeff;border:1px solid #c5bbff;border-radius:8px"><div style="font-size:10px;color:var(--elderberry-90);font-weight:700">💳 STRIPE</div><div style="font-size:20px;font-weight:700;margin:4px 0">$272,460</div><div style="font-size:11px;color:var(--elderberry-100)">gross charges (incl. non-store)</div></div>
+            <div style="padding:14px;background:#e6fdfb;border:1px solid #80e6db;border-radius:8px"><div style="font-size:10px;color:var(--elderberry-90);font-weight:700">🐳 TRIPLE WHALE</div><div style="font-size:20px;font-weight:700;margin:4px 0">$201,470</div><div style="font-size:11px;color:var(--elderberry-100)">multi-touch attribution · 7d</div></div>
+            <div style="padding:14px;background:#f4f4f5;border:1px solid #d1d1d6;border-radius:8px"><div style="font-size:10px;color:var(--elderberry-90);font-weight:700">📧 KLAVIYO</div><div style="font-size:20px;font-weight:700;margin:4px 0">$0</div><div style="font-size:11px;color:var(--elderberry-100)">not connected · for ESP migrations</div></div>
+            <div style="padding:14px;background:#f4f9ff;border:1px solid #b8d4f7;border-radius:8px"><div style="font-size:10px;color:var(--elderberry-90);font-weight:700">📊 GA4</div><div style="font-size:20px;font-weight:700;margin:4px 0">$247,890</div><div style="font-size:11px;color:var(--elderberry-100)">last touch · 30d window</div></div>
           </div>
           <div style="padding:10px 14px;background:var(--elderberry-20);border:1px solid var(--elderberry-40);border-radius:6px;font-size:12px;color:var(--elderberry-100);line-height:1.5">
             <strong>None of these numbers are wrong.</strong> Each tool measures a different question. Click any tile above to see what's included/excluded vs Mailchimp.
@@ -1196,14 +1216,19 @@ GA total                          $247,890<br>
               <div style="font-size:11px;color:var(--kiwi-80);font-weight:600">⏱ 2 min ago</div>
             </div>
             <div style="display:flex;gap:12px;padding:10px 14px;background:var(--elderberry-20);border:1px solid var(--elderberry-40);border-radius:6px;align-items:center">
+              <div style="width:10px;height:10px;background:#00d1c1;border-radius:2px"></div>
+              <div style="flex:1"><strong>Triple Whale</strong> · Multi-touch attribution API · pulls Mailchimp + Meta + Google Ads</div>
+              <div style="font-size:11px;color:var(--kiwi-80);font-weight:600">⏱ 6 min ago</div>
+            </div>
+            <div style="display:flex;gap:12px;padding:10px 14px;background:var(--elderberry-20);border:1px solid var(--elderberry-40);border-radius:6px;align-items:center">
+              <div style="width:10px;height:10px;background:#232425;border-radius:2px"></div>
+              <div style="flex:1"><strong>Klaviyo</strong> · Optional · enable for ESP migrations or to compare attribution</div>
+              <div style="font-size:11px;color:var(--elderberry-90);font-weight:600">Not connected</div>
+            </div>
+            <div style="display:flex;gap:12px;padding:10px 14px;background:var(--elderberry-20);border:1px solid var(--elderberry-40);border-radius:6px;align-items:center">
               <div style="width:10px;height:10px;background:#f9ab00;border-radius:2px"></div>
               <div style="flex:1"><strong>GA4</strong> · Property G-XXXXX-X · Measurement Protocol API</div>
               <div style="font-size:11px;color:var(--persimmon-60);font-weight:600">⏱ 18 min ago</div>
-            </div>
-            <div style="display:flex;gap:12px;padding:10px 14px;background:var(--elderberry-20);border:1px solid var(--elderberry-40);border-radius:6px;align-items:center">
-              <div style="width:10px;height:10px;background:#635bff;border-radius:2px"></div>
-              <div style="flex:1"><strong>Stripe</strong> · Charges API · live event stream</div>
-              <div style="font-size:11px;color:var(--kiwi-80);font-weight:600">⏱ 1 min ago</div>
             </div>
             <div style="display:flex;gap:12px;padding:10px 14px;background:var(--elderberry-20);border:1px solid var(--elderberry-40);border-radius:6px;align-items:center">
               <div style="width:10px;height:10px;background:var(--cavendish);border-radius:2px"></div>
@@ -1216,7 +1241,7 @@ GA total                          $247,890<br>
         <div class="widget">
           <div class="widget-header"><div><div class="widget-title">✨ Ask follow-ups about the reconciliation</div></div></div>
           <div class="followup-chips" style="padding:0">
-            <button class="chip">Why is Stripe higher than Shopify?</button>
+            <button class="chip">Why is Triple Whale's number higher than Mailchimp's?</button>
             <button class="chip">Show me the orders only Mailchimp counts</button>
             <button class="chip">Switch to a 30-day attribution window</button>
             <button class="chip">Why doesn't this match my BI tool?</button>
