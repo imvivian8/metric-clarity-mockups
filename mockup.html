@@ -310,6 +310,126 @@ body { font-family: var(--font); font-size: 14px; color: var(--elderberry-130); 
 /* Cap charts */
 canvas[id^="chart-"] { max-height: 220px !important; height: 220px !important; }
 
+/* ─────────── REFINED FINALISTS (F1, F2) ─────────── */
+.rationale-panel {
+  background: linear-gradient(135deg, #1a1f2a 0%, #0f1521 100%);
+  color: white;
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin: 0 32px 24px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.12);
+  border: 1px solid #2a3142;
+}
+.rationale-eyebrow { display: inline-flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; background: var(--cavendish); color: var(--elderberry-130); padding: 4px 10px; border-radius: 100px; margin-bottom: 14px; }
+.rationale-title { font-size: 22px; font-weight: 700; letter-spacing: -.01em; margin-bottom: 6px; }
+.rationale-sub { font-size: 13px; color: rgba(255,255,255,.65); margin-bottom: 18px; line-height: 1.55; }
+.rationale-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.rationale-section h4 { font-size: 11px; font-weight: 700; color: var(--cavendish); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 10px; }
+.rationale-section ul { list-style: none; padding: 0; margin: 0; }
+.rationale-section li { font-size: 13px; line-height: 1.55; margin-bottom: 10px; padding-left: 22px; position: relative; }
+.rationale-section li::before { content: ''; position: absolute; left: 0; top: 7px; width: 12px; height: 2px; background: var(--cavendish); border-radius: 2px; }
+.rationale-section li strong { color: white; font-weight: 600; }
+.rationale-section li code { background: rgba(255,224,27,.15); color: var(--cavendish); padding: 1px 6px; border-radius: 3px; font-size: 11px; font-family: 'SF Mono', Menlo, monospace; }
+.rationale-tag { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 8px; background: rgba(255,224,27,.18); color: var(--cavendish); border-radius: 100px; margin-right: 4px; margin-bottom: 4px; }
+
+/* Compact tooltip — used by both F1 & F2 finalists */
+.compact-tt {
+  position: absolute;
+  background: white;
+  border: 1px solid var(--elderberry-40);
+  border-radius: 10px;
+  padding: 0;
+  box-shadow: 0 16px 36px rgba(0,0,0,.16), 0 4px 12px rgba(0,0,0,.06);
+  width: 340px;
+  z-index: 80;
+  font-size: 12px;
+  overflow: hidden;
+}
+.compact-tt::before { content: ''; position: absolute; top: -7px; left: 24px; width: 12px; height: 12px; background: white; border-left: 1px solid var(--elderberry-40); border-top: 1px solid var(--elderberry-40); transform: rotate(45deg); }
+.ctt-head { padding: 14px 16px 10px; border-bottom: 1px solid var(--elderberry-40); }
+.ctt-eyebrow-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+.ctt-eyebrow { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--kale-90); }
+.ctt-compare-pill { display: inline-flex; align-items: center; gap: 4px; height: 20px; padding: 0 8px; border-radius: 100px; background: var(--kale-10); border: 1px solid var(--kale-30); color: var(--kale-100); font-size: 10px; font-weight: 700; cursor: pointer; }
+.ctt-compare-pill:hover { background: var(--kale-30); }
+.ctt-title { font-size: 15px; font-weight: 700; letter-spacing: -.005em; }
+.ctt-def { font-size: 12px; color: var(--elderberry-100); line-height: 1.5; margin-top: 4px; }
+
+.ctt-precision { padding: 10px 16px; background: var(--persimmon-10); border-bottom: 1px solid #ffd4a8; display: flex; justify-content: space-between; align-items: center; font-size: 11px; }
+.ctt-precision .l { color: var(--elderberry-100); font-weight: 500; }
+.ctt-precision .v { font-weight: 700; color: var(--persimmon-60); font-size: 13px; }
+
+.ctt-fresh { padding: 8px 16px; font-size: 10px; color: var(--elderberry-90); display: flex; align-items: center; gap: 6px; background: var(--elderberry-20); border-bottom: 1px solid var(--elderberry-40); }
+.ctt-fresh .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--kiwi-80); }
+
+/* More details accordion */
+.ctt-toggle {
+  width: 100%; border: none; background: white; cursor: pointer;
+  padding: 10px 16px; font-family: var(--font); font-size: 11px; font-weight: 600;
+  color: var(--kale-90); text-align: left;
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid var(--elderberry-40);
+}
+.ctt-toggle:hover { background: var(--kale-0); }
+.ctt-toggle .chev { transition: transform .15s; }
+.ctt-toggle.open .chev { transform: rotate(180deg); }
+
+.ctt-more { display: none; padding: 4px 16px 12px; font-size: 11px; }
+.ctt-more.open { display: block; }
+.ctt-more-row { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-top: 1px solid var(--elderberry-30); align-items: flex-start; }
+.ctt-more-row:first-child { border-top: none; padding-top: 0; }
+.ctt-more-row .l { color: var(--elderberry-100); display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+.ctt-more-row .v { font-weight: 600; text-align: right; }
+.ctt-more-row .v.kiwi { color: var(--kiwi-80); }
+.ctt-more-row.bench { background: var(--kiwi-10); margin: 4px -16px; padding: 8px 16px; border-radius: 0; }
+
+/* KB inline footer */
+.ctt-kb { padding: 10px 16px; background: var(--elderberry-20); border-top: 1px solid var(--elderberry-40); display: flex; flex-direction: column; gap: 6px; }
+.ctt-kb-card { display: flex; gap: 8px; align-items: center; padding: 6px 10px; background: white; border: 1px solid var(--elderberry-40); border-radius: 6px; cursor: pointer; text-decoration: none; color: inherit; }
+.ctt-kb-card:hover { border-color: var(--kale-90); background: var(--kale-0); }
+.ctt-kb-card .ico { width: 22px; height: 22px; border-radius: 4px; background: var(--kale-10); color: var(--kale-90); display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; }
+.ctt-kb-card .body { flex: 1; min-width: 0; }
+.ctt-kb-card .t { font-size: 11px; font-weight: 600; }
+.ctt-kb-card .m { font-size: 10px; color: var(--elderberry-90); }
+
+/* Agent inline */
+.ctt-agent { padding: 10px 16px; border-top: 1px solid var(--elderberry-40); background: linear-gradient(135deg, #faf6ff, #f0e8ff); }
+.ctt-agent-trigger { width: 100%; height: 32px; border: 1px solid var(--eggplant-50); border-radius: 100px; background: white; color: var(--eggplant-70); font-size: 12px; font-weight: 600; font-family: var(--font); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+.ctt-agent-trigger:hover { background: var(--eggplant-10); }
+.ctt-agent-expanded { padding-top: 4px; }
+.ctt-agent-expanded .chips { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+.ctt-agent-expanded .chip-mini { display: inline-flex; align-items: center; height: 22px; padding: 0 8px; background: white; border: 1px solid var(--elderberry-50); border-radius: 100px; font-size: 10px; font-weight: 600; cursor: pointer; color: var(--elderberry-100); }
+.ctt-agent-expanded .chip-mini:hover { background: var(--kale-0); border-color: var(--kale-90); color: var(--kale-100); }
+.ctt-agent-input-row { display: flex; gap: 6px; }
+.ctt-agent-input { flex: 1; height: 30px; border: 1px solid var(--elderberry-50); border-radius: 100px; padding: 0 12px; font-size: 11px; font-family: var(--font); }
+.ctt-agent-send { width: 30px; height: 30px; border-radius: 50%; border: none; background: var(--eggplant-70); color: white; cursor: pointer; flex-shrink: 0; font-size: 12px; }
+.ctt-agent-response { background: white; border: 1px solid var(--eggplant-10); border-radius: 8px; padding: 10px; margin-top: 8px; font-size: 11px; line-height: 1.5; }
+.ctt-agent-response strong { font-weight: 700; }
+.ctt-agent-response .kb-inline { color: var(--kale-90); font-weight: 600; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; }
+
+/* Compare-mode body (when "Compare" pill is active) */
+.ctt-compare-body { padding: 12px 16px; }
+.ctt-compare-body .row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-top: 1px solid var(--elderberry-30); font-size: 11px; }
+.ctt-compare-body .row:first-child { border-top: none; }
+.ctt-compare-body .row .l { display: flex; align-items: center; gap: 6px; color: var(--elderberry-100); }
+.ctt-compare-body .row .v { font-weight: 700; font-size: 13px; }
+.ctt-compare-body .row .l .logo { width: 12px; height: 12px; border-radius: 2px; }
+.ctt-back { font-size: 11px; font-weight: 600; color: var(--kale-90); cursor: pointer; padding: 6px 0; display: inline-flex; align-items: center; gap: 4px; }
+
+/* F2 — "Explain this metric" hover button */
+.f2-explain-btn {
+  position: absolute; top: 6px; right: 6px;
+  height: 22px; padding: 0 8px;
+  background: white;
+  border: 1px solid var(--kale-30);
+  color: var(--kale-100);
+  border-radius: 100px;
+  font-size: 10px; font-weight: 600;
+  cursor: pointer;
+  opacity: 0; transition: opacity .15s;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.kpi-tile:hover .f2-explain-btn { opacity: 1; }
+
 /* Freshness + source strip (used across mockups) */
 .data-strip {
   display: flex;
@@ -477,7 +597,306 @@ function drawShareChart() {
 }
 
 // ========================= MOCKUP DEFINITIONS =========================
+// ─────────── SHARED COMPACT TOOLTIP (used by F1 + F2) ───────────
+// Progressive disclosure: 3 always-visible items, accordion for the rest, KB cards inline,
+// agent collapsed by default. All 8 confusion modes are addressed but never all-at-once.
+function compactTooltip(opts = {}) {
+  const arrowLeft = opts.arrowLeft || '24px';
+  return `
+    <div class="compact-tt" style="position:fixed;top:${opts.top||'200px'};left:${opts.left||'434px'};">
+      <span style="position:absolute;top:-7px;left:${arrowLeft};width:12px;height:12px;background:white;border-left:1px solid var(--elderberry-40);border-top:1px solid var(--elderberry-40);transform:rotate(45deg)"></span>
+
+      <!-- Default body -->
+      <div data-view="default">
+        <!-- HEAD: Definition + Compare pill (📖 Definition + ⚖️ vs other platforms) -->
+        <div class="ctt-head">
+          <div class="ctt-eyebrow-row">
+            <span class="ctt-eyebrow">📖 Definition</span>
+            <button class="ctt-compare-pill">⚖️ Compare to other tools ▸</button>
+          </div>
+          <div class="ctt-title">Order rate</div>
+          <div class="ctt-def">% of recipients who placed an order within your attribution window after a marketing touch.</div>
+        </div>
+
+        <!-- ALWAYS-VISIBLE: Precision (🔍) -->
+        <div class="ctt-precision">
+          <span class="l">🔍 Actual value</span>
+          <span class="v">3.184% <span style="color:var(--elderberry-90);font-weight:500;font-size:11px">· displayed 3.2%</span></span>
+        </div>
+
+        <!-- ALWAYS-VISIBLE: Freshness (⏱) — subtle -->
+        <div class="ctt-fresh">
+          <span class="dot"></span>
+          ⏱ Updated 4 min ago · Mailchimp + Shopify · auto-refreshes every 15 min
+        </div>
+
+        <!-- ACCORDION: more details (📅 Date · 🎯 Benchmark · ⚖️ vs other metric · 🌐 Attribution · 📍 Source) -->
+        <button class="ctt-toggle" data-toggle="more">More details <span class="chev">▾</span></button>
+        <div class="ctt-more" data-section="more">
+          <div class="ctt-more-row bench">
+            <span class="l">🎯 Health</span>
+            <span class="v kiwi">Top 25% — celebrate ✓</span>
+          </div>
+          <div class="ctt-more-row">
+            <span class="l">📅 Date range</span>
+            <span class="v">Feb 4 – May 5 · 90d</span>
+          </div>
+          <div class="ctt-more-row">
+            <span class="l">📅 vs previous</span>
+            <span class="v">▼ 2% (was 3.265%)</span>
+          </div>
+          <div class="ctt-more-row">
+            <span class="l">📖 Formula</span>
+            <span class="v">orders ÷ recipients</span>
+          </div>
+          <div class="ctt-more-row">
+            <span class="l">🌐 Includes</span>
+            <span class="v">Email · SMS · Automation</span>
+          </div>
+          <div class="ctt-more-row">
+            <span class="l">🌐 Excludes</span>
+            <span class="v">Direct, paid, organic</span>
+          </div>
+          <div class="ctt-more-row">
+            <span class="l">⚖️ Not the same as</span>
+            <span class="v">Click-to-purchase rate</span>
+          </div>
+          <div class="ctt-more-row">
+            <span class="l">📍 Source</span>
+            <span class="v">Mailchimp clicks ⨯ Shopify orders</span>
+          </div>
+        </div>
+
+        <!-- KB INLINE (no rail) -->
+        <div class="ctt-kb">
+          <a class="ctt-kb-card" href="#">
+            <span class="ico">📄</span>
+            <span class="body"><span class="t">How order rate is calculated</span><span class="m">KB · 3 min read · ⭐ Top FAQ</span></span>
+          </a>
+          <a class="ctt-kb-card" href="#">
+            <span class="ico">⚖️</span>
+            <span class="body"><span class="t">Order rate vs click-to-purchase</span><span class="m">KB · 2 min read</span></span>
+          </a>
+        </div>
+
+        <!-- AGENT INLINE (collapsed by default) -->
+        <div class="ctt-agent">
+          <button class="ctt-agent-trigger" data-toggle="agent">✨ Ask a follow-up</button>
+          <div class="ctt-agent-expanded" data-section="agent" style="display:none">
+            <div class="chips">
+              <button class="chip-mini">Why is this lower than Shopify?</button>
+              <button class="chip-mini">Is 3.2% good for my industry?</button>
+              <button class="chip-mini">Show me the orders included</button>
+            </div>
+            <div class="ctt-agent-input-row">
+              <input class="ctt-agent-input" placeholder="Ask about this metric...">
+              <button class="ctt-agent-send">→</button>
+            </div>
+            <div class="ctt-agent-response">
+              <strong>Order rate is healthy at 3.2%.</strong> For DTC home goods at your list size (5k contacts), the median is 2.1% and top quartile starts at 3.0% — so you're solidly above peers. <span class="kb-inline">See benchmarks →</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Compare-mode body (swaps in when "Compare" pill is clicked) -->
+      <div data-view="compare" style="display:none">
+        <div class="ctt-head">
+          <div class="ctt-back" data-action="back">← Back to definition</div>
+          <div class="ctt-title">⚖️ Order rate across tools</div>
+          <div class="ctt-def">Each platform answers a slightly different question — none are wrong.</div>
+        </div>
+        <div class="ctt-compare-body">
+          <div class="row" style="background:#fffceb;margin:0 -16px;padding:8px 16px;border-radius:0">
+            <span class="l"><span class="logo" style="background:#FFE01B"></span>🐵 Mailchimp</span>
+            <span class="v">3.2%</span>
+          </div>
+          <div class="row">
+            <span class="l"><span class="logo" style="background:#96bf48"></span>Shopify</span>
+            <span class="v">4.1%</span>
+          </div>
+          <div class="row">
+            <span class="l"><span class="logo" style="background:#00d1c1"></span>Triple Whale</span>
+            <span class="v">3.6%</span>
+          </div>
+          <div class="row">
+            <span class="l"><span class="logo" style="background:#232425"></span>Klaviyo</span>
+            <span class="v" style="color:var(--elderberry-90);font-weight:500;font-size:11px">Not connected</span>
+          </div>
+          <div class="row">
+            <span class="l"><span class="logo" style="background:#f9ab00"></span>GA4</span>
+            <span class="v">3.8%</span>
+          </div>
+          <div style="font-size:11px;color:var(--elderberry-100);margin-top:10px;padding:8px;background:var(--elderberry-20);border-radius:6px;line-height:1.4">
+            🐵 <strong>Mailchimp uses last-marketing-touch</strong> — most conservative. <span style="color:var(--kale-90);font-weight:600;cursor:pointer">Why these differ →</span>
+          </div>
+        </div>
+        <div class="ctt-agent">
+          <button class="ctt-agent-trigger">✨ Ask why these differ</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// Wire up tooltip interactivity (toggles for accordion, agent, compare view)
+function wireTooltips() {
+  document.querySelectorAll('.compact-tt').forEach(tt => {
+    // Toggles
+    tt.querySelectorAll('[data-toggle]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-toggle');
+        const section = tt.querySelector(`[data-section="${target}"]`);
+        const isOpen = section.classList.contains('open') || section.style.display === 'block';
+        if (target === 'more') {
+          section.classList.toggle('open');
+          btn.classList.toggle('open');
+        } else {
+          section.style.display = isOpen ? 'none' : 'block';
+        }
+      });
+    });
+    // Compare pill swaps the body
+    const compareBtn = tt.querySelector('.ctt-compare-pill');
+    if (compareBtn) {
+      compareBtn.addEventListener('click', () => {
+        tt.querySelector('[data-view="default"]').style.display = 'none';
+        tt.querySelector('[data-view="compare"]').style.display = 'block';
+      });
+    }
+    const backBtn = tt.querySelector('[data-action="back"]');
+    if (backBtn) {
+      backBtn.addEventListener('click', () => {
+        tt.querySelector('[data-view="default"]').style.display = 'block';
+        tt.querySelector('[data-view="compare"]').style.display = 'none';
+      });
+    }
+  });
+}
+
 const MOCKUPS = {
+
+  // =====================================================
+  // ✨ REFINED FINALISTS (F1, F2)
+  // =====================================================
+
+  'f1': {
+    title: 'Compact ⓘ Tooltip · Progressive Disclosure + Inline KB + Agent Follow-up',
+    tactic: 'Progressive disclosure · KB cards inline · agent on demand',
+    isAi: false,
+    render: () => `
+      <div class="rationale-panel">
+        <div class="rationale-eyebrow">✨ Refined finalist · F1</div>
+        <div class="rationale-title">Compact tooltip that shows 3 things upfront, expands for the rest, and lets you ask a follow-up — all without leaving the page</div>
+        <div class="rationale-sub">Click the <code style="background:rgba(255,224,27,.15);color:var(--cavendish);padding:1px 6px;border-radius:3px;font-family:'SF Mono',Menlo,monospace;font-size:11px">ⓘ</code> next to any metric. The tooltip shows just <strong>definition + actual value + freshness</strong> upfront — the 3 things almost everyone needs. The other 5 confusion modes (date range, benchmark, vs other metric, attribution, source) are tucked under a single "More details" toggle. Cross-platform comparison is one pill-click away. KB articles render as inline cards at the bottom — no rail. The Analytics Agent is a collapsed button that expands inline with sample chips and an input — also no rail.</div>
+        <div class="rationale-grid">
+          <div class="rationale-section">
+            <h4>Coverage of all 8 confusion modes</h4>
+            <ul>
+              <li><span class="rationale-tag">📖 Def</span> Top of tooltip · headline sentence</li>
+              <li><span class="rationale-tag">🔍 Precision</span> Always-visible row with un-rounded value</li>
+              <li><span class="rationale-tag">⏱ Freshness</span> Subtle timestamp footer line — always visible</li>
+              <li><span class="rationale-tag">⚖️ vs other platforms</span> "Compare" pill swaps the body in place</li>
+              <li><span class="rationale-tag">📅 Date</span> Inside accordion</li>
+              <li><span class="rationale-tag">🎯 Benchmark</span> Highlighted row at the top of accordion</li>
+              <li><span class="rationale-tag">⚖️ vs other metric</span> Inside accordion ("Not the same as...")</li>
+              <li><span class="rationale-tag">🌐 Attribution</span> Inside accordion (includes/excludes)</li>
+              <li><span class="rationale-tag">📍 Source</span> Inside accordion</li>
+            </ul>
+          </div>
+          <div class="rationale-section">
+            <h4>How we avoid overload</h4>
+            <ul>
+              <li><strong>Progressive disclosure</strong> — only 3 lines upfront. The user pulls more if they need it (Hick's law).</li>
+              <li><strong>One pill swaps the body in place</strong> for cross-platform comparison — no need to scroll a giant list.</li>
+              <li><strong>KB lives inline</strong> as 2 contextual cards at the bottom — not a generic "browse KB" rail.</li>
+              <li><strong>Agent is collapsed by default</strong> — a single button. Expands to chips + input inline if the user wants more.</li>
+              <li><strong>340px wide cap</strong> — fits next to any metric without dominating the page.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-content">
+        ${filtersBar}
+        ${dataStrip}
+        <div style="background:linear-gradient(135deg,#fffceb,#fff8d0);border:1px solid #f0d800;border-radius:8px;padding:14px 18px;margin-bottom:16px;display:flex;gap:10px;align-items:center">
+          <span style="font-size:20px">ⓘ</span>
+          <div style="flex:1;font-size:13px"><strong>Click any <code style="background:white;padding:1px 6px;border-radius:3px;font-family:monospace;font-size:11px">ⓘ</code> icon</strong> to see the compact tooltip in action — shown live for "Order rate" below.</div>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi-tile"><div class="kpi-label">$ Attributed revenue <span class="info-i" data-tip="rev">i</span></div><div class="kpi-value">$184,320</div><div class="kpi-delta up">▲ 12%</div></div>
+          <div class="kpi-tile"><div class="kpi-label"># Attributed orders <span class="info-i" data-tip="orders">i</span></div><div class="kpi-value">1,427</div><div class="kpi-delta up">▲ 8%</div></div>
+          <div class="kpi-tile"><div class="kpi-label">% Order rate <span class="info-i lit" data-tip="orderrate">i</span></div><div class="kpi-value">3.2%</div><div class="kpi-delta down">▼ 2%</div></div>
+          <div class="kpi-tile"><div class="kpi-label">⌀ Avg order value <span class="info-i" data-tip="aov">i</span></div><div class="kpi-value">$129</div><div class="kpi-delta up">▲ 4%</div></div>
+          <div class="kpi-tile"><div class="kpi-label">↻ Repeat rate <span class="info-i" data-tip="repeat">i</span></div><div class="kpi-value">28%</div><div class="kpi-delta up">▲ 3%</div></div>
+          <div class="kpi-tile"><div class="kpi-label">$ Rev / recipient <span class="info-i" data-tip="revper">i</span></div><div class="kpi-value">$2.84</div><div class="kpi-delta up">▲ 6%</div></div>
+        </div>
+
+        ${compactTooltip({ top: '320px', left: '434px', arrowLeft: '24px' })}
+
+        ${stackedChartWidget('Share of attributed revenue over time')}
+      </div>
+    `,
+    afterRender: () => { drawShareChart(); wireTooltips(); }
+  },
+
+  'f2': {
+    title: 'Hover-Reveal "Explain this metric" Button → Same Tooltip',
+    tactic: 'Discoverability via hover-button · same compact tooltip',
+    isAi: false,
+    render: () => `
+      <div class="rationale-panel">
+        <div class="rationale-eyebrow">✨ Refined finalist · F2</div>
+        <div class="rationale-title">Same tooltip as F1, but the entry point is a hover-revealed "Explain this metric" button instead of a persistent ⓘ icon</div>
+        <div class="rationale-sub">F1 has a persistent <code style="background:rgba(255,224,27,.15);color:var(--cavendish);padding:1px 6px;border-radius:3px;font-family:'SF Mono',Menlo,monospace;font-size:11px">ⓘ</code> next to every metric — discoverable but always visible (some find it noisy). F2 keeps the dashboard cleaner: hover any metric → a small <strong>"✨ Explain this metric"</strong> button fades in next to it. Click → the same compact tooltip pops out next to the metric (positioned exactly like F1 — <strong>not in a right rail</strong>).</div>
+        <div class="rationale-grid">
+          <div class="rationale-section">
+            <h4>What changes vs F1</h4>
+            <ul>
+              <li><strong>Cleaner default state</strong> — no permanent <code>ⓘ</code> icons cluttering metric labels.</li>
+              <li><strong>Hover discovery</strong> — button appears only when the user hovers a metric tile.</li>
+              <li><strong>"Explain this metric" wording</strong> — invites curiosity rather than being a passive icon.</li>
+              <li><strong>Same compact tooltip</strong> — positioned next to the metric, no right rail. Same progressive disclosure, KB cards, agent.</li>
+            </ul>
+          </div>
+          <div class="rationale-section">
+            <h4>Why this works</h4>
+            <ul>
+              <li><strong>Reduces visual noise</strong> — addresses overload at the dashboard level (not just inside the tooltip).</li>
+              <li><strong>Active CTA &gt; passive icon</strong> — "Explain this metric" reads as helpful, not as "here's a small thing you might miss."</li>
+              <li><strong>Same payload</strong> — once invoked, F2 covers all 8 confusion modes the same way F1 does.</li>
+              <li><strong>Tradeoff:</strong> hover-only entry is slightly less discoverable on touch devices — but power users + keyboard users get focus-state too.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-content">
+        ${filtersBar}
+        ${dataStrip}
+        <div style="background:linear-gradient(135deg,#fffceb,#fff8d0);border:1px solid #f0d800;border-radius:8px;padding:14px 18px;margin-bottom:16px;display:flex;gap:10px;align-items:center">
+          <span style="font-size:20px">✨</span>
+          <div style="flex:1;font-size:13px"><strong>Hover any KPI tile</strong> — the "✨ Explain this metric" button fades in. Shown live for "Order rate" with the tooltip already open below.</div>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi-tile"><button class="f2-explain-btn">✨ Explain this metric</button><div class="kpi-label">$ Attributed revenue</div><div class="kpi-value">$184,320</div><div class="kpi-delta up">▲ 12%</div></div>
+          <div class="kpi-tile"><button class="f2-explain-btn">✨ Explain this metric</button><div class="kpi-label"># Attributed orders</div><div class="kpi-value">1,427</div><div class="kpi-delta up">▲ 8%</div></div>
+          <div class="kpi-tile" style="border-color:var(--kale-30)"><button class="f2-explain-btn" style="opacity:1">✨ Explain this metric</button><div class="kpi-label">% Order rate</div><div class="kpi-value">3.2%</div><div class="kpi-delta down">▼ 2%</div></div>
+          <div class="kpi-tile"><button class="f2-explain-btn">✨ Explain this metric</button><div class="kpi-label">⌀ Avg order value</div><div class="kpi-value">$129</div><div class="kpi-delta up">▲ 4%</div></div>
+          <div class="kpi-tile"><button class="f2-explain-btn">✨ Explain this metric</button><div class="kpi-label">↻ Repeat rate</div><div class="kpi-value">28%</div><div class="kpi-delta up">▲ 3%</div></div>
+          <div class="kpi-tile"><button class="f2-explain-btn">✨ Explain this metric</button><div class="kpi-label">$ Rev / recipient</div><div class="kpi-value">$2.84</div><div class="kpi-delta up">▲ 6%</div></div>
+        </div>
+
+        ${compactTooltip({ top: '320px', left: '434px', arrowLeft: '24px' })}
+
+        ${stackedChartWidget('Share of attributed revenue over time')}
+      </div>
+    `,
+    afterRender: () => { drawShareChart(); wireTooltips(); }
+  },
 
   // ============= 01 · INLINE TOOLTIP =============
   '1': {
@@ -1261,7 +1680,7 @@ GA total                          $247,890<br>
 // ========================= ROUTING =========================
 const params = new URLSearchParams(location.search);
 const id = params.get('id') || '1';
-const order = ['1','2','3','4','5','6','7','8'];
+const order = ['f1','f2','1','2','3','4','5','6','7','8'];
 const idx = order.indexOf(id);
 const m = MOCKUPS[id];
 
@@ -1269,11 +1688,12 @@ if (!m) {
   document.getElementById('content-root').innerHTML = '<div class="page-content"><div class="widget"><div class="widget-title">Mockup not found.</div><a href="index.html" class="btn-primary" style="margin-top:12px;display:inline-block">← Back to gallery</a></div></div>';
 } else {
   const metaId = document.getElementById('meta-id');
-  metaId.textContent = id.padStart(2,'0');
+  const displayId = /^f\d/.test(id) ? id.toUpperCase() : id.padStart(2,'0');
+  metaId.textContent = displayId;
   if (m.isAi) metaId.classList.add('ai');
   document.getElementById('meta-title').textContent = m.title;
   document.getElementById('meta-tactic').textContent = '· ' + m.tactic;
-  document.title = `${id.padStart(2,'0')} · ${m.title}`;
+  document.title = `${displayId} · ${m.title}`;
   document.getElementById('content-root').innerHTML = m.render();
   if (m.afterRender) setTimeout(m.afterRender, 50);
 }

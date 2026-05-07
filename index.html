@@ -49,13 +49,48 @@ body { font-family: 'Graphik Mailchimp', Helvetica, Arial, sans-serif; backgroun
 .card-arrow { position: absolute; top: 22px; right: 22px; font-size: 18px; color: #b2b3b4; }
 .card:hover .card-arrow { color: #007c89; }
 .card.ai:hover .card-arrow { color: #6f4cd6; }
+
+/* ─────────── REFINED FINALISTS ─────────── */
+.finalists-band {
+  background: linear-gradient(135deg, #1a1f2a 0%, #0f1521 100%);
+  color: white;
+  border-radius: 16px;
+  padding: 36px 40px;
+  margin: 0 0 56px;
+  position: relative;
+  box-shadow: 0 12px 32px rgba(0,0,0,.12);
+}
+.finalists-eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  background: #ffe01b; color: #171b1f;
+  padding: 5px 12px; border-radius: 100px;
+  margin-bottom: 16px;
+}
+.finalists-band h2 { font-size: 30px; font-weight: 700; letter-spacing: -.02em; margin-bottom: 8px; }
+.finalists-band p.lead { font-size: 14px; color: rgba(255,255,255,.7); max-width: 760px; margin-bottom: 28px; line-height: 1.5; }
+.finalist-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+.finalist-card { display: flex; flex-direction: column; background: white; color: #171b1f; border-radius: 12px; padding: 28px; text-decoration: none; transition: transform .15s, box-shadow .15s; position: relative; border: 2px solid transparent; }
+.finalist-card:hover { transform: translateY(-3px); box-shadow: 0 16px 32px rgba(0,0,0,.2); border-color: #ffe01b; }
+.finalist-id { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: #ffe01b; color: #171b1f; border-radius: 50%; font-weight: 800; font-size: 18px; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(255,224,27,.3); }
+.finalist-title { font-size: 19px; font-weight: 700; letter-spacing: -.005em; margin-bottom: 8px; }
+.finalist-desc { font-size: 13px; color: #6e7173; line-height: 1.55; margin-bottom: 16px; flex: 1; }
+.finalist-includes { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #007c89; margin-bottom: 8px; }
+.finalist-includes-row { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 16px; }
+.finalist-tag { display: inline-flex; padding: 3px 10px; background: #e5f2f3; color: #045c67; border-radius: 100px; font-size: 10px; font-weight: 700; letter-spacing: .04em; }
+.finalist-modes-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #9ea0a2; margin-bottom: 6px; }
+.finalist-modes { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 16px; }
+.finalist-cta { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #045c67; padding-top: 14px; border-top: 1px solid #ececec; }
+.finalist-card:hover .finalist-cta { color: #007c89; }
+
+.supporting-divider { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #9ea0a2; margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #ececec; }
 </style>
 </head>
 <body>
 <div class="hero">
   <div class="hero-eyebrow">R&amp;A · Q4 FY26 · Metric Clarity Initiative</div>
   <h1>Explain My Metrics</h1>
-  <p>A meaningful share of Mailchimp's "data inaccuracy" VOC isn't bad data — it's metric-clarity confusion. These 8 mockups span the spectrum from cheap static UX to AI-driven contextual explanations, and every one targets all <strong>8 confusion modes</strong> — including how Mailchimp's numbers compare to other platforms (Shopify, GA), where the data came from, and when it was last updated.</p>
+  <p>2 refined finalists (top of page) + 8 supporting explorations. A meaningful share of Mailchimp's "data inaccuracy" VOC isn't bad data — it's metric-clarity confusion. Every mockup targets all <strong>8 confusion modes</strong> — including how Mailchimp's numbers compare to other platforms (Shopify, Triple Whale, Klaviyo, GA4), where the data came from, and when it was last updated.</p>
 
   <div class="legend">
     <div class="legend-title">The 8 confusion modes we're solving</div>
@@ -71,6 +106,66 @@ body { font-family: 'Graphik Mailchimp', Helvetica, Arial, sans-serif; backgroun
     </div>
   </div>
 </div>
+
+<!-- ─────────── REFINED FINALISTS ─────────── -->
+<section class="finalists-band">
+  <div class="finalists-eyebrow">✨ Refined finalists · Top picks</div>
+  <h2>2 consolidated mockups</h2>
+  <p class="lead">Two takes on the same idea: a compact tooltip that addresses all 8 confusion modes <strong>without overloading the user</strong>. Both use progressive disclosure (3 essentials upfront, the rest in an inline accordion), inline KB cards (no rail), and an inline Analytics Agent follow-up. The difference is the trigger pattern.</p>
+
+  <div class="finalist-grid">
+    <a class="finalist-card" href="mockup.html?id=f1">
+      <div class="finalist-id">F1</div>
+      <div class="finalist-title">Persistent <code style="background:#fffceb;padding:1px 6px;border-radius:3px;font-family:monospace;font-size:14px;color:#171b1f">ⓘ</code> icon → compact tooltip</div>
+      <div class="finalist-desc">Every metric label has a small <code style="background:#f8f8f8;padding:1px 5px;border-radius:3px;font-family:monospace;font-size:11px">ⓘ</code> icon. Click it → tooltip pops with definition, actual un-rounded value, and freshness timestamp upfront. "More details" accordion holds the other 5 confusion modes. KB cards inline at the bottom. "Ask a follow-up" button reveals an inline mini agent. <strong>No right rail anywhere.</strong></div>
+      <div class="finalist-includes">Combines</div>
+      <div class="finalist-includes-row">
+        <span class="finalist-tag">01 · Tooltip</span>
+        <span class="finalist-tag">+ Inline KB</span>
+        <span class="finalist-tag">+ Agent follow-up</span>
+      </div>
+      <div class="finalist-modes-label">Solves all 8 confusion modes (with progressive disclosure)</div>
+      <div class="finalist-modes">
+        <span class="confusion-pill cp-def">📖 Def</span>
+        <span class="confusion-pill cp-prec">🔍 Precision</span>
+        <span class="confusion-pill cp-fresh">⏱ Freshness</span>
+        <span class="confusion-pill cp-date">📅 Date</span>
+        <span class="confusion-pill cp-bench">🎯 Bench</span>
+        <span class="confusion-pill cp-vs">⚖️ vs metric</span>
+        <span class="confusion-pill cp-attr">🌐 Attribution</span>
+        <span class="confusion-pill cp-source">📍 Source</span>
+      </div>
+      <div class="finalist-cta">View mockup →</div>
+    </a>
+
+    <a class="finalist-card" href="mockup.html?id=f2">
+      <div class="finalist-id">F2</div>
+      <div class="finalist-title">Hover-revealed "✨ Explain this metric" → same tooltip</div>
+      <div class="finalist-desc">Same compact tooltip as F1 — but the trigger is different. <strong>No persistent <code style="background:#f8f8f8;padding:1px 5px;border-radius:3px;font-family:monospace;font-size:11px">ⓘ</code> icons</strong>. Hover any KPI tile → a small "✨ Explain this metric" button fades in. Click → the same tooltip pops out next to the metric (still no right rail). Cleaner default dashboard, more active CTA wording.</div>
+      <div class="finalist-includes">Combines</div>
+      <div class="finalist-includes-row">
+        <span class="finalist-tag">04 · Hover trigger</span>
+        <span class="finalist-tag">+ 01 · Compact tooltip</span>
+        <span class="finalist-tag">+ Inline KB</span>
+        <span class="finalist-tag">+ Agent follow-up</span>
+      </div>
+      <div class="finalist-modes-label">Solves all 8 confusion modes (with progressive disclosure)</div>
+      <div class="finalist-modes">
+        <span class="confusion-pill cp-def">📖 Def</span>
+        <span class="confusion-pill cp-prec">🔍 Precision</span>
+        <span class="confusion-pill cp-fresh">⏱ Freshness</span>
+        <span class="confusion-pill cp-date">📅 Date</span>
+        <span class="confusion-pill cp-bench">🎯 Bench</span>
+        <span class="confusion-pill cp-vs">⚖️ vs metric</span>
+        <span class="confusion-pill cp-attr">🌐 Attribution</span>
+        <span class="confusion-pill cp-source">📍 Source</span>
+      </div>
+      <div class="finalist-cta">View mockup →</div>
+    </a>
+  </div>
+</section>
+
+<div class="supporting-divider">📚 Supporting explorations · the original 8</div>
 
 <!-- TIER 1 -->
 <div class="tier-band">
