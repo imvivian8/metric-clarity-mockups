@@ -428,6 +428,21 @@ canvas[id^="chart-"] { max-height: 220px !important; height: 220px !important; }
 .ctt-agent-response strong { font-weight: 700; }
 .ctt-agent-response .kb-inline { color: var(--kale-90); font-weight: 600; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; }
 
+/* F3 — "Explain this chart" pill in chart header */
+.explain-chart-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  height: 28px; padding: 0 12px;
+  background: white;
+  border: 1px solid var(--kale-30);
+  color: var(--kale-100);
+  border-radius: 100px;
+  font-size: 11px; font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: all .15s;
+}
+.explain-chart-pill:hover { background: var(--kale-0); border-color: var(--kale-90); transform: translateY(-1px); box-shadow: 0 2px 6px rgba(0,124,137,.15); }
+
 /* F2 — "Explain this metric" hover button */
 .f2-explain-btn {
   position: absolute; top: 6px; right: 6px;
@@ -719,6 +734,124 @@ function compactTooltip(opts = {}) {
   `;
 }
 
+// ─────────── CHART VARIANT TOOLTIP (used by F3) ───────────
+// Same structure as compactTooltip — but content describes a chart, not a single metric.
+function compactTooltipChart(opts = {}) {
+  const arrowLeft = opts.arrowLeft || '24px';
+  return `
+    <div class="compact-tt" style="position:fixed;top:${opts.top||'200px'};left:${opts.left||'434px'};width:380px">
+      <span style="position:absolute;top:-7px;left:${arrowLeft};width:12px;height:12px;background:white;border-left:1px solid var(--elderberry-40);border-top:1px solid var(--elderberry-40);transform:rotate(45deg)"></span>
+
+      <!-- HEAD: Definition (always visible) -->
+      <div class="ctt-head">
+        <div class="ctt-eyebrow">📖 What this chart shows</div>
+        <div class="ctt-title">Share of attributed revenue over time</div>
+        <div class="ctt-def">Weekly % of your total online store revenue that Mailchimp can attribute to email, SMS, or automation activity within your attribution window.</div>
+      </div>
+
+      <!-- ⏱ Freshness — always visible -->
+      <div class="ctt-meta-row">
+        <span class="ctt-meta-icon">⏱</span>
+        <span class="ctt-meta-body"><strong>Updated 4 min ago</strong> · auto-refreshes every 15 min</span>
+      </div>
+
+      <!-- 📍 Source — always visible -->
+      <div class="ctt-meta-row">
+        <span class="ctt-meta-icon">📍</span>
+        <span class="ctt-meta-body"><strong>Source:</strong> Mailchimp + Shopify (revenue denominator)</span>
+      </div>
+
+      <!-- ACCORDION 1: More details (📅 Date · 🎯 Benchmark · ⚖️ vs other view · 🌐 Attribution · ⚖️ Compare to platforms) -->
+      <button class="ctt-toggle" data-toggle="more">
+        <span><strong>More details</strong> <span style="color:var(--elderberry-90);font-weight:500">· date, channels, benchmark, compare</span></span>
+        <span class="chev">▾</span>
+      </button>
+      <div class="ctt-more" data-section="more">
+        <div class="ctt-more-row">
+          <span class="l">📅 Date range</span>
+          <span class="v">Feb 4 – May 5 · 13 weeks</span>
+        </div>
+        <div class="ctt-more-row">
+          <span class="l">📅 Granularity</span>
+          <span class="v">Weekly (toggle Day / Month above)</span>
+        </div>
+        <div class="ctt-more-row bench">
+          <span class="l">🎯 Health</span>
+          <span class="v kiwi">Trending up · 23% → 51% over 13 weeks</span>
+        </div>
+        <div class="ctt-more-row">
+          <span class="l">⚖️ Not the same as</span>
+          <span class="v">Total store revenue (which includes direct, paid, organic)</span>
+        </div>
+        <div class="ctt-more-row">
+          <span class="l">🌐 Series shown</span>
+          <span class="v">Email · SMS · Automation · Total attributed</span>
+        </div>
+        <div class="ctt-more-row">
+          <span class="l">🌐 Includes</span>
+          <span class="v">Orders within attribution window after a marketing touch</span>
+        </div>
+        <div class="ctt-more-row">
+          <span class="l">🌐 Excludes</span>
+          <span class="v">Direct, paid ads, organic search, social</span>
+        </div>
+        <div class="ctt-compare-section">
+          <div class="ctt-compare-label">⚖️ Same chart in other tools (W13)</div>
+          <div class="ctt-compare-row"><span class="l"><span class="logo" style="background:#FFE01B"></span>🐵 Mailchimp</span><span class="v">51%</span></div>
+          <div class="ctt-compare-row"><span class="l"><span class="logo" style="background:#96bf48"></span>Shopify "Marketing"</span><span class="v">47%</span></div>
+          <div class="ctt-compare-row"><span class="l"><span class="logo" style="background:#00d1c1"></span>Triple Whale</span><span class="v">56%</span></div>
+          <div class="ctt-compare-row"><span class="l"><span class="logo" style="background:#232425"></span>Klaviyo</span><span class="v" style="color:var(--elderberry-90);font-weight:500;font-size:11px">Not connected</span></div>
+          <div class="ctt-compare-row"><span class="l"><span class="logo" style="background:#f9ab00"></span>GA4</span><span class="v">38%</span></div>
+        </div>
+      </div>
+
+      <!-- ACCORDION 2: Related articles -->
+      <button class="ctt-toggle" data-toggle="kb">
+        <span><strong>Related articles</strong> <span style="color:var(--elderberry-90);font-weight:500">· 3 KB articles</span></span>
+        <span class="chev">▾</span>
+      </button>
+      <div class="ctt-more" data-section="kb">
+        <a class="ctt-kb-card" href="#">
+          <span class="ico">📄</span>
+          <span class="body"><span class="t">Reading the share-of-revenue chart</span><span class="m">KB · 4 min read · ⭐ Top FAQ</span></span>
+        </a>
+        <a class="ctt-kb-card" href="#">
+          <span class="ico">🎯</span>
+          <span class="body"><span class="t">Attribution windows: how long after a touch counts</span><span class="m">KB · 3 min read</span></span>
+        </a>
+        <a class="ctt-kb-card" href="#">
+          <span class="ico">⚖️</span>
+          <span class="body"><span class="t">Why your numbers don't match Google Analytics</span><span class="m">KB · 8 min read · ⭐ Top FAQ</span></span>
+        </a>
+      </div>
+
+      <!-- AGENT INLINE -->
+      <div class="ctt-agent">
+        <button class="ctt-agent-trigger" data-toggle="agent">✨ Ask a follow-up</button>
+        <div class="ctt-agent-expanded" data-section="agent" style="display:none">
+          <div class="chips">
+            <button class="chip-mini">Why is automation climbing fastest?</button>
+            <button class="chip-mini">Split this by campaign</button>
+            <button class="chip-mini">Why doesn't this match GA4?</button>
+          </div>
+          <div class="ctt-agent-input-row">
+            <input class="ctt-agent-input" placeholder="Ask about this chart...">
+            <button class="ctt-agent-send">→</button>
+          </div>
+          <div class="ctt-agent-response">
+            <strong>Total Mailchimp-attributed share is climbing</strong> — from 23% in W1 to 51% in W13. Email contributes ~28% of the most recent week, then SMS (~12%) and automation (~11%). The acceleration starting W4 lines up with your abandoned-cart flow launch. <span class="kb-inline">View flow →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// "Explain this chart" pill button — placed inside the chart widget header
+function explainChartPill() {
+  return `<button class="explain-chart-pill">✨ Explain this chart</button>`;
+}
+
 // Wire up tooltip interactivity (toggles for accordions + agent)
 function wireTooltips() {
   document.querySelectorAll('.compact-tt').forEach(tt => {
@@ -855,6 +988,61 @@ const MOCKUPS = {
         ${compactTooltip({ top: '320px', left: '434px', arrowLeft: '24px' })}
 
         ${stackedChartWidget('Share of attributed revenue over time')}
+      </div>
+    `,
+    afterRender: () => { drawShareChart(); wireTooltips(); }
+  },
+
+  'f3': {
+    title: 'Chart-Level "Explain this chart" Button → Same Tooltip',
+    tactic: 'Chart-anchored explanation · same consistent tooltip as F1/F2',
+    isAi: false,
+    render: () => `
+      <div class="rationale-panel">
+        <div class="rationale-eyebrow">✨ Refined finalist · F3</div>
+        <div class="rationale-title">Same compact tooltip pattern as F1/F2 — but for charts, not single metrics</div>
+        <div class="rationale-sub">F1 and F2 explain individual KPI tiles. F3 brings the same pattern to <strong>charts</strong>: an "✨ Explain this chart" button sits in the chart header. Click → the same compact tooltip pops out, but the content is about the chart itself (what it shows, the date granularity, what each series is, how to read the trend, how it compares across platforms). <strong>No right rail anywhere.</strong></div>
+        <div class="rationale-grid">
+          <div class="rationale-section">
+            <h4>Coverage of all 7 confusion modes (chart-flavored)</h4>
+            <ul>
+              <li><span class="rationale-tag">📖 Def</span> Always visible · "What this chart shows"</li>
+              <li><span class="rationale-tag">⏱ Freshness</span> Always visible · "Updated 4 min ago · auto-refreshes every 15 min"</li>
+              <li><span class="rationale-tag">📍 Source</span> Always visible · "Mailchimp + Shopify (revenue denominator)"</li>
+              <li><span class="rationale-tag">📅 Date</span> Inside accordion · "Feb 4 – May 5 · 13 weeks · weekly granularity"</li>
+              <li><span class="rationale-tag">🎯 Benchmark</span> Inside accordion · "Trending up · 23% → 51%"</li>
+              <li><span class="rationale-tag">⚖️ vs other view</span> Inside accordion · "Not total store revenue — marketing-attributed only"</li>
+              <li><span class="rationale-tag">🌐 Attribution</span> Inside accordion · series shown + includes/excludes</li>
+              <li><span class="rationale-tag">⚖️ Compare to platforms</span> Inside accordion · same chart's value in Shopify, Triple Whale, Klaviyo, GA4</li>
+            </ul>
+          </div>
+          <div class="rationale-section">
+            <h4>Why a chart needs its own variant</h4>
+            <ul>
+              <li><strong>Charts answer different questions than single metrics</strong> — a KPI tooltip explains "what is this number?" A chart tooltip explains "what is this view?"</li>
+              <li><strong>Granularity matters</strong> — a chart has Day/Week/Month toggles. The tooltip surfaces which one you're seeing.</li>
+              <li><strong>Multiple series</strong> — the tooltip names each line/area so users know what they're looking at.</li>
+              <li><strong>Trend health</strong> beats single-point health — "trending up 23% → 51%" tells a story; "3.2%" is just a number.</li>
+              <li><strong>Cross-platform comparison adapts</strong> — instead of comparing one number, F3 compares the same chart's most-recent point across tools (Shopify, Triple Whale, GA4).</li>
+              <li><strong>Same tooltip skeleton</strong> — users learn the format once and it works for both metrics (F1/F2) and charts (F3).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-content">
+        ${filtersBar}
+        ${dataStrip}
+        <div style="background:linear-gradient(135deg,#fffceb,#fff8d0);border:1px solid #f0d800;border-radius:8px;padding:14px 18px;margin-bottom:16px;display:flex;gap:10px;align-items:center">
+          <span style="font-size:20px">📊</span>
+          <div style="flex:1;font-size:13px"><strong>Look for the "✨ Explain this chart" button</strong> in the chart header below. Click → tooltip uses the same format as F1/F2, but the content is about the <em>chart</em> not a single metric. Shown live below.</div>
+        </div>
+
+        ${standardKpis}
+
+        ${stackedChartWidget('Share of attributed revenue over time', explainChartPill())}
+
+        ${compactTooltipChart({ top: '510px', left: '60px', arrowLeft: '36px' })}
       </div>
     `,
     afterRender: () => { drawShareChart(); wireTooltips(); }
@@ -1642,7 +1830,7 @@ GA total                          $247,890<br>
 // ========================= ROUTING =========================
 const params = new URLSearchParams(location.search);
 const id = params.get('id') || '1';
-const order = ['f1','f2','1','2','3','4','5','6','7','8'];
+const order = ['f1','f2','f3','1','2','3','4','5','6','7','8'];
 const idx = order.indexOf(id);
 const m = MOCKUPS[id];
 

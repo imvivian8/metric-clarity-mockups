@@ -69,7 +69,7 @@ body { font-family: 'Graphik Mailchimp', Helvetica, Arial, sans-serif; backgroun
 }
 .finalists-band h2 { font-size: 30px; font-weight: 700; letter-spacing: -.02em; margin-bottom: 8px; }
 .finalists-band p.lead { font-size: 14px; color: rgba(255,255,255,.7); max-width: 760px; margin-bottom: 28px; line-height: 1.5; }
-.finalist-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+.finalist-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .finalist-card { display: flex; flex-direction: column; background: white; color: #171b1f; border-radius: 12px; padding: 28px; text-decoration: none; transition: transform .15s, box-shadow .15s; position: relative; border: 2px solid transparent; }
 .finalist-card:hover { transform: translateY(-3px); box-shadow: 0 16px 32px rgba(0,0,0,.2); border-color: #ffe01b; }
 .finalist-id { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: #ffe01b; color: #171b1f; border-radius: 50%; font-weight: 800; font-size: 18px; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(255,224,27,.3); }
@@ -90,7 +90,7 @@ body { font-family: 'Graphik Mailchimp', Helvetica, Arial, sans-serif; backgroun
 <div class="hero">
   <div class="hero-eyebrow">R&amp;A · Q4 FY26 · Metric Clarity Initiative</div>
   <h1>Explain My Metrics</h1>
-  <p>2 refined finalists (top of page) + 8 supporting explorations. A meaningful share of Mailchimp's "data inaccuracy" VOC isn't bad data — it's metric-clarity confusion. Every mockup targets all <strong>8 confusion modes</strong> — including how Mailchimp's numbers compare to other platforms (Shopify, Triple Whale, Klaviyo, GA4), where the data came from, and when it was last updated.</p>
+  <p>3 refined finalists (top of page) + 8 supporting explorations. A meaningful share of Mailchimp's "data inaccuracy" VOC isn't bad data — it's metric-clarity confusion. Every mockup targets all <strong>8 confusion modes</strong> — including how Mailchimp's numbers compare to other platforms (Shopify, Triple Whale, Klaviyo, GA4), where the data came from, and when it was last updated.</p>
 
   <div class="legend">
     <div class="legend-title">The 8 confusion modes we're solving</div>
@@ -110,8 +110,8 @@ body { font-family: 'Graphik Mailchimp', Helvetica, Arial, sans-serif; backgroun
 <!-- ─────────── REFINED FINALISTS ─────────── -->
 <section class="finalists-band">
   <div class="finalists-eyebrow">✨ Refined finalists · Top picks</div>
-  <h2>2 consolidated mockups</h2>
-  <p class="lead">Two takes on the same idea: a compact tooltip with a <strong>consistent format</strong> that addresses all 7 confusion modes without overloading the user. Both show the same 3 things upfront for every metric (📖 Definition · ⏱ Freshness · 📍 Source), tuck the rest into two collapsed accordions (More details + Related articles), and offer an inline Analytics Agent follow-up. <strong>No right rail anywhere.</strong> The difference between F1 and F2 is the trigger pattern.</p>
+  <h2>3 consolidated mockups</h2>
+  <p class="lead">Three takes on the same idea: a compact tooltip with a <strong>consistent format</strong> that addresses all 7 confusion modes without overloading the user. All three show the same 3 things upfront (📖 Definition · ⏱ Freshness · 📍 Source), tuck the rest into two collapsed accordions (More details + Related articles), and offer an inline Analytics Agent follow-up. <strong>No right rail anywhere.</strong> F1 and F2 explain individual KPI tiles (different triggers); F3 brings the same pattern to charts.</p>
 
   <div class="finalist-grid">
     <a class="finalist-card" href="mockup.html?id=f1">
@@ -156,6 +156,30 @@ body { font-family: 'Graphik Mailchimp', Helvetica, Arial, sans-serif; backgroun
         <span class="confusion-pill cp-date">📅 Date</span>
         <span class="confusion-pill cp-bench">🎯 Bench</span>
         <span class="confusion-pill cp-vs">⚖️ vs metric</span>
+        <span class="confusion-pill cp-attr">🌐 Attribution</span>
+      </div>
+      <div class="finalist-cta">View mockup →</div>
+    </a>
+
+    <a class="finalist-card" href="mockup.html?id=f3">
+      <div class="finalist-id">F3</div>
+      <div class="finalist-title">Chart-level "✨ Explain this chart" → same tooltip pattern, chart-flavored</div>
+      <div class="finalist-desc">F1/F2 explain individual KPI tiles. F3 brings the same pattern to <strong>charts</strong>. An "✨ Explain this chart" button sits in the chart header. Click → the same compact tooltip pops out, but the content is about the chart itself: what it shows, the date granularity (Day/Week/Month), the series displayed, the trend story, and how the same chart looks across other platforms. <strong>No right rail.</strong></div>
+      <div class="finalist-includes">Combines</div>
+      <div class="finalist-includes-row">
+        <span class="finalist-tag">05 · Chart pill</span>
+        <span class="finalist-tag">+ 01 · Compact tooltip</span>
+        <span class="finalist-tag">+ Inline KB accordion</span>
+        <span class="finalist-tag">+ Agent follow-up</span>
+      </div>
+      <div class="finalist-modes-label">Solves all 7 confusion modes (chart-flavored)</div>
+      <div class="finalist-modes">
+        <span class="confusion-pill cp-def">📖 Def</span>
+        <span class="confusion-pill cp-fresh">⏱ Freshness</span>
+        <span class="confusion-pill cp-source">📍 Source</span>
+        <span class="confusion-pill cp-date">📅 Date</span>
+        <span class="confusion-pill cp-bench">🎯 Bench</span>
+        <span class="confusion-pill cp-vs">⚖️ vs view</span>
         <span class="confusion-pill cp-attr">🌐 Attribution</span>
       </div>
       <div class="finalist-cta">View mockup →</div>
